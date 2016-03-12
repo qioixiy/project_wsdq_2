@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Excel = Microsoft.Office.Interop.Excel;
 
-namespace TestExcel
+namespace ExportExcel
 {
     public class CBExcel
     {
