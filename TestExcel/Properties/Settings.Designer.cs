@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TestExcel.Properties {
+namespace ExportExcel.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
