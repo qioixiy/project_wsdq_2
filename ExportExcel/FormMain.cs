@@ -70,5 +70,10 @@ namespace ExportExcel
         {
             return System.Environment.CurrentDirectory + "\\export.xlsx";
         }
+
+        private void labelTitle_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
