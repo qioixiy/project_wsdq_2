@@ -30,16 +30,16 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.buttonExportExcel = new System.Windows.Forms.Button();
-<<<<<<< HEAD
+
             this.buttonOpenFile = new System.Windows.Forms.Button();
             this.openFileDialogData = new System.Windows.Forms.OpenFileDialog();
-=======
+
             this.labelNumber = new System.Windows.Forms.Label();
             this.textBoxNumber = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.labelTitle = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
->>>>>>> ba72b6b0bd14c58cd408fac3d3f50f53c84b5248
+
             this.SuspendLayout();
             // 
             // buttonExportExcel
@@ -52,7 +52,7 @@
             this.buttonExportExcel.UseVisualStyleBackColor = true;
             this.buttonExportExcel.Click += new System.EventHandler(this.buttonExportExcel_Click);
             // 
-<<<<<<< HEAD
+
             // buttonOpenFile
             // 
             this.buttonOpenFile.Location = new System.Drawing.Point(12, 521);
@@ -62,7 +62,7 @@
             this.buttonOpenFile.Text = "打开文件";
             this.buttonOpenFile.UseVisualStyleBackColor = true;
             this.buttonOpenFile.Click += new System.EventHandler(this.buttonOpenFile_Click);
-=======
+
             // labelNumber
             // 
             this.labelNumber.AutoSize = true;
@@ -97,21 +97,21 @@
             this.labelTitle.TabIndex = 4;
             this.labelTitle.Text = "电能数据";
             this.labelTitle.Click += new System.EventHandler(this.labelTitle_Click);
->>>>>>> ba72b6b0bd14c58cd408fac3d3f50f53c84b5248
+
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(986, 556);
-<<<<<<< HEAD
+
             this.Controls.Add(this.buttonOpenFile);
-=======
+
             this.Controls.Add(this.labelTitle);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBoxNumber);
             this.Controls.Add(this.labelNumber);
->>>>>>> ba72b6b0bd14c58cd408fac3d3f50f53c84b5248
+
             this.Controls.Add(this.buttonExportExcel);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -126,15 +126,14 @@
         #endregion
 
         private System.Windows.Forms.Button buttonExportExcel;
-<<<<<<< HEAD
+
         private System.Windows.Forms.Button buttonOpenFile;
         private System.Windows.Forms.OpenFileDialog openFileDialogData;
-=======
+
         private System.Windows.Forms.Label labelNumber;
         private System.Windows.Forms.TextBox textBoxNumber;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label labelTitle;
->>>>>>> ba72b6b0bd14c58cd408fac3d3f50f53c84b5248
     }
 }
 
