@@ -16,7 +16,11 @@ namespace ExportExcel
         public FormMain()
         {
             InitializeComponent();
-            mEnergyData = new EnergyData();
+        }
+
+        public void SetEnergyDataFromFile(String filename)
+        {
+            mEnergyData = new EnergyData(filename);
         }
 
         private void releaseObject(object obj)
@@ -81,6 +85,22 @@ namespace ExportExcel
         private void labelTitle_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonSelect_Click(object sender, EventArgs e)
+        {
+            this.openFileDialog1.Filter = "数据文件(*.txt)|*.txt|所有文件(*.*)|*.*";
+            this.openFileDialog1.FileName = "电能列表2016-03-02.TXT";
+            if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string FileName = this.openFileDialog1.FileName;
+                SetEnergyDataFromFile(FileName);
+            }
+        }
+
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            System.Environment.Exit(0);
         }
     }
 }
