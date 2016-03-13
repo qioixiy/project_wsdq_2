@@ -19,9 +19,9 @@ namespace ExportExcel
         }
         List<EngrgyDataRaw> mEngrgyDataRawList = new List<EngrgyDataRaw>();
 
-        public EnergyData()
+        public EnergyData(String filename)
         {
-            ReadFromFile("电能列表2016-03-02.TXT");
+            ReadFromFile(filename);
         }
 
         bool ReadFromFile(String filename)

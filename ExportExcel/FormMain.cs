@@ -25,7 +25,11 @@ namespace ExportExcel
         public FormMain()
         {
             InitializeComponent();
-            mEnergyData = new EnergyData();
+        }
+
+        public void SetEnergyDataFromFile(String filename)
+        {
+            mEnergyData = new EnergyData(filename);
         }
 
         private void releaseObject(object obj)
@@ -50,6 +54,8 @@ namespace ExportExcel
         {
             CBExcel excel = new CBExcel();
             excel.Create();
+            
+            excel.SelectWorksheet(1);
             excel.SetData(1, 1, "");
             excel.SetData(1, 2, "Student1");
             excel.SetData(1, 3, "Student2");
@@ -70,14 +76,26 @@ namespace ExportExcel
             excel.SetData(4, 3, "62");
             excel.SetData(4, 4, "42");
 
+            excel.SelectWorksheet(2);
+            excel.SetChart("A1", "D4", Excel.XlChartType.xlColumnClustered);
+
+            excel.SelectWorksheet(3); 
             excel.SetChart("A1", "D4", Excel.XlChartType.xlLine);
-            excel.SaveAs(GetExcelFileName());
-            excel.Release();
+            excel.SaveAs(GetExcelFileName(textBoxNumber.Text));
+
+            excel.Release(); 
         }
 
-        public String GetExcelFileName()
+        public String GetExcelFileName(String append)
         {
-            return System.Environment.CurrentDirectory + "\\export.xlsx";
+            if (append.Equals("")) {
+                append = "xxxx";
+            }
+            String curDate = DateTime.Now.ToString("yyyyMMdd");
+            String ret = System.Environment.CurrentDirectory
+                + "\\" + "CRH380D-" + append + "_" + curDate + ".xlsx";
+
+            return ret;
         }
 
         private void buttonOpenFile_Click(object sender, EventArgs e)
@@ -106,6 +124,22 @@ namespace ExportExcel
         private void labelTitle_Click(object sender, EventArgs e)
         {
             ;
+        }
+
+        private void buttonSelect_Click(object sender, EventArgs e)
+        {
+            this.openFileDialog1.Filter = "数据文件(*.txt)|*.txt|所有文件(*.*)|*.*";
+            this.openFileDialog1.FileName = "电能列表2016-03-02.TXT";
+            if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string FileName = this.openFileDialog1.FileName;
+                SetEnergyDataFromFile(FileName);
+            }
+        }
+
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            System.Environment.Exit(0);
         }
     }
 }
