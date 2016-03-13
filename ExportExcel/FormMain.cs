@@ -17,7 +17,25 @@ namespace ExportExcel
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void releaseObject(object obj)
+        {
+            try
+            {
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
+                obj = null;
+            }
+            catch (Exception ex)
+            {
+                obj = null;
+                MessageBox.Show("Exception Occured while releasing object " + ex.ToString());
+            }
+            finally
+            {
+                GC.Collect();
+            }
+        }
+
+        private void buttonExportExcel_Click(object sender, EventArgs e)
         {
             CBExcel excel = new CBExcel();
             excel.Create();
@@ -44,23 +62,6 @@ namespace ExportExcel
             excel.SetChart("A1", "D4", Excel.XlChartType.xlLine);
             excel.SaveAs();
             excel.Release();
-        }
-        private void releaseObject(object obj)
-        {
-            try
-            {
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
-                obj = null;
-            }
-            catch (Exception ex)
-            {
-                obj = null;
-                MessageBox.Show("Exception Occured while releasing object " + ex.ToString());
-            }
-            finally
-            {
-                GC.Collect();
-            }
         }
     }
 }
