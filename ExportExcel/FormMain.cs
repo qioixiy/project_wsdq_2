@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel; 
 
@@ -12,6 +13,14 @@ namespace ExportExcel
 {
     public partial class FormMain : Form
     {
+        struct PowerStruct{//电能列表结构
+                            public char year;//年
+                            public char mouth;//月
+                            public char day;//日
+                            public char power1;//正向电能
+                            public char power2;//负向电能
+                            public char powerAll;//总电能
+                          };
         EnergyData mEnergyData;
         public FormMain()
         {
@@ -69,6 +78,29 @@ namespace ExportExcel
         public String GetExcelFileName()
         {
             return System.Environment.CurrentDirectory + "\\export.xlsx";
+        }
+
+        private void buttonOpenFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ElectircData = new OpenFileDialog();
+            ElectircData.Filter = "文本文件|*.txt";
+            if (ElectircData.ShowDialog() == DialogResult.OK)
+            {
+                //
+                Stream st = new FileStream(ElectircData.FileName, FileMode.Open);
+                BinaryReader br = new BinaryReader(st);
+
+                PowerStruct pr = new PowerStruct();//一个未被具体指明的  
+
+                //pr.year = br.;
+                //pr.mouth = br.ReadChar;
+                //pr.day = br.ReadChar;
+                //pr.power1 = br.ReadChar;
+                //pr.power2 = br.ReadChar;
+                //pr.powerAll = br.ReadChar;
+                br.Close();
+                st.Close();  
+            }
         }
     }
 }

@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.buttonExportExcel = new System.Windows.Forms.Button();
+            this.buttonOpenFile = new System.Windows.Forms.Button();
+            this.openFileDialogData = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // buttonExportExcel
@@ -42,11 +44,22 @@
             this.buttonExportExcel.UseVisualStyleBackColor = true;
             this.buttonExportExcel.Click += new System.EventHandler(this.buttonExportExcel_Click);
             // 
+            // buttonOpenFile
+            // 
+            this.buttonOpenFile.Location = new System.Drawing.Point(12, 521);
+            this.buttonOpenFile.Name = "buttonOpenFile";
+            this.buttonOpenFile.Size = new System.Drawing.Size(75, 23);
+            this.buttonOpenFile.TabIndex = 1;
+            this.buttonOpenFile.Text = "打开文件";
+            this.buttonOpenFile.UseVisualStyleBackColor = true;
+            this.buttonOpenFile.Click += new System.EventHandler(this.buttonOpenFile_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(986, 556);
+            this.Controls.Add(this.buttonOpenFile);
             this.Controls.Add(this.buttonExportExcel);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -59,6 +72,8 @@
         #endregion
 
         private System.Windows.Forms.Button buttonExportExcel;
+        private System.Windows.Forms.Button buttonOpenFile;
+        private System.Windows.Forms.OpenFileDialog openFileDialogData;
     }
 }
 
