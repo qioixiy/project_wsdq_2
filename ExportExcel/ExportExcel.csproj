@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnergyData.cs" />
     <Compile Include="Excel.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>

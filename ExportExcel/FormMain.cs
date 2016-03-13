@@ -12,9 +12,11 @@ namespace ExportExcel
 {
     public partial class FormMain : Form
     {
+        EnergyData mEnergyData;
         public FormMain()
         {
             InitializeComponent();
+            mEnergyData = new EnergyData();
         }
 
         private void releaseObject(object obj)
@@ -60,8 +62,13 @@ namespace ExportExcel
             excel.SetData(4, 4, "42");
 
             excel.SetChart("A1", "D4", Excel.XlChartType.xlLine);
-            excel.SaveAs();
+            excel.SaveAs(GetExcelFileName());
             excel.Release();
+        }
+
+        public String GetExcelFileName()
+        {
+            return System.Environment.CurrentDirectory + "\\export.xlsx";
         }
     }
 }

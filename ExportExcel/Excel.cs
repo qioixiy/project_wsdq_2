@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace ExportExcel
 {
     public class CBExcel
     {
-        Excel.Application xlApp;
-        Excel.Workbook xlWorkBook;
-        Excel.Worksheet xlWorkSheet;
+        Excel.Application xlsApp;
+        Excel.Workbook xlsWorkBook;
+        Excel.Worksheet xlsWorkSheet;
         object misValue = System.Reflection.Missing.Value;
 
         public CBExcel()
@@ -19,18 +20,18 @@ namespace ExportExcel
 
         public void SetData(int i, int j, string data)
         {
-            xlWorkSheet.Cells[i, j] = data;
+            xlsWorkSheet.Cells[i, j] = data;
         }
 
         public void SetChart(string start, string end, Excel.XlChartType type)
         {
             Excel.Range chartRange;
 
-            Excel.ChartObjects xlCharts = (Excel.ChartObjects)xlWorkSheet.ChartObjects(Type.Missing);
+            Excel.ChartObjects xlCharts = (Excel.ChartObjects)xlsWorkSheet.ChartObjects(Type.Missing);
             Excel.ChartObject myChart = (Excel.ChartObject)xlCharts.Add(10, 80, 300, 250);
             Excel.Chart chartPage = myChart.Chart;
 
-            chartRange = xlWorkSheet.get_Range(start, end);
+            chartRange = xlsWorkSheet.get_Range(start, end);
             chartPage.SetSourceData(chartRange, misValue);
             chartPage.ChartType = type;
         }
@@ -54,22 +55,39 @@ namespace ExportExcel
 
         public void Create()
         {
-            xlApp = new Excel.ApplicationClass();
-            xlWorkBook = xlApp.Workbooks.Add(misValue);
-            xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+            xlsApp = new Excel.ApplicationClass();
+            xlsWorkBook = xlsApp.Workbooks.Add(misValue);
+            xlsApp.Worksheets.Add(misValue);
+            xlsWorkSheet = (Excel.Worksheet)xlsWorkBook.Worksheets.get_Item(1);
+            //xlsWorkSheet.Name = "电能";
         }
 
-        public void SaveAs()
+        public void SaveAs(String filename)
         {
-            xlWorkBook.Close(true, misValue, misValue);
-            xlApp.Quit();
+            //xlsApp.DisplayAlerts = false;
+            //xlsWorkBook.Close(true, misValue, misValue);
+            //xlsApp.Quit();
+
+            xlsApp.DisplayAlerts = false;
+            xlsApp.AlertBeforeOverwriting = false;
+            if (File.Exists(filename))
+            {
+                File.Delete(filename);
+            }
+
+            xlsApp.ActiveWorkbook.SaveCopyAs(filename);
+            xlsApp.Quit();
+            xlsApp = null;
+            xlsWorkBook = null;
+            xlsWorkSheet = null;
         }
 
         public void Release()
         {
-            releaseObject(xlWorkSheet);
-            releaseObject(xlWorkBook);
-            releaseObject(xlApp);
+            releaseObject(xlsWorkSheet);
+            releaseObject(xlsWorkBook);
+            releaseObject(xlsApp);
         }
+
     }
 }
