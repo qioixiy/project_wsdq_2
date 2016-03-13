@@ -80,6 +80,7 @@ namespace ExportExcel
             return System.Environment.CurrentDirectory + "\\export.xlsx";
         }
 
+<<<<<<< HEAD
         private void buttonOpenFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog ElectircData = new OpenFileDialog();
@@ -101,6 +102,11 @@ namespace ExportExcel
                 br.Close();
                 st.Close();  
             }
+=======
+        private void labelTitle_Click(object sender, EventArgs e)
+        {
+
+>>>>>>> ba72b6b0bd14c58cd408fac3d3f50f53c84b5248
         }
     }
 }
