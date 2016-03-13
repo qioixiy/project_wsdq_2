@@ -45,6 +45,8 @@ namespace ExportExcel
         {
             CBExcel excel = new CBExcel();
             excel.Create();
+            
+            excel.SelectWorksheet(1);
             excel.SetData(1, 1, "");
             excel.SetData(1, 2, "Student1");
             excel.SetData(1, 3, "Student2");
@@ -65,9 +67,14 @@ namespace ExportExcel
             excel.SetData(4, 3, "62");
             excel.SetData(4, 4, "42");
 
+            excel.SelectWorksheet(2);
+            excel.SetChart("A1", "D4", Excel.XlChartType.xlColumnClustered);
+
+            excel.SelectWorksheet(3); 
             excel.SetChart("A1", "D4", Excel.XlChartType.xlLine);
             excel.SaveAs(GetExcelFileName(textBoxNumber.Text));
-            excel.Release();
+
+            excel.Release(); 
         }
 
         public String GetExcelFileName(String append)

@@ -11,27 +11,32 @@ namespace ExportExcel
     {
         Excel.Application xlsApp;
         Excel.Workbook xlsWorkBook;
-        Excel.Worksheet xlsWorkSheet;
+        Excel.Worksheet CurXlsWorkSheet;
         object misValue = System.Reflection.Missing.Value;
 
         public CBExcel()
         {
+            ;
+        }
+
+        ~CBExcel()
+        {
+            ;
         }
 
         public void SetData(int i, int j, string data)
         {
-            xlsWorkSheet.Cells[i, j] = data;
+            CurXlsWorkSheet.Cells[i, j] = data;
         }
 
         public void SetChart(string start, string end, Excel.XlChartType type)
         {
-            Excel.Range chartRange;
 
-            Excel.ChartObjects xlCharts = (Excel.ChartObjects)xlsWorkSheet.ChartObjects(Type.Missing);
-            Excel.ChartObject myChart = (Excel.ChartObject)xlCharts.Add(10, 80, 300, 250);
+            Excel.ChartObjects xlCharts = (Excel.ChartObjects)CurXlsWorkSheet.ChartObjects(Type.Missing);
+            Excel.ChartObject myChart = (Excel.ChartObject)xlCharts.Add(20, 20, 300, 250);
             Excel.Chart chartPage = myChart.Chart;
 
-            chartRange = xlsWorkSheet.get_Range(start, end);
+            Excel.Range chartRange = GetWorksheet(1).get_Range(start, end);
             chartPage.SetSourceData(chartRange, misValue);
             chartPage.ChartType = type;
         }
@@ -56,18 +61,18 @@ namespace ExportExcel
         public void Create()
         {
             xlsApp = new Excel.ApplicationClass();
+            // default sheet1
             xlsWorkBook = xlsApp.Workbooks.Add(misValue);
+            // add 2s sheet
             xlsApp.Worksheets.Add(misValue);
-            xlsWorkSheet = (Excel.Worksheet)xlsWorkBook.Worksheets.get_Item(1);
-            //xlsWorkSheet.Name = "电能";
+            xlsApp.Worksheets.Add(misValue);
+            GetWorksheet(1).Name = "电能";
+            GetWorksheet(2).Name = "柱状图";
+            GetWorksheet(3).Name = "电量曲线";
         }
 
         public void SaveAs(String filename)
         {
-            //xlsApp.DisplayAlerts = false;
-            //xlsWorkBook.Close(true, misValue, misValue);
-            //xlsApp.Quit();
-
             xlsApp.DisplayAlerts = false;
             xlsApp.AlertBeforeOverwriting = false;
             if (File.Exists(filename))
@@ -79,12 +84,22 @@ namespace ExportExcel
             xlsApp.Quit();
             xlsApp = null;
             xlsWorkBook = null;
-            xlsWorkSheet = null;
+            CurXlsWorkSheet = null;
         }
 
+        public Excel.Worksheet GetWorksheet(int index)
+        {
+            return (Excel.Worksheet)xlsWorkBook.Worksheets.get_Item(index);
+        }
+        
+        public void SelectWorksheet(int index)
+        {
+            CurXlsWorkSheet = (Excel.Worksheet)xlsWorkBook.Worksheets.get_Item(index);
+        }
+        
         public void Release()
         {
-            releaseObject(xlsWorkSheet);
+            releaseObject(CurXlsWorkSheet);
             releaseObject(xlsWorkBook);
             releaseObject(xlsApp);
         }
