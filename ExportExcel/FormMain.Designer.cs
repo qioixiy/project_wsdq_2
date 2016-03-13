@@ -39,7 +39,7 @@
             // 
             // buttonExportExcel
             // 
-            this.buttonExportExcel.Location = new System.Drawing.Point(874, 521);
+            this.buttonExportExcel.Location = new System.Drawing.Point(868, 92);
             this.buttonExportExcel.Name = "buttonExportExcel";
             this.buttonExportExcel.Size = new System.Drawing.Size(87, 23);
             this.buttonExportExcel.TabIndex = 0;
@@ -50,7 +50,7 @@
             // labelNumber
             // 
             this.labelNumber.AutoSize = true;
-            this.labelNumber.Location = new System.Drawing.Point(872, 468);
+            this.labelNumber.Location = new System.Drawing.Point(866, 39);
             this.labelNumber.Name = "labelNumber";
             this.labelNumber.Size = new System.Drawing.Size(29, 12);
             this.labelNumber.TabIndex = 1;
@@ -58,25 +58,25 @@
             // 
             // textBoxNumber
             // 
-            this.textBoxNumber.Location = new System.Drawing.Point(874, 494);
+            this.textBoxNumber.Location = new System.Drawing.Point(868, 65);
             this.textBoxNumber.Name = "textBoxNumber";
-            this.textBoxNumber.Size = new System.Drawing.Size(100, 21);
+            this.textBoxNumber.Size = new System.Drawing.Size(87, 21);
             this.textBoxNumber.TabIndex = 2;
             this.textBoxNumber.Text = "1571";
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(11, 39);
+            this.dataGridView1.Location = new System.Drawing.Point(11, 65);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(838, 505);
+            this.dataGridView1.Size = new System.Drawing.Size(827, 582);
             this.dataGridView1.TabIndex = 3;
             // 
             // labelTitle
             // 
             this.labelTitle.AutoSize = true;
-            this.labelTitle.Location = new System.Drawing.Point(366, 13);
+            this.labelTitle.Location = new System.Drawing.Point(398, 21);
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(53, 12);
             this.labelTitle.TabIndex = 4;
@@ -87,7 +87,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(986, 556);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(1008, 662);
             this.Controls.Add(this.labelTitle);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBoxNumber);
@@ -96,6 +97,7 @@
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "苏州市万松电器有限公司";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
