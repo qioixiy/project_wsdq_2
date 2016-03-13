@@ -62,13 +62,20 @@ namespace ExportExcel
             excel.SetData(4, 4, "42");
 
             excel.SetChart("A1", "D4", Excel.XlChartType.xlLine);
-            excel.SaveAs(GetExcelFileName());
+            excel.SaveAs(GetExcelFileName(textBoxNumber.Text));
             excel.Release();
         }
 
-        public String GetExcelFileName()
+        public String GetExcelFileName(String append)
         {
-            return System.Environment.CurrentDirectory + "\\export.xlsx";
+            if (append.Equals("")) {
+                append = "xxxx";
+            }
+            String curDate = DateTime.Now.ToString("yyyyMMdd");
+            String ret = System.Environment.CurrentDirectory
+                + "\\" + "CRH380D-" + append + "_" + curDate + ".xlsx";
+
+            return ret;
         }
 
         private void labelTitle_Click(object sender, EventArgs e)

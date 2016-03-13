@@ -62,6 +62,7 @@
             this.textBoxNumber.Name = "textBoxNumber";
             this.textBoxNumber.Size = new System.Drawing.Size(100, 21);
             this.textBoxNumber.TabIndex = 2;
+            this.textBoxNumber.Text = "1571";
             // 
             // dataGridView1
             // 
