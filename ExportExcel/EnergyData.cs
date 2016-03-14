@@ -8,7 +8,7 @@ namespace ExportExcel
 {
     class EnergyData
     {
-        class EngrgyDataRaw
+        class EnergyDataRaw
         {
             public byte[] year;//年 2byte
             public byte[] mouth;//月 1byte
@@ -17,7 +17,8 @@ namespace ExportExcel
             public byte[] power2;//负向电能 4byte
             public byte[] powerAll;//总电能 4byte
         }
-        List<EngrgyDataRaw> mEngrgyDataRawList = new List<EngrgyDataRaw>();
+        
+        public List<EnergyDataRaw> mEnergyDataRawList = new List<EnergyDataRaw>();
 
         public EnergyData(String filename)
         {
@@ -40,35 +41,34 @@ namespace ExportExcel
                     {
                         while (true)
                         {
-                            EngrgyDataRaw _EngrgyDataRaw = new EngrgyDataRaw();
+                            EnergyDataRaw _EnergyDataRaw = new EnergyDataRaw();
                             // 2 1 1 4 4 4
-                            _EngrgyDataRaw.year = br.ReadBytes(2);
-                            _EngrgyDataRaw.mouth = br.ReadBytes(1);
-                            _EngrgyDataRaw.day = br.ReadBytes(1);
-                            _EngrgyDataRaw.power1 = br.ReadBytes(4);
-                            _EngrgyDataRaw.power2 = br.ReadBytes(4);
-                            _EngrgyDataRaw.powerAll = br.ReadBytes(4);
+                            _EnergyDataRaw.year = br.ReadBytes(2);
+                            _EnergyDataRaw.mouth = br.ReadBytes(1);
+                            _EnergyDataRaw.day = br.ReadBytes(1);
+                            _EnergyDataRaw.power1 = br.ReadBytes(4);
+                            _EnergyDataRaw.power2 = br.ReadBytes(4);
+                            _EnergyDataRaw.powerAll = br.ReadBytes(4);
 
-                            if (_EngrgyDataRaw.year == null
-                                || _EngrgyDataRaw.mouth == null
-                                || _EngrgyDataRaw.day == null
-                                || _EngrgyDataRaw.power1 == null
-                                || _EngrgyDataRaw.power2 == null
-                                || _EngrgyDataRaw.powerAll == null)
+                            if (_EnergyDataRaw.year == null
+                                || _EnergyDataRaw.mouth == null
+                                || _EnergyDataRaw.day == null
+                                || _EnergyDataRaw.power1 == null
+                                || _EnergyDataRaw.power2 == null
+                                || _EnergyDataRaw.powerAll == null)
                             {
-                                _EngrgyDataRaw = null;
+                                _EnergyDataRaw = null;
                                 break;
                             }
                             //*
-                            Console.WriteLine("year:" + BitConverter.ToUInt16(ToHostEndian(_EngrgyDataRaw.year),0)
-                                + " mouth:" + BitConverter.ToString(_EngrgyDataRaw.mouth)
-                                + " day:" + BitConverter.ToString(_EngrgyDataRaw.day)
-                                + " power1:" + BitConverter.ToUInt32(ToHostEndian(_EngrgyDataRaw.power1), 0)
-                                + " power2:" + BitConverter.ToUInt32(ToHostEndian(_EngrgyDataRaw.power2), 0)
-                                + " powerAll:" + BitConverter.ToUInt32(ToHostEndian(_EngrgyDataRaw.powerAll), 0));//*/
-                            var test = BitConverter.ToUInt16(ToHostEndian(_EngrgyDataRaw.year), 0);
+                            Console.WriteLine("year:" + BitConverter.ToUInt16(ToHostEndian(_EnergyDataRaw.year),0)
+                                + " mouth:" + BitConverter.ToString(_EnergyDataRaw.mouth)
+                                + " day:" + BitConverter.ToString(_EnergyDataRaw.day)
+                                + " power1:" + BitConverter.ToUInt32(ToHostEndian(_EnergyDataRaw.power1), 0)
+                                + " power2:" + BitConverter.ToUInt32(ToHostEndian(_EnergyDataRaw.power2), 0)
+                                + " powerAll:" + BitConverter.ToUInt32(ToHostEndian(_EnergyDataRaw.powerAll), 0));//*/
                             
-                            mEngrgyDataRawList.Add(_EngrgyDataRaw);
+                            mEnergyDataRawList.Add(_EnergyDataRaw);
                         }
                     }
                     catch (Exception)

@@ -103,6 +103,11 @@ namespace ExportExcel
             {
                 string FileName = this.openFileDialog1.FileName;
                 SetEnergyDataFromFile(FileName);
+                /*if (mEnergyData.mEnergyDataRawList.Count == 0)
+                {
+                        
+                }
+                */
             }
         }
 
