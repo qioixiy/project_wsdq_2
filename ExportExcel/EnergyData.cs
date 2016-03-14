@@ -66,6 +66,7 @@ namespace ExportExcel
                                 + " power1:" + BitConverter.ToUInt32(ToHostEndian(_EngrgyDataRaw.power1), 0)
                                 + " power2:" + BitConverter.ToUInt32(ToHostEndian(_EngrgyDataRaw.power2), 0)
                                 + " powerAll:" + BitConverter.ToUInt32(ToHostEndian(_EngrgyDataRaw.powerAll), 0));//*/
+                            var test = BitConverter.ToUInt16(ToHostEndian(_EngrgyDataRaw.year), 0);
                             
                             mEngrgyDataRawList.Add(_EngrgyDataRaw);
                         }

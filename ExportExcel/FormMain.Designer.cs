@@ -38,6 +38,13 @@
             this.buttonSelect = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.buttonExit = new System.Windows.Forms.Button();
+            this.ColumnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnPositivePower = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnNegativePower = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnTotalPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnDayConsumePower = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnDayFeedPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnConsumeTotalPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,16 +78,24 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(11, 65);
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnDate,
+            this.ColumnPositivePower,
+            this.ColumnNegativePower,
+            this.ColumnTotalPower,
+            this.ColumnDayConsumePower,
+            this.ColumnDayFeedPower,
+            this.ColumnConsumeTotalPower});
+            this.dataGridView1.Location = new System.Drawing.Point(11, 39);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(852, 542);
+            this.dataGridView1.Size = new System.Drawing.Size(867, 568);
             this.dataGridView1.TabIndex = 3;
             // 
             // labelTitle
             // 
             this.labelTitle.AutoSize = true;
-            this.labelTitle.Location = new System.Drawing.Point(398, 21);
+            this.labelTitle.Location = new System.Drawing.Point(408, 9);
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(53, 12);
             this.labelTitle.TabIndex = 4;
@@ -110,6 +125,55 @@
             this.buttonExit.Text = "退出";
             this.buttonExit.UseVisualStyleBackColor = true;
             this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
+            // 
+            // ColumnDate
+            // 
+            this.ColumnDate.HeaderText = "日期";
+            this.ColumnDate.Name = "ColumnDate";
+            this.ColumnDate.ReadOnly = true;
+            this.ColumnDate.Width = 110;
+            // 
+            // ColumnPositivePower
+            // 
+            this.ColumnPositivePower.HeaderText = "正向电能";
+            this.ColumnPositivePower.Name = "ColumnPositivePower";
+            this.ColumnPositivePower.ReadOnly = true;
+            this.ColumnPositivePower.Width = 110;
+            // 
+            // ColumnNegativePower
+            // 
+            this.ColumnNegativePower.HeaderText = "反向电能";
+            this.ColumnNegativePower.Name = "ColumnNegativePower";
+            this.ColumnNegativePower.ReadOnly = true;
+            this.ColumnNegativePower.Width = 110;
+            // 
+            // ColumnTotalPower
+            // 
+            this.ColumnTotalPower.HeaderText = "总电能";
+            this.ColumnTotalPower.Name = "ColumnTotalPower";
+            this.ColumnTotalPower.ReadOnly = true;
+            this.ColumnTotalPower.Width = 110;
+            // 
+            // ColumnDayConsumePower
+            // 
+            this.ColumnDayConsumePower.HeaderText = "日耗正向电能";
+            this.ColumnDayConsumePower.Name = "ColumnDayConsumePower";
+            this.ColumnDayConsumePower.ReadOnly = true;
+            this.ColumnDayConsumePower.Width = 110;
+            // 
+            // ColumnDayFeedPower
+            // 
+            this.ColumnDayFeedPower.HeaderText = "日馈反向电能";
+            this.ColumnDayFeedPower.Name = "ColumnDayFeedPower";
+            this.ColumnDayFeedPower.ReadOnly = true;
+            this.ColumnDayFeedPower.Width = 110;
+            // 
+            // ColumnConsumeTotalPower
+            // 
+            this.ColumnConsumeTotalPower.HeaderText = "单耗总电能";
+            this.ColumnConsumeTotalPower.Name = "ColumnConsumeTotalPower";
+            this.ColumnConsumeTotalPower.ReadOnly = true;
+            this.ColumnConsumeTotalPower.Width = 110;
             // 
             // FormMain
             // 
@@ -147,6 +211,13 @@
         private System.Windows.Forms.Button buttonSelect;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button buttonExit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPositivePower;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNegativePower;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTotalPower;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDayConsumePower;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDayFeedPower;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnConsumeTotalPower;
     }
 }
 
