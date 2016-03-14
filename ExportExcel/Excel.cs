@@ -11,7 +11,7 @@ namespace ExportExcel
     {
         Excel.Application xlsApp;
         Excel.Workbook xlsWorkBook;
-        Excel.Worksheet CurXlsWorkSheet;
+        public Excel.Worksheet CurXlsWorkSheet;
         object misValue = System.Reflection.Missing.Value;
 
         public CBExcel()
