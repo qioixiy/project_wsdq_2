@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.buttonExportExcel = new System.Windows.Forms.Button();
             this.openFileDialogData = new System.Windows.Forms.OpenFileDialog();
@@ -45,16 +46,20 @@
             this.ColumnDayConsumePower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDayFeedPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnConsumeTotalPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonExportExcel
             // 
-            this.buttonExportExcel.Location = new System.Drawing.Point(884, 525);
+            this.buttonExportExcel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.buttonExportExcel.ImageIndex = 0;
+            this.buttonExportExcel.ImageList = this.imageList1;
+            this.buttonExportExcel.Location = new System.Drawing.Point(884, 524);
             this.buttonExportExcel.Name = "buttonExportExcel";
-            this.buttonExportExcel.Size = new System.Drawing.Size(112, 23);
+            this.buttonExportExcel.Size = new System.Drawing.Size(112, 24);
             this.buttonExportExcel.TabIndex = 0;
-            this.buttonExportExcel.Text = "导出为Excel";
+            this.buttonExportExcel.Text = "  导出为Excel";
             this.buttonExportExcel.UseVisualStyleBackColor = true;
             this.buttonExportExcel.Click += new System.EventHandler(this.buttonExportExcel_Click);
             // 
@@ -104,6 +109,9 @@
             // 
             // buttonSelect
             // 
+            this.buttonSelect.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.buttonSelect.ImageIndex = 1;
+            this.buttonSelect.ImageList = this.imageList1;
             this.buttonSelect.Location = new System.Drawing.Point(884, 554);
             this.buttonSelect.Name = "buttonSelect";
             this.buttonSelect.Size = new System.Drawing.Size(112, 23);
@@ -118,6 +126,9 @@
             // 
             // buttonExit
             // 
+            this.buttonExit.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.buttonExit.ImageIndex = 2;
+            this.buttonExit.ImageList = this.imageList1;
             this.buttonExit.Location = new System.Drawing.Point(884, 583);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(112, 23);
@@ -175,6 +186,14 @@
             this.ColumnConsumeTotalPower.ReadOnly = true;
             this.ColumnConsumeTotalPower.Width = 110;
             // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "Excel.ico");
+            this.imageList1.Images.SetKeyName(1, "document.ico");
+            this.imageList1.Images.SetKeyName(2, "Exit.ico");
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -218,6 +237,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDayConsumePower;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDayFeedPower;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnConsumeTotalPower;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }
 
