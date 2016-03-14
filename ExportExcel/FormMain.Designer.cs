@@ -34,7 +34,7 @@
             this.openFileDialogData = new System.Windows.Forms.OpenFileDialog();
             this.labelNumber = new System.Windows.Forms.Label();
             this.textBoxNumber = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewEnergy = new System.Windows.Forms.DataGridView();
             this.labelTitle = new System.Windows.Forms.Label();
             this.buttonSelect = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -47,7 +47,7 @@
             this.ColumnDayFeedPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnConsumeTotalPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEnergy)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonExportExcel
@@ -80,10 +80,11 @@
             this.textBoxNumber.TabIndex = 2;
             this.textBoxNumber.Text = "1571";
             // 
-            // dataGridView1
+            // dataGridViewEnergy
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewEnergy.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewEnergy.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewEnergy.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnDate,
             this.ColumnPositivePower,
             this.ColumnNegativePower,
@@ -91,11 +92,11 @@
             this.ColumnDayConsumePower,
             this.ColumnDayFeedPower,
             this.ColumnConsumeTotalPower});
-            this.dataGridView1.Location = new System.Drawing.Point(11, 39);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(867, 568);
-            this.dataGridView1.TabIndex = 3;
+            this.dataGridViewEnergy.Location = new System.Drawing.Point(11, 39);
+            this.dataGridViewEnergy.Name = "dataGridViewEnergy";
+            this.dataGridViewEnergy.RowTemplate.Height = 23;
+            this.dataGridViewEnergy.Size = new System.Drawing.Size(867, 568);
+            this.dataGridViewEnergy.TabIndex = 3;
             // 
             // labelTitle
             // 
@@ -142,49 +143,42 @@
             this.ColumnDate.HeaderText = "日期";
             this.ColumnDate.Name = "ColumnDate";
             this.ColumnDate.ReadOnly = true;
-            this.ColumnDate.Width = 110;
             // 
             // ColumnPositivePower
             // 
             this.ColumnPositivePower.HeaderText = "正向电能";
             this.ColumnPositivePower.Name = "ColumnPositivePower";
             this.ColumnPositivePower.ReadOnly = true;
-            this.ColumnPositivePower.Width = 110;
             // 
             // ColumnNegativePower
             // 
             this.ColumnNegativePower.HeaderText = "反向电能";
             this.ColumnNegativePower.Name = "ColumnNegativePower";
             this.ColumnNegativePower.ReadOnly = true;
-            this.ColumnNegativePower.Width = 110;
             // 
             // ColumnTotalPower
             // 
             this.ColumnTotalPower.HeaderText = "总电能";
             this.ColumnTotalPower.Name = "ColumnTotalPower";
             this.ColumnTotalPower.ReadOnly = true;
-            this.ColumnTotalPower.Width = 110;
             // 
             // ColumnDayConsumePower
             // 
             this.ColumnDayConsumePower.HeaderText = "日耗正向电能";
             this.ColumnDayConsumePower.Name = "ColumnDayConsumePower";
             this.ColumnDayConsumePower.ReadOnly = true;
-            this.ColumnDayConsumePower.Width = 110;
             // 
             // ColumnDayFeedPower
             // 
             this.ColumnDayFeedPower.HeaderText = "日馈反向电能";
             this.ColumnDayFeedPower.Name = "ColumnDayFeedPower";
             this.ColumnDayFeedPower.ReadOnly = true;
-            this.ColumnDayFeedPower.Width = 110;
             // 
             // ColumnConsumeTotalPower
             // 
             this.ColumnConsumeTotalPower.HeaderText = "单耗总电能";
             this.ColumnConsumeTotalPower.Name = "ColumnConsumeTotalPower";
             this.ColumnConsumeTotalPower.ReadOnly = true;
-            this.ColumnConsumeTotalPower.Width = 110;
             // 
             // imageList1
             // 
@@ -203,7 +197,7 @@
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.buttonSelect);
             this.Controls.Add(this.labelTitle);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridViewEnergy);
             this.Controls.Add(this.textBoxNumber);
             this.Controls.Add(this.labelNumber);
             this.Controls.Add(this.buttonExportExcel);
@@ -212,7 +206,7 @@
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "苏州市万松电器有限公司";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEnergy)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -225,7 +219,7 @@
 
         private System.Windows.Forms.Label labelNumber;
         private System.Windows.Forms.TextBox textBoxNumber;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewEnergy;
         private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.Button buttonSelect;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;

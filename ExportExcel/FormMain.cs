@@ -103,17 +103,60 @@ namespace ExportExcel
             {
                 string FileName = this.openFileDialog1.FileName;
                 SetEnergyDataFromFile(FileName);
-                /*if (mEnergyData.mEnergyDataRawList.Count == 0)
+                this.dataGridViewEnergy.RowCount = mEnergyData.mEnergyDataRawList.Count;
+                if (this.dataGridViewEnergy.RowCount == 0)
                 {
-                        
+                    MessageBox.Show("数据文件内容为空");
+                    return;
                 }
-                */
+                for (int i = 0; i < this.dataGridViewEnergy.RowCount; i++)
+                {
+                    dataGridViewEnergy.Rows[i].Cells[0].Value = BitConverter.ToUInt16(ToHostEndian(mEnergyData.mEnergyDataRawList[i].year), 0) + "年" 
+                                                            + BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth) + "月"
+                                                            + BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day) + "日";
+                    dataGridViewEnergy.Rows[i].Cells[1].Value = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0) + "kW.h";
+                    dataGridViewEnergy.Rows[i].Cells[2].Value = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0) + "kW.h";
+                    dataGridViewEnergy.Rows[i].Cells[3].Value = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0) + "kW.h";
+                    if (i == 0)
+                    {
+                        dataGridViewEnergy.Rows[i].Cells[4].Value = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0) + "kW.h";
+                        dataGridViewEnergy.Rows[i].Cells[5].Value = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0) + "kW.h";
+                        dataGridViewEnergy.Rows[i].Cells[6].Value = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0) + "kW.h";
+                    }
+                    else
+                    {
+                        dataGridViewEnergy.Rows[i].Cells[4].Value = (BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0)
+                           - BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power1), 0)) + "kW.h";
+                        dataGridViewEnergy.Rows[i].Cells[5].Value = (BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0)
+                           - BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power2), 0)) + "kW.h";
+                        dataGridViewEnergy.Rows[i].Cells[6].Value = (BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0)
+                           - BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0)) + "kW.h";
+                    }
+                    
+                    //dataGridViewEnergy.Rows[i].Cells[2].Value = "test2";
+                    //dataGridViewEnergy.Rows[i].Cells[3].Value = mEnergyData.mEnergyDataRawList[i].power1;
+                    //dataGridViewEnergy.Rows[i].Cells[4].Value = mEnergyData.mEnergyDataRawList[i].power2;
+                    //dataGridViewEnergy.Rows[i].Cells[0].Value = mEnergyData.mEnergyDataRawList[i].powerAll;
+                   //string Str =  " mouth:" + BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth)
+                   //             + " day:" + BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day);
+                }
             }
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
             System.Environment.Exit(0);
+        }
+
+        byte[] ToHostEndian(byte[] src)
+        {
+            byte[] dest = new byte[src.Length];
+            for (int i = src.Length - 1, j = 0; i >= 0; i--, j++)
+            {
+                dest[j] = src[i];
+            }
+
+            return dest;
         }
     }
 }

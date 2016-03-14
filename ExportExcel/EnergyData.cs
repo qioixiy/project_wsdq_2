@@ -8,7 +8,7 @@ namespace ExportExcel
 {
     class EnergyData
     {
-        class EnergyDataRaw
+        public class EnergyDataRaw
         {
             public byte[] year;//年 2byte
             public byte[] mouth;//月 1byte
@@ -86,14 +86,17 @@ namespace ExportExcel
                 return true;
             }
         }
+
         byte[] ToHostEndian(byte[] src)
-        { 
+        {
             byte[] dest = new byte[src.Length];
-            for (int i = src.Length-1, j = 0; i >= 0; i--, j++) {
+            for (int i = src.Length - 1, j = 0; i >= 0; i--, j++)
+            {
                 dest[j] = src[i];
             }
 
             return dest;
         }
+       
     }
 }
