@@ -112,34 +112,27 @@ namespace ExportExcel
                 for (int i = 0; i < this.dataGridViewEnergy.RowCount; i++)
                 {
                     dataGridViewEnergy.Rows[i].Cells[0].Value = BitConverter.ToUInt16(ToHostEndian(mEnergyData.mEnergyDataRawList[i].year), 0) + "年" 
-                                                            + BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth) + "月"
-                                                            + BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day) + "日";
-                    dataGridViewEnergy.Rows[i].Cells[1].Value = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0) + "kW.h";
-                    dataGridViewEnergy.Rows[i].Cells[2].Value = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0) + "kW.h";
-                    dataGridViewEnergy.Rows[i].Cells[3].Value = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0) + "kW.h";
+                                                            + Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth),System.Globalization.NumberStyles.HexNumber) + "月"
+                                                            + Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day),System.Globalization.NumberStyles.HexNumber) + "日";
+                    dataGridViewEnergy.Rows[i].Cells[1].Value = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0) + " kW.h";
+                    dataGridViewEnergy.Rows[i].Cells[2].Value = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0) + " kW.h";
+                    dataGridViewEnergy.Rows[i].Cells[3].Value = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0) + " kW.h";
                     if (i == 0)
                     {
-                        dataGridViewEnergy.Rows[i].Cells[4].Value = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0) + "kW.h";
-                        dataGridViewEnergy.Rows[i].Cells[5].Value = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0) + "kW.h";
-                        dataGridViewEnergy.Rows[i].Cells[6].Value = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0) + "kW.h";
+                        dataGridViewEnergy.Rows[i].Cells[4].Value = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0) + " kW.h";
+                        dataGridViewEnergy.Rows[i].Cells[5].Value = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0) + " kW.h";
+                        dataGridViewEnergy.Rows[i].Cells[6].Value = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0) + " kW.h";
                     }
                     else
                     {
                         dataGridViewEnergy.Rows[i].Cells[4].Value = (BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0)
-                           - BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power1), 0)) + "kW.h";
+                           - BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power1), 0)) + " kW.h";
                         dataGridViewEnergy.Rows[i].Cells[5].Value = (BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0)
-                           - BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power2), 0)) + "kW.h";
+                           - BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power2), 0)) + " kW.h";
                         dataGridViewEnergy.Rows[i].Cells[6].Value = (BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0)
-                           - BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0)) + "kW.h";
+                           - BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0)) + " kW.h";
                     }
-                    
-                    //dataGridViewEnergy.Rows[i].Cells[2].Value = "test2";
-                    //dataGridViewEnergy.Rows[i].Cells[3].Value = mEnergyData.mEnergyDataRawList[i].power1;
-                    //dataGridViewEnergy.Rows[i].Cells[4].Value = mEnergyData.mEnergyDataRawList[i].power2;
-                    //dataGridViewEnergy.Rows[i].Cells[0].Value = mEnergyData.mEnergyDataRawList[i].powerAll;
-                   //string Str =  " mouth:" + BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth)
-                   //             + " day:" + BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day);
-                }
+                 }
             }
         }
 
@@ -157,6 +150,30 @@ namespace ExportExcel
             }
 
             return dest;
+        }
+
+        private void FormMain_Shown(object sender, EventArgs e)
+        {
+            dataGridViewEnergy.Font = new Font("Arial",9);
+        }
+
+        private void dataGridViewEnergy_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            DataGridViewRow dgr = dataGridViewEnergy.Rows[e.RowIndex];
+            try
+            {
+                if (e.ColumnIndex == 0)//定位到第1列日期 
+                {
+                        e.CellStyle.Font = new Font("微软雅黑",9);  
+                }
+            }
+            catch
+            {
+
+            }  
         }
     }
 }

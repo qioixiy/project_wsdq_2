@@ -31,14 +31,11 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.buttonExportExcel = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.openFileDialogData = new System.Windows.Forms.OpenFileDialog();
             this.labelNumber = new System.Windows.Forms.Label();
             this.textBoxNumber = new System.Windows.Forms.TextBox();
             this.dataGridViewEnergy = new System.Windows.Forms.DataGridView();
-            this.labelTitle = new System.Windows.Forms.Label();
-            this.buttonSelect = new System.Windows.Forms.Button();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.buttonExit = new System.Windows.Forms.Button();
             this.ColumnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPositivePower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnNegativePower = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,7 +43,10 @@
             this.ColumnDayConsumePower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDayFeedPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnConsumeTotalPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.labelTitle = new System.Windows.Forms.Label();
+            this.buttonSelect = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.buttonExit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEnergy)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,28 +55,38 @@
             this.buttonExportExcel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.buttonExportExcel.ImageIndex = 0;
             this.buttonExportExcel.ImageList = this.imageList1;
-            this.buttonExportExcel.Location = new System.Drawing.Point(884, 524);
+            this.buttonExportExcel.Location = new System.Drawing.Point(952, 420);
+            this.buttonExportExcel.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.buttonExportExcel.Name = "buttonExportExcel";
-            this.buttonExportExcel.Size = new System.Drawing.Size(112, 24);
+            this.buttonExportExcel.Size = new System.Drawing.Size(131, 34);
             this.buttonExportExcel.TabIndex = 0;
             this.buttonExportExcel.Text = "  导出为Excel";
             this.buttonExportExcel.UseVisualStyleBackColor = true;
             this.buttonExportExcel.Click += new System.EventHandler(this.buttonExportExcel_Click);
             // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "Excel.ico");
+            this.imageList1.Images.SetKeyName(1, "document.ico");
+            this.imageList1.Images.SetKeyName(2, "Exit.ico");
+            // 
             // labelNumber
             // 
             this.labelNumber.AutoSize = true;
-            this.labelNumber.Location = new System.Drawing.Point(884, 39);
+            this.labelNumber.Location = new System.Drawing.Point(948, 46);
             this.labelNumber.Name = "labelNumber";
-            this.labelNumber.Size = new System.Drawing.Size(29, 12);
+            this.labelNumber.Size = new System.Drawing.Size(35, 17);
             this.labelNumber.TabIndex = 1;
-            this.labelNumber.Text = "车号";
+            this.labelNumber.Text = "车号:";
             // 
             // textBoxNumber
             // 
-            this.textBoxNumber.Location = new System.Drawing.Point(886, 65);
+            this.textBoxNumber.Location = new System.Drawing.Point(988, 43);
+            this.textBoxNumber.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.textBoxNumber.Name = "textBoxNumber";
-            this.textBoxNumber.Size = new System.Drawing.Size(112, 21);
+            this.textBoxNumber.Size = new System.Drawing.Size(85, 23);
             this.textBoxNumber.TabIndex = 2;
             this.textBoxNumber.Text = "1571";
             // 
@@ -92,51 +102,13 @@
             this.ColumnDayConsumePower,
             this.ColumnDayFeedPower,
             this.ColumnConsumeTotalPower});
-            this.dataGridViewEnergy.Location = new System.Drawing.Point(11, 39);
+            this.dataGridViewEnergy.Location = new System.Drawing.Point(0, 43);
+            this.dataGridViewEnergy.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.dataGridViewEnergy.Name = "dataGridViewEnergy";
             this.dataGridViewEnergy.RowTemplate.Height = 23;
-            this.dataGridViewEnergy.Size = new System.Drawing.Size(867, 568);
+            this.dataGridViewEnergy.Size = new System.Drawing.Size(941, 531);
             this.dataGridViewEnergy.TabIndex = 3;
-            // 
-            // labelTitle
-            // 
-            this.labelTitle.AutoSize = true;
-            this.labelTitle.Location = new System.Drawing.Point(408, 9);
-            this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(53, 12);
-            this.labelTitle.TabIndex = 4;
-            this.labelTitle.Text = "电能数据";
-            this.labelTitle.Click += new System.EventHandler(this.labelTitle_Click);
-            // 
-            // buttonSelect
-            // 
-            this.buttonSelect.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.buttonSelect.ImageIndex = 1;
-            this.buttonSelect.ImageList = this.imageList1;
-            this.buttonSelect.Location = new System.Drawing.Point(884, 554);
-            this.buttonSelect.Name = "buttonSelect";
-            this.buttonSelect.Size = new System.Drawing.Size(112, 23);
-            this.buttonSelect.TabIndex = 5;
-            this.buttonSelect.Text = "选择文件";
-            this.buttonSelect.UseVisualStyleBackColor = true;
-            this.buttonSelect.Click += new System.EventHandler(this.buttonSelect_Click);
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // buttonExit
-            // 
-            this.buttonExit.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.buttonExit.ImageIndex = 2;
-            this.buttonExit.ImageList = this.imageList1;
-            this.buttonExit.Location = new System.Drawing.Point(884, 583);
-            this.buttonExit.Name = "buttonExit";
-            this.buttonExit.Size = new System.Drawing.Size(112, 23);
-            this.buttonExit.TabIndex = 6;
-            this.buttonExit.Text = "退出";
-            this.buttonExit.UseVisualStyleBackColor = true;
-            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
+            this.dataGridViewEnergy.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridViewEnergy_CellPainting);
             // 
             // ColumnDate
             // 
@@ -180,20 +152,54 @@
             this.ColumnConsumeTotalPower.Name = "ColumnConsumeTotalPower";
             this.ColumnConsumeTotalPower.ReadOnly = true;
             // 
-            // imageList1
+            // labelTitle
             // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "Excel.ico");
-            this.imageList1.Images.SetKeyName(1, "document.ico");
-            this.imageList1.Images.SetKeyName(2, "Exit.ico");
+            this.labelTitle.AutoSize = true;
+            this.labelTitle.Location = new System.Drawing.Point(476, 12);
+            this.labelTitle.Name = "labelTitle";
+            this.labelTitle.Size = new System.Drawing.Size(56, 17);
+            this.labelTitle.TabIndex = 4;
+            this.labelTitle.Text = "电能数据";
+            this.labelTitle.Click += new System.EventHandler(this.labelTitle_Click);
+            // 
+            // buttonSelect
+            // 
+            this.buttonSelect.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.buttonSelect.ImageIndex = 1;
+            this.buttonSelect.ImageList = this.imageList1;
+            this.buttonSelect.Location = new System.Drawing.Point(951, 486);
+            this.buttonSelect.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.buttonSelect.Name = "buttonSelect";
+            this.buttonSelect.Size = new System.Drawing.Size(131, 33);
+            this.buttonSelect.TabIndex = 5;
+            this.buttonSelect.Text = "选择文件";
+            this.buttonSelect.UseVisualStyleBackColor = true;
+            this.buttonSelect.Click += new System.EventHandler(this.buttonSelect_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // buttonExit
+            // 
+            this.buttonExit.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.buttonExit.ImageIndex = 2;
+            this.buttonExit.ImageList = this.imageList1;
+            this.buttonExit.Location = new System.Drawing.Point(951, 541);
+            this.buttonExit.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.buttonExit.Name = "buttonExit";
+            this.buttonExit.Size = new System.Drawing.Size(131, 33);
+            this.buttonExit.TabIndex = 6;
+            this.buttonExit.Text = "退出";
+            this.buttonExit.UseVisualStyleBackColor = true;
+            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1008, 622);
+            this.ClientSize = new System.Drawing.Size(1085, 576);
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.buttonSelect);
             this.Controls.Add(this.labelTitle);
@@ -202,10 +208,13 @@
             this.Controls.Add(this.labelNumber);
             this.Controls.Add(this.buttonExportExcel);
             this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "苏州市万松电器有限公司";
+            this.Shown += new System.EventHandler(this.FormMain_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEnergy)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
