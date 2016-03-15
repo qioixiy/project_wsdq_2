@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="EnergyData.cs" />
     <Compile Include="Excel.cs" />
+    <Compile Include="ExportExcelThread.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>

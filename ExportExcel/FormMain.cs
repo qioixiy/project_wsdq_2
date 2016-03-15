@@ -7,13 +7,15 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Windows.Forms;
-using Excel = Microsoft.Office.Interop.Excel; 
+using Excel = Microsoft.Office.Interop.Excel;
+using System.Threading; 
 
 namespace ExportExcel
 {
     public partial class FormMain : Form
     {
-        EnergyData mEnergyData;
+        public EnergyData mEnergyData;
+        
         public FormMain()
         {
             InitializeComponent();
@@ -41,41 +43,35 @@ namespace ExportExcel
                 GC.Collect();
             }
         }
+        
+        public void setExportExcelStatus(int i)
+        {
+            if (i == 1)
+            {
+                buttonExportExcel.Text = "导出为Excel";
+                buttonExportExcel.Enabled = true;
+                System.Windows.Forms.MessageBox.Show("请先导入正确的数据文件！");
+            }
+            else if (i == 2)
+            {
+                buttonExportExcel.Text = "导出...";
+                buttonExportExcel.Enabled = false;
+            }
+            else if (i == 3)
+            {
+                buttonExportExcel.Text = "导出为Excel";
+                buttonExportExcel.Enabled = true;
+
+                System.Windows.Forms.MessageBox.Show("导出成功！");
+            }
+        }
 
         private void buttonExportExcel_Click(object sender, EventArgs e)
         {
-            CBExcel excel = new CBExcel();
-            excel.Create();
-            
-            excel.SelectWorksheet(1);
-            excel.SetData(1, 1, "");
-            excel.SetData(1, 2, "Student1");
-            excel.SetData(1, 3, "Student2");
-            excel.SetData(1, 4, "Student3");
+            ExportExcelThread mExportExcelThread = new ExportExcelThread(this, mEnergyData, GetExcelFileName(textBoxNumber.Text));
+            Thread th = new Thread(mExportExcelThread.ThreadMethod);
 
-            excel.SetData(2, 1, "Term1");
-            excel.SetData(2, 2, "80");
-            excel.SetData(2, 3, "65");
-            excel.SetData(2, 4, "45");
-
-            excel.SetData(3, 1, "Term2");
-            excel.SetData(3, 2, "81");
-            excel.SetData(3, 3, "61");
-            excel.SetData(3, 4, "41");
-
-            excel.SetData(4, 1, "Term3");
-            excel.SetData(4, 2, "82");
-            excel.SetData(4, 3, "62");
-            excel.SetData(4, 4, "42");
-
-            excel.SelectWorksheet(2);
-            excel.SetChart("A1", "D4", Excel.XlChartType.xlColumnClustered);
-
-            excel.SelectWorksheet(3); 
-            excel.SetChart("A1", "D4", Excel.XlChartType.xlLine);
-            excel.SaveAs(GetExcelFileName(textBoxNumber.Text));
-
-            excel.Release(); 
+            th.Start();
         }
 
         public String GetExcelFileName(String append)
@@ -111,26 +107,26 @@ namespace ExportExcel
                 }
                 for (int i = 0; i < this.dataGridViewEnergy.RowCount; i++)
                 {
-                    dataGridViewEnergy.Rows[i].Cells[0].Value = BitConverter.ToUInt16(ToHostEndian(mEnergyData.mEnergyDataRawList[i].year), 0) + "年" 
+                    dataGridViewEnergy.Rows[i].Cells[0].Value = BitConverter.ToUInt16(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].year), 0) + "年" 
                                                             + Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth),System.Globalization.NumberStyles.HexNumber) + "月"
                                                             + Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day),System.Globalization.NumberStyles.HexNumber) + "日";
-                    dataGridViewEnergy.Rows[i].Cells[1].Value = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0) + " kW.h";
-                    dataGridViewEnergy.Rows[i].Cells[2].Value = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0) + " kW.h";
-                    dataGridViewEnergy.Rows[i].Cells[3].Value = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0) + " kW.h";
+                    dataGridViewEnergy.Rows[i].Cells[1].Value = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0) + " kW.h";
+                    dataGridViewEnergy.Rows[i].Cells[2].Value = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0) + " kW.h";
+                    dataGridViewEnergy.Rows[i].Cells[3].Value = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0) + " kW.h";
                     if (i == 0)
                     {
-                        dataGridViewEnergy.Rows[i].Cells[4].Value = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0) + " kW.h";
-                        dataGridViewEnergy.Rows[i].Cells[5].Value = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0) + " kW.h";
-                        dataGridViewEnergy.Rows[i].Cells[6].Value = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0) + " kW.h";
+                        dataGridViewEnergy.Rows[i].Cells[4].Value = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0) + " kW.h";
+                        dataGridViewEnergy.Rows[i].Cells[5].Value = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0) + " kW.h";
+                        dataGridViewEnergy.Rows[i].Cells[6].Value = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0) + " kW.h";
                     }
                     else
                     {
-                        dataGridViewEnergy.Rows[i].Cells[4].Value = (BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0)
-                           - BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power1), 0)) + " kW.h";
-                        dataGridViewEnergy.Rows[i].Cells[5].Value = (BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0)
-                           - BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power2), 0)) + " kW.h";
-                        dataGridViewEnergy.Rows[i].Cells[6].Value = (BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0)
-                           - BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0)) + " kW.h";
+                        dataGridViewEnergy.Rows[i].Cells[4].Value = (BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0)
+                           - BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power1), 0)) + " kW.h";
+                        dataGridViewEnergy.Rows[i].Cells[5].Value = (BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0)
+                           - BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power2), 0)) + " kW.h";
+                        dataGridViewEnergy.Rows[i].Cells[6].Value = (BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0)
+                           - BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0)) + " kW.h";
                     }
                  }
             }
@@ -139,17 +135,6 @@ namespace ExportExcel
         private void buttonExit_Click(object sender, EventArgs e)
         {
             System.Environment.Exit(0);
-        }
-
-        byte[] ToHostEndian(byte[] src)
-        {
-            byte[] dest = new byte[src.Length];
-            for (int i = src.Length - 1, j = 0; i >= 0; i--, j++)
-            {
-                dest[j] = src[i];
-            }
-
-            return dest;
         }
 
         private void FormMain_Shown(object sender, EventArgs e)
