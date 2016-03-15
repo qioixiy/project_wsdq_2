@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Windows.Forms;
 
 namespace ExportExcel
 {
@@ -29,7 +30,7 @@ namespace ExportExcel
         {
             if (!File.Exists(filename))
             {
-                Console.WriteLine("不存在此文件");
+                MessageBox.Show("不存在此文件");
                 return false;
             }
             else {
@@ -55,12 +56,18 @@ namespace ExportExcel
                                 || _EnergyDataRaw.day == null
                                 || _EnergyDataRaw.power1 == null
                                 || _EnergyDataRaw.power2 == null
-                                || _EnergyDataRaw.powerAll == null)
+                                || _EnergyDataRaw.powerAll == null
+                                || _EnergyDataRaw.year.Length == 0
+                                || _EnergyDataRaw.mouth.Length == 0
+                                || _EnergyDataRaw.day.Length == 0
+                                || _EnergyDataRaw.power1.Length == 0
+                                || _EnergyDataRaw.power2.Length == 0
+                                || _EnergyDataRaw.powerAll.Length == 0)
                             {
                                 _EnergyDataRaw = null;
                                 break;
                             }
-                            //*
+                            /*
                             Console.WriteLine("year:" + BitConverter.ToUInt16(ToHostEndian(_EnergyDataRaw.year),0)
                                 + " mouth:" + BitConverter.ToString(_EnergyDataRaw.mouth)
                                 + " day:" + BitConverter.ToString(_EnergyDataRaw.day)

@@ -141,6 +141,31 @@ namespace ExportExcel
             for (int i = 0; i < mEnergyData.mEnergyDataRawList.Count; i++)
             {
                 row = i + 2;
+
+                string v0_0, v0_1, v0_2, v1, v2, v3, v4, v5, v6;
+
+                v0_0 = BitConverter.ToUInt16(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].year), 0).ToString();
+                v0_1 = Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth), System.Globalization.NumberStyles.HexNumber).ToString();
+                v0_2 = Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day), System.Globalization.NumberStyles.HexNumber).ToString();
+                v1 = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0).ToString();
+                v2 = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0).ToString();
+                v3 = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0).ToString();
+
+                if (i == 0)
+                {
+                    v4 = "0";
+                    v5 = "0";
+                    v6 = "0";
+                }
+                else
+                {
+                    v4 = (BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0)
+                        - BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power1), 0)).ToString();
+                    v5 = (BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0)
+                        - BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power2), 0)).ToString();
+                    v6 = (BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0)
+                        - BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0)).ToString();
+                }
                 object s1, s2, s3, s4, s5, s6, s7;
                 s1 = BitConverter.ToUInt16(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].year), 0) + "年"
                      + Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth), System.Globalization.NumberStyles.HexNumber) + "月"
@@ -164,13 +189,13 @@ namespace ExportExcel
                        - BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0));
                 }
 
-                excel.SetData(row, 1, s1.ToString());
-                excel.SetData(row, 2, s2.ToString());
-                excel.SetData(row, 3, s3.ToString());
-                excel.SetData(row, 4, s4.ToString());
-                excel.SetData(row, 5, s5.ToString());
-                excel.SetData(row, 6, s6.ToString());
-                excel.SetData(row, 7, s7.ToString());
+                excel.SetData(row, 1, v0_0 + "年" + v0_1 + "月" + v0_2 + "日");
+                excel.SetData(row, 2, v1);
+                excel.SetData(row, 3, v2);
+                excel.SetData(row, 4, v3);
+                excel.SetData(row, 5, v4);
+                excel.SetData(row, 6, v5);
+                excel.SetData(row, 7, v6);
             }
 
             excel.SelectWorksheet(2);
