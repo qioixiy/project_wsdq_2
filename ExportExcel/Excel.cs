@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Interop.Excel;
+using System.Windows.Forms;
 
 namespace ExportExcel
 {
@@ -60,13 +61,21 @@ namespace ExportExcel
             GetWorksheet(3).Name = "曲线图";
         }
 
-        public void SaveAs(String filename)
+        public bool SaveAs(String filename)
         {
             xlsApp.DisplayAlerts = false;
             xlsApp.AlertBeforeOverwriting = false;
             if (File.Exists(filename))
             {
-                File.Delete(filename);
+                try
+                {
+                    File.Delete(filename);
+                }
+                catch (IOException)
+                {
+                    MessageBox.Show(filename + "已经打开");
+                    return false;
+                }
             }
 
             xlsApp.ActiveWorkbook.SaveCopyAs(filename);
@@ -74,6 +83,8 @@ namespace ExportExcel
             xlsApp = null;
             xlsWorkBook = null;
             CurXlsWorkSheet = null;
+
+            return true;
         }
 
         public Excel.Worksheet GetWorksheet(int index)
@@ -122,7 +133,7 @@ namespace ExportExcel
 
             if (mEnergyData == null || mEnergyData.mEnergyDataRawList.Count == 0)
             {
-                form.setExportExcelStatus(1);
+                form.setExportExcelStatus("unknown-data");
                 return -1;
             }
 
@@ -167,12 +178,18 @@ namespace ExportExcel
            
             excel.SelectWorksheet(3);
             excel.SetChart(Excel.XlChartType.xlLine, "A1", "G" + row, row * 10);
-            
-            excel.SaveAs(filename);
+
+            if (excel.SaveAs(filename))
+            {
+                form.setExportExcelStatus("export-success");
+            }
+            else
+            {
+                form.setExportExcelStatus("export-fail");
+            }
 
             excel.Release();
 
-            form.setExportExcelStatus(3);
             return 0;
         }
 

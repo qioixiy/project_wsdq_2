@@ -45,22 +45,27 @@ namespace ExportExcel
             }
         }
         
-        public void setExportExcelStatus(int i)
+        public void setExportExcelStatus(string status)
         {
             bool enable = true;
-            if (i == 1)
+            if (status.Equals("unknown-data"))
             {
                 MessageBox.Show("请先导入正确的数据文件！");
                 enable = true;
             }
-            else if (i == 2)
+            else if (status.Equals("exporting"))
             {
                 buttonExportExcel.Text = "导出...";
                 enable = false;
             }
-            else if (i == 3)
+            else if (status.Equals("export-success"))
             {
                 MessageBox.Show("导出成功！");
+                buttonExportExcel.Text = "导出为Excel";
+                enable = true;
+            }
+            else if (status.Equals("export-fail"))
+            {
                 buttonExportExcel.Text = "导出为Excel";
                 enable = true;
             }
@@ -77,7 +82,7 @@ namespace ExportExcel
 
         private void buttonExportExcel_Click(object sender, EventArgs e)
         {
-            setExportExcelStatus(2);
+            setExportExcelStatus("exporting");
            
             ExportExcelThread mExportExcelThread = new ExportExcelThread(this, mEnergyData, GetExcelFileName(textBoxNumber.Text));
             Thread th = new Thread(mExportExcelThread.ThreadMethod);
