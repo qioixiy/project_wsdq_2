@@ -56,8 +56,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEnergy)).BeginInit();
             this.SuspendLayout();
             // 
-<<<<<<< HEAD
-=======
             // buttonExportExcel
             // 
             this.buttonExportExcel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
@@ -72,7 +70,6 @@
             this.buttonExportExcel.UseVisualStyleBackColor = true;
             this.buttonExportExcel.Click += new System.EventHandler(this.buttonExportExcel_Click);
             // 
->>>>>>> 6c9e7d62772a53aac910a52a4ecbcb688768348d
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
