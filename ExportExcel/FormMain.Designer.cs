@@ -188,6 +188,7 @@
             this.dataGridViewEnergy.RowTemplate.Height = 23;
             this.dataGridViewEnergy.Size = new System.Drawing.Size(1077, 533);
             this.dataGridViewEnergy.TabIndex = 4;
+            this.dataGridViewEnergy.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridViewEnergy_CellPainting);
             // 
             // ColumnDate
             // 
