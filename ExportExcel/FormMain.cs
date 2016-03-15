@@ -15,7 +15,6 @@ namespace ExportExcel
     public partial class FormMain : Form
     {
         public EnergyData mEnergyData;
-        public string prevText;
         
         public FormMain()
         {
@@ -49,14 +48,21 @@ namespace ExportExcel
         {
             if (i == 1)
             {
-                prevText = buttonExportExcel.Text;
-                buttonExportExcel.Text = "导出...";
-                buttonExportExcel.Enabled = false;
+                buttonExportExcel.Text = "导出为Excel";
+                buttonExportExcel.Enabled = true;
+                System.Windows.Forms.MessageBox.Show("请先导入正确的数据文件！");
             }
             else if (i == 2)
             {
-                buttonExportExcel.Text = prevText;
+                buttonExportExcel.Text = "导出...";
+                buttonExportExcel.Enabled = false;
+            }
+            else if (i == 3)
+            {
+                buttonExportExcel.Text = "导出为Excel";
                 buttonExportExcel.Enabled = true;
+
+                System.Windows.Forms.MessageBox.Show("导出成功！");
             }
         }
 

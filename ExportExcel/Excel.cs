@@ -122,13 +122,12 @@ namespace ExportExcel
 
             if (mEnergyData == null || mEnergyData.mEnergyDataRawList.Count == 0)
             {
-                System.Windows.Forms.MessageBox.Show("请先导入正确的数据文件！");
-                form.setExportExcelStatus(2);
+                form.setExportExcelStatus(1);
                 return -1;
             }
             else
             {
-                form.setExportExcelStatus(1);
+                form.setExportExcelStatus(2);
             }
 
             int row = 2;
@@ -177,8 +176,7 @@ namespace ExportExcel
 
             excel.Release();
 
-            form.setExportExcelStatus(2);
-            System.Windows.Forms.MessageBox.Show("生成成功！");
+            form.setExportExcelStatus(3);
             return 0;
         }
 
