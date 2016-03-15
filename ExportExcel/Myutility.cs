@@ -7,7 +7,7 @@ namespace ExportExcel
 {
     public class Myutility
     {
-        public byte[] ToHostEndian(byte[] src)
+        public static byte[] ToHostEndian(byte[] src)
         {
             byte[] dest = new byte[src.Length];
             for (int i = src.Length - 1, j = 0; i >= 0; i--, j++)

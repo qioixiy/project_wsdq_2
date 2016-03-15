@@ -93,18 +93,7 @@ namespace ExportExcel
             releaseObject(xlsApp);
         }
 
-        public byte[] ToHostEndian(byte[] src)
-        {
-            byte[] dest = new byte[src.Length];
-            for (int i = src.Length - 1, j = 0; i >= 0; i--, j++)
-            {
-                dest[j] = src[i];
-            }
-
-            return dest;
-        }
-
-        public int GenExcel(EnergyData mEnergyData, string filename)
+        public static int GenExcel(FormMain form, EnergyData mEnergyData, string filename)
         {
             CBExcel excel = new CBExcel();
             excel.Create();
@@ -134,7 +123,12 @@ namespace ExportExcel
             if (mEnergyData == null || mEnergyData.mEnergyDataRawList.Count == 0)
             {
                 System.Windows.Forms.MessageBox.Show("请先导入正确的数据文件！");
+                form.setExportExcelStatus(2);
                 return -1;
+            }
+            else
+            {
+                form.setExportExcelStatus(1);
             }
 
             int row = 2;
@@ -142,26 +136,26 @@ namespace ExportExcel
             {
                 row = i + 2;
                 object s1, s2, s3, s4, s5, s6, s7;
-                s1 = BitConverter.ToUInt16(ToHostEndian(mEnergyData.mEnergyDataRawList[i].year), 0) + "年"
+                s1 = BitConverter.ToUInt16(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].year), 0) + "年"
                      + Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth), System.Globalization.NumberStyles.HexNumber) + "月"
                      + Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day), System.Globalization.NumberStyles.HexNumber) + "日";
-                s2 = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0);
-                s3 = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0);
-                s4 = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0);
+                s2 = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0);
+                s3 = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0);
+                s4 = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0);
                 if (i == 0)
                 {
-                    s5 = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0);
-                    s6 = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0);
-                    s7 = BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0);
+                    s5 = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0);
+                    s6 = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0);
+                    s7 = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0);
                 }
                 else
                 {
-                    s5 = (BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0)
-                       - BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power1), 0));
-                    s6 = (BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0)
-                       - BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power2), 0));
-                    s7 = (BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0)
-                       - BitConverter.ToUInt32(ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0));
+                    s5 = (BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0)
+                       - BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power1), 0));
+                    s6 = (BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0)
+                       - BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power2), 0));
+                    s7 = (BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0)
+                       - BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0));
                 }
 
                 excel.SetData(row, 1, s1.ToString());
@@ -183,6 +177,8 @@ namespace ExportExcel
 
             excel.Release();
 
+            form.setExportExcelStatus(2);
+            System.Windows.Forms.MessageBox.Show("生成成功！");
             return 0;
         }
 
