@@ -30,11 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            this.buttonExportExcel = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.openFileDialogData = new System.Windows.Forms.OpenFileDialog();
-            this.labelNumber = new System.Windows.Forms.Label();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.labelTitle = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.buttonExit = new System.Windows.Forms.Button();
+            this.buttonSelect = new System.Windows.Forms.Button();
             this.textBoxNumber = new System.Windows.Forms.TextBox();
+            this.labelNumber = new System.Windows.Forms.Label();
+            this.buttonExportExcel = new System.Windows.Forms.Button();
             this.dataGridViewEnergy = new System.Windows.Forms.DataGridView();
             this.ColumnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPositivePower = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,26 +50,11 @@
             this.ColumnDayConsumePower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDayFeedPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnConsumeTotalPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.labelTitle = new System.Windows.Forms.Label();
-            this.buttonSelect = new System.Windows.Forms.Button();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.buttonExit = new System.Windows.Forms.Button();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEnergy)).BeginInit();
             this.SuspendLayout();
-            // 
-            // buttonExportExcel
-            // 
-            this.buttonExportExcel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.buttonExportExcel.ImageIndex = 0;
-            this.buttonExportExcel.ImageList = this.imageList1;
-            this.buttonExportExcel.Location = new System.Drawing.Point(952, 420);
-            this.buttonExportExcel.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.buttonExportExcel.Name = "buttonExportExcel";
-            this.buttonExportExcel.Size = new System.Drawing.Size(131, 34);
-            this.buttonExportExcel.TabIndex = 0;
-            this.buttonExportExcel.Text = "  导出为Excel";
-            this.buttonExportExcel.UseVisualStyleBackColor = true;
-            this.buttonExportExcel.Click += new System.EventHandler(this.buttonExportExcel_Click);
             // 
             // imageList1
             // 
@@ -72,23 +64,111 @@
             this.imageList1.Images.SetKeyName(1, "document.ico");
             this.imageList1.Images.SetKeyName(2, "Exit.ico");
             // 
-            // labelNumber
+            // openFileDialog1
             // 
-            this.labelNumber.AutoSize = true;
-            this.labelNumber.Location = new System.Drawing.Point(948, 46);
-            this.labelNumber.Name = "labelNumber";
-            this.labelNumber.Size = new System.Drawing.Size(35, 17);
-            this.labelNumber.TabIndex = 1;
-            this.labelNumber.Text = "车号:";
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.labelTitle);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1278, 43);
+            this.panel1.TabIndex = 7;
+            // 
+            // labelTitle
+            // 
+            this.labelTitle.AutoSize = true;
+            this.labelTitle.Location = new System.Drawing.Point(444, 21);
+            this.labelTitle.Name = "labelTitle";
+            this.labelTitle.Size = new System.Drawing.Size(56, 17);
+            this.labelTitle.TabIndex = 5;
+            this.labelTitle.Text = "电能数据";
+            this.labelTitle.Click += new System.EventHandler(this.labelTitle_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.panel3);
+            this.panel2.Controls.Add(this.dataGridViewEnergy);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 43);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1278, 533);
+            this.panel2.TabIndex = 8;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.buttonExit);
+            this.panel3.Controls.Add(this.buttonSelect);
+            this.panel3.Controls.Add(this.textBoxNumber);
+            this.panel3.Controls.Add(this.labelNumber);
+            this.panel3.Controls.Add(this.buttonExportExcel);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel3.Location = new System.Drawing.Point(1078, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(200, 533);
+            this.panel3.TabIndex = 12;
+            // 
+            // buttonExit
+            // 
+            this.buttonExit.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.buttonExit.ImageIndex = 2;
+            this.buttonExit.ImageList = this.imageList1;
+            this.buttonExit.Location = new System.Drawing.Point(40, 486);
+            this.buttonExit.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.buttonExit.Name = "buttonExit";
+            this.buttonExit.Size = new System.Drawing.Size(131, 33);
+            this.buttonExit.TabIndex = 16;
+            this.buttonExit.Text = "退出";
+            this.buttonExit.UseVisualStyleBackColor = true;
+            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
+            // 
+            // buttonSelect
+            // 
+            this.buttonSelect.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.buttonSelect.ImageIndex = 1;
+            this.buttonSelect.ImageList = this.imageList1;
+            this.buttonSelect.Location = new System.Drawing.Point(40, 430);
+            this.buttonSelect.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.buttonSelect.Name = "buttonSelect";
+            this.buttonSelect.Size = new System.Drawing.Size(131, 33);
+            this.buttonSelect.TabIndex = 15;
+            this.buttonSelect.Text = "选择文件";
+            this.buttonSelect.UseVisualStyleBackColor = true;
+            this.buttonSelect.Click += new System.EventHandler(this.buttonSelect_Click);
             // 
             // textBoxNumber
             // 
-            this.textBoxNumber.Location = new System.Drawing.Point(988, 43);
+            this.textBoxNumber.Location = new System.Drawing.Point(76, 5);
             this.textBoxNumber.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.textBoxNumber.Name = "textBoxNumber";
             this.textBoxNumber.Size = new System.Drawing.Size(85, 23);
-            this.textBoxNumber.TabIndex = 2;
+            this.textBoxNumber.TabIndex = 14;
             this.textBoxNumber.Text = "1571";
+            // 
+            // labelNumber
+            // 
+            this.labelNumber.AutoSize = true;
+            this.labelNumber.Location = new System.Drawing.Point(36, 8);
+            this.labelNumber.Name = "labelNumber";
+            this.labelNumber.Size = new System.Drawing.Size(35, 17);
+            this.labelNumber.TabIndex = 13;
+            this.labelNumber.Text = "车号:";
+            // 
+            // buttonExportExcel
+            // 
+            this.buttonExportExcel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.buttonExportExcel.ImageIndex = 0;
+            this.buttonExportExcel.ImageList = this.imageList1;
+            this.buttonExportExcel.Location = new System.Drawing.Point(39, 372);
+            this.buttonExportExcel.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.buttonExportExcel.Name = "buttonExportExcel";
+            this.buttonExportExcel.Size = new System.Drawing.Size(131, 34);
+            this.buttonExportExcel.TabIndex = 12;
+            this.buttonExportExcel.Text = "  导出为Excel";
+            this.buttonExportExcel.UseVisualStyleBackColor = true;
+            this.buttonExportExcel.Click += new System.EventHandler(this.buttonExportExcel_Click);
             // 
             // dataGridViewEnergy
             // 
@@ -102,13 +182,13 @@
             this.ColumnDayConsumePower,
             this.ColumnDayFeedPower,
             this.ColumnConsumeTotalPower});
-            this.dataGridViewEnergy.Location = new System.Drawing.Point(0, 43);
+            this.dataGridViewEnergy.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewEnergy.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewEnergy.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.dataGridViewEnergy.Name = "dataGridViewEnergy";
             this.dataGridViewEnergy.RowTemplate.Height = 23;
-            this.dataGridViewEnergy.Size = new System.Drawing.Size(941, 531);
-            this.dataGridViewEnergy.TabIndex = 3;
-            this.dataGridViewEnergy.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridViewEnergy_CellPainting);
+            this.dataGridViewEnergy.Size = new System.Drawing.Size(1278, 533);
+            this.dataGridViewEnergy.TabIndex = 4;
             // 
             // ColumnDate
             // 
@@ -152,61 +232,14 @@
             this.ColumnConsumeTotalPower.Name = "ColumnConsumeTotalPower";
             this.ColumnConsumeTotalPower.ReadOnly = true;
             // 
-            // labelTitle
-            // 
-            this.labelTitle.AutoSize = true;
-            this.labelTitle.Location = new System.Drawing.Point(476, 12);
-            this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(56, 17);
-            this.labelTitle.TabIndex = 4;
-            this.labelTitle.Text = "电能数据";
-            this.labelTitle.Click += new System.EventHandler(this.labelTitle_Click);
-            // 
-            // buttonSelect
-            // 
-            this.buttonSelect.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.buttonSelect.ImageIndex = 1;
-            this.buttonSelect.ImageList = this.imageList1;
-            this.buttonSelect.Location = new System.Drawing.Point(951, 486);
-            this.buttonSelect.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.buttonSelect.Name = "buttonSelect";
-            this.buttonSelect.Size = new System.Drawing.Size(131, 33);
-            this.buttonSelect.TabIndex = 5;
-            this.buttonSelect.Text = "选择文件";
-            this.buttonSelect.UseVisualStyleBackColor = true;
-            this.buttonSelect.Click += new System.EventHandler(this.buttonSelect_Click);
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // buttonExit
-            // 
-            this.buttonExit.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.buttonExit.ImageIndex = 2;
-            this.buttonExit.ImageList = this.imageList1;
-            this.buttonExit.Location = new System.Drawing.Point(951, 541);
-            this.buttonExit.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.buttonExit.Name = "buttonExit";
-            this.buttonExit.Size = new System.Drawing.Size(131, 33);
-            this.buttonExit.TabIndex = 6;
-            this.buttonExit.Text = "退出";
-            this.buttonExit.UseVisualStyleBackColor = true;
-            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1085, 576);
-            this.Controls.Add(this.buttonExit);
-            this.Controls.Add(this.buttonSelect);
-            this.Controls.Add(this.labelTitle);
-            this.Controls.Add(this.dataGridViewEnergy);
-            this.Controls.Add(this.textBoxNumber);
-            this.Controls.Add(this.labelNumber);
-            this.Controls.Add(this.buttonExportExcel);
+            this.ClientSize = new System.Drawing.Size(1278, 576);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -215,24 +248,31 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "苏州市万松电器有限公司";
             this.Shown += new System.EventHandler(this.FormMain_Shown);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEnergy)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button buttonExportExcel;
         private System.Windows.Forms.OpenFileDialog openFileDialogData;
-
-        private System.Windows.Forms.Label labelNumber;
-        private System.Windows.Forms.TextBox textBoxNumber;
-        private System.Windows.Forms.DataGridView dataGridViewEnergy;
-        private System.Windows.Forms.Label labelTitle;
-        private System.Windows.Forms.Button buttonSelect;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label labelTitle;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button buttonExit;
+        private System.Windows.Forms.Button buttonSelect;
+        private System.Windows.Forms.TextBox textBoxNumber;
+        private System.Windows.Forms.Label labelNumber;
+        private System.Windows.Forms.Button buttonExportExcel;
+        private System.Windows.Forms.DataGridView dataGridViewEnergy;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPositivePower;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNegativePower;
@@ -240,7 +280,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDayConsumePower;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDayFeedPower;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnConsumeTotalPower;
-        private System.Windows.Forms.ImageList imageList1;
     }
 }
 
