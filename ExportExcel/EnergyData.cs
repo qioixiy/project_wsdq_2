@@ -6,7 +6,7 @@ using System.IO;
 
 namespace ExportExcel
 {
-    class EnergyData
+    public class EnergyData
     {
         public class EnergyDataRaw
         {
