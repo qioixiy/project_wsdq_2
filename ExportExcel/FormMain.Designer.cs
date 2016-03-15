@@ -182,12 +182,11 @@
             this.ColumnDayConsumePower,
             this.ColumnDayFeedPower,
             this.ColumnConsumeTotalPower});
-            this.dataGridViewEnergy.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewEnergy.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewEnergy.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.dataGridViewEnergy.Name = "dataGridViewEnergy";
             this.dataGridViewEnergy.RowTemplate.Height = 23;
-            this.dataGridViewEnergy.Size = new System.Drawing.Size(1278, 533);
+            this.dataGridViewEnergy.Size = new System.Drawing.Size(1077, 533);
             this.dataGridViewEnergy.TabIndex = 4;
             // 
             // ColumnDate
@@ -241,7 +240,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "FormMain";
