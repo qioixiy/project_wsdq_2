@@ -139,14 +139,16 @@ namespace ExportExcel
         private void dataGridViewEnergy_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex < 0)
+            {
+                e.CellStyle.Font = new Font("微软雅黑",9);  
                 return;
+            }
 
-            DataGridViewRow dgr = dataGridViewEnergy.Rows[e.RowIndex];
             try
             {
                 if (e.ColumnIndex == 0)//定位到第1列日期 
                 {
-                        e.CellStyle.Font = new Font("微软雅黑",9);  
+                    e.CellStyle.Font = new Font("微软雅黑",9);  
                 }
             }
             catch
