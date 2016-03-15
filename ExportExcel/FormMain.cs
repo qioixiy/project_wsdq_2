@@ -19,6 +19,7 @@ namespace ExportExcel
         public FormMain()
         {
             InitializeComponent();
+            //CheckForIllegalCrossThreadCalls = false;
         }
 
         public void SetEnergyDataFromFile(String filename)
@@ -46,28 +47,38 @@ namespace ExportExcel
         
         public void setExportExcelStatus(int i)
         {
+            bool enable = true;
             if (i == 1)
             {
-                buttonExportExcel.Text = "导出为Excel";
-                buttonExportExcel.Enabled = true;
-                System.Windows.Forms.MessageBox.Show("请先导入正确的数据文件！");
+                MessageBox.Show("请先导入正确的数据文件！");
+                enable = true;
             }
             else if (i == 2)
             {
                 buttonExportExcel.Text = "导出...";
-                buttonExportExcel.Enabled = false;
+                enable = false;
             }
             else if (i == 3)
             {
+                MessageBox.Show("导出成功！");
+                buttonExportExcel.Text = "导出为Excel";
+                enable = true;
+            }
+
+            if (enable == true)
+            {
                 buttonExportExcel.Text = "导出为Excel";
                 buttonExportExcel.Enabled = true;
-
-                System.Windows.Forms.MessageBox.Show("导出成功！");
+            }
+            else {
+                buttonExportExcel.Enabled = false;
             }
         }
 
         private void buttonExportExcel_Click(object sender, EventArgs e)
         {
+            setExportExcelStatus(2);
+           
             ExportExcelThread mExportExcelThread = new ExportExcelThread(this, mEnergyData, GetExcelFileName(textBoxNumber.Text));
             Thread th = new Thread(mExportExcelThread.ThreadMethod);
 

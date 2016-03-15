@@ -125,10 +125,6 @@ namespace ExportExcel
                 form.setExportExcelStatus(1);
                 return -1;
             }
-            else
-            {
-                form.setExportExcelStatus(2);
-            }
 
             int row = 2;
             for (int i = 0; i < mEnergyData.mEnergyDataRawList.Count; i++)

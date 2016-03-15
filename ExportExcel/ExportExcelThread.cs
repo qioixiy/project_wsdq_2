@@ -20,7 +20,6 @@ namespace ExportExcel
         }
         public void ThreadMethod()
         {
-
             CBExcel.GenExcel((FormMain)form, mEnergyData, filename);
         }
     }

@@ -56,20 +56,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEnergy)).BeginInit();
             this.SuspendLayout();
             // 
-            // buttonExportExcel
-            // 
-            this.buttonExportExcel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.buttonExportExcel.ImageIndex = 0;
-            this.buttonExportExcel.ImageList = this.imageList1;
-            this.buttonExportExcel.Location = new System.Drawing.Point(952, 420);
-            this.buttonExportExcel.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.buttonExportExcel.Name = "buttonExportExcel";
-            this.buttonExportExcel.Size = new System.Drawing.Size(131, 34);
-            this.buttonExportExcel.TabIndex = 0;
-            this.buttonExportExcel.Text = "导出为Excel";
-            this.buttonExportExcel.UseVisualStyleBackColor = true;
-            this.buttonExportExcel.Click += new System.EventHandler(this.buttonExportExcel_Click);
-            // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
