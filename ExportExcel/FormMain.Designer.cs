@@ -50,6 +50,8 @@
             this.ColumnDayConsumePower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDayFeedPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnConsumeTotalPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox_V_type = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -80,11 +82,12 @@
             // labelTitle
             // 
             this.labelTitle.AutoSize = true;
-            this.labelTitle.Location = new System.Drawing.Point(444, 21);
+            this.labelTitle.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelTitle.Location = new System.Drawing.Point(446, 11);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(56, 17);
+            this.labelTitle.Size = new System.Drawing.Size(185, 17);
             this.labelTitle.TabIndex = 5;
-            this.labelTitle.Text = "电能数据";
+            this.labelTitle.Text = "EEMS电能监控系统数据处理助手";
             this.labelTitle.Click += new System.EventHandler(this.labelTitle_Click);
             // 
             // panel2
@@ -99,6 +102,8 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.textBox_V_type);
+            this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.buttonExit);
             this.panel3.Controls.Add(this.buttonSelect);
             this.panel3.Controls.Add(this.textBoxNumber);
@@ -145,7 +150,7 @@
             this.textBoxNumber.Name = "textBoxNumber";
             this.textBoxNumber.Size = new System.Drawing.Size(85, 23);
             this.textBoxNumber.TabIndex = 14;
-            this.textBoxNumber.Text = "1571";
+            this.textBoxNumber.Text = "0000";
             // 
             // labelNumber
             // 
@@ -232,6 +237,23 @@
             this.ColumnConsumeTotalPower.Name = "ColumnConsumeTotalPower";
             this.ColumnConsumeTotalPower.ReadOnly = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(36, 45);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(32, 17);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "车型";
+            // 
+            // textBox_V_type
+            // 
+            this.textBox_V_type.Location = new System.Drawing.Point(76, 39);
+            this.textBox_V_type.Name = "textBox_V_type";
+            this.textBox_V_type.Size = new System.Drawing.Size(85, 23);
+            this.textBox_V_type.TabIndex = 18;
+            this.textBox_V_type.Text = "CRH380D";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -241,7 +263,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "FormMain";
@@ -280,6 +302,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDayConsumePower;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDayFeedPower;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnConsumeTotalPower;
+        private System.Windows.Forms.TextBox textBox_V_type;
+        private System.Windows.Forms.Label label1;
     }
 }
 

@@ -97,7 +97,7 @@ namespace ExportExcel
             }
             String curDate = DateTime.Now.ToString("yyyyMMdd");
             String ret = System.Environment.CurrentDirectory
-                + "\\" + "CRH380D-" + append + "_" + curDate + ".xlsx";
+                + "\\" + textBox_V_type.Text + "-" + append + "_" + curDate + ".xlsx";
 
             return ret;
         }
