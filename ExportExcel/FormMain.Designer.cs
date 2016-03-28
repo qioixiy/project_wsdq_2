@@ -82,7 +82,7 @@
             // labelTitle
             // 
             this.labelTitle.AutoSize = true;
-            this.labelTitle.Font = new System.Drawing.Font("LiSu", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelTitle.Font = new System.Drawing.Font("隶书", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelTitle.Location = new System.Drawing.Point(446, 6);
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(449, 29);
@@ -134,10 +134,11 @@
             // 
             // buttonExit
             // 
+            this.buttonExit.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.buttonExit.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.buttonExit.ImageIndex = 2;
             this.buttonExit.ImageList = this.imageList1;
-            this.buttonExit.Location = new System.Drawing.Point(40, 486);
+            this.buttonExit.Location = new System.Drawing.Point(39, 486);
             this.buttonExit.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(131, 33);
@@ -148,10 +149,11 @@
             // 
             // buttonSelect
             // 
+            this.buttonSelect.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.buttonSelect.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.buttonSelect.ImageIndex = 1;
             this.buttonSelect.ImageList = this.imageList1;
-            this.buttonSelect.Location = new System.Drawing.Point(40, 430);
+            this.buttonSelect.Location = new System.Drawing.Point(39, 430);
             this.buttonSelect.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.buttonSelect.Name = "buttonSelect";
             this.buttonSelect.Size = new System.Drawing.Size(131, 33);
@@ -180,10 +182,11 @@
             // 
             // buttonExportExcel
             // 
+            this.buttonExportExcel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.buttonExportExcel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.buttonExportExcel.ImageIndex = 0;
             this.buttonExportExcel.ImageList = this.imageList1;
-            this.buttonExportExcel.Location = new System.Drawing.Point(39, 372);
+            this.buttonExportExcel.Location = new System.Drawing.Point(38, 372);
             this.buttonExportExcel.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.buttonExportExcel.Name = "buttonExportExcel";
             this.buttonExportExcel.Size = new System.Drawing.Size(131, 34);
@@ -266,7 +269,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "FormMain";
