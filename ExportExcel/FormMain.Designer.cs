@@ -83,11 +83,11 @@
             // 
             this.labelTitle.AutoSize = true;
             this.labelTitle.Font = new System.Drawing.Font("隶书", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelTitle.Location = new System.Drawing.Point(446, 6);
+            this.labelTitle.Location = new System.Drawing.Point(392, 6);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(449, 29);
+            this.labelTitle.Size = new System.Drawing.Size(513, 29);
             this.labelTitle.TabIndex = 5;
-            this.labelTitle.Text = "EEMS电能监控系统数据处理助手V1.1";
+            this.labelTitle.Text = "EEMS电能监控系统数据处理助手V1.2";
             this.labelTitle.Click += new System.EventHandler(this.labelTitle_Click);
             // 
             // panel2
@@ -122,6 +122,7 @@
             this.textBox_V_type.Size = new System.Drawing.Size(85, 23);
             this.textBox_V_type.TabIndex = 18;
             this.textBox_V_type.Text = "CRH";
+            this.textBox_V_type.Visible = false;
             // 
             // label1
             // 
@@ -131,6 +132,7 @@
             this.label1.Size = new System.Drawing.Size(32, 17);
             this.label1.TabIndex = 17;
             this.label1.Text = "车型";
+            this.label1.Visible = false;
             // 
             // buttonExit
             // 
@@ -170,6 +172,7 @@
             this.textBoxNumber.Size = new System.Drawing.Size(85, 23);
             this.textBoxNumber.TabIndex = 14;
             this.textBoxNumber.Text = "0000";
+            this.textBoxNumber.Visible = false;
             // 
             // labelNumber
             // 
@@ -179,6 +182,7 @@
             this.labelNumber.Size = new System.Drawing.Size(35, 17);
             this.labelNumber.TabIndex = 13;
             this.labelNumber.Text = "车号:";
+            this.labelNumber.Visible = false;
             // 
             // buttonExportExcel
             // 

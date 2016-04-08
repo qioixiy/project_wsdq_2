@@ -79,12 +79,48 @@ namespace ExportExcel
                 buttonExportExcel.Enabled = false;
             }
         }
+        private string GetExcelFileNameV1_2()
+        {
+            string ret;
+            string carType = "";
+            if (mEnergyData.carType[0] == 0x01)
+            {
+                carType = "CRH1A";
+            }
+            else if (mEnergyData.carType[0] == 0x02)
+            {
+                carType = "CRH1E";
+            }
+            else if (mEnergyData.carType[0] == 0x03)
+            {
+                carType = "CRH380D";
+            }
+            else
+            {
+                MessageBox.Show("未识别的车型");
+                return null;
+            }
 
+            UInt16 num = System.BitConverter.ToUInt16(mEnergyData.carNum, 0);
+            string carNum = num.ToString();
+            string pre = System.Environment.CurrentDirectory + "\\";
+            ret = pre + carType + "-" + carNum + "_" + DateTime.Now.ToString("yyyyMMdd") + ".xlsx";
+            return ret;
+        }
         private void buttonExportExcel_Click(object sender, EventArgs e)
         {
             setExportExcelStatus("exporting");
-           
-            ExportExcelThread mExportExcelThread = new ExportExcelThread(this, mEnergyData, GetExcelFileName(textBoxNumber.Text));
+
+            ExportExcelThread mExportExcelThread;
+            //mExportExcelThread = new ExportExcelThread(this, mEnergyData, GetExcelFileName(textBoxNumber.Text));
+            // V1.2
+            string filename = GetExcelFileNameV1_2();
+            if (null == filename)
+            {
+                MessageBox.Show("无效文件名");
+                return;
+            }
+            mExportExcelThread = new ExportExcelThread(this, mEnergyData, filename);
             Thread th = new Thread(mExportExcelThread.ThreadMethod);
 
             th.Start();

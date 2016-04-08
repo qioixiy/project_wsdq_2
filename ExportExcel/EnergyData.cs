@@ -19,6 +19,9 @@ namespace ExportExcel
             public byte[] powerAll;//总电能 4byte
         }
         
+        public byte[] reserve = new byte[1];
+        public byte[] carType = new byte[1];
+        public byte[] carNum = new byte[2];
         public List<EnergyDataRaw> mEnergyDataRawList = new List<EnergyDataRaw>();
 
         public EnergyData(String filename)
@@ -40,6 +43,12 @@ namespace ExportExcel
                     BinaryReader br = new BinaryReader(fs);
                     try
                     {
+                        reserve = br.ReadBytes(1);
+                        carType = br.ReadBytes(1);
+                        carNum = br.ReadBytes(2);
+                        byte temp = carNum[0];
+                        carNum[0] = carNum[1];
+                        carNum[1] = temp;
                         while (true)
                         {
                             EnergyDataRaw _EnergyDataRaw = new EnergyDataRaw();
