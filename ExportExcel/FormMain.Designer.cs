@@ -87,7 +87,7 @@
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(449, 29);
             this.labelTitle.TabIndex = 5;
-            this.labelTitle.Text = "EEMS电能监控系统数据处理助手";
+            this.labelTitle.Text = "EEMS电能监控系统数据处理助手V1.1";
             this.labelTitle.Click += new System.EventHandler(this.labelTitle_Click);
             // 
             // panel2
