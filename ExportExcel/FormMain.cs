@@ -118,6 +118,7 @@ namespace ExportExcel
             if (null == filename)
             {
                 MessageBox.Show("无效文件名");
+                setExportExcelStatus("export-fail");
                 return;
             }
             mExportExcelThread = new ExportExcelThread(this, mEnergyData, filename);
