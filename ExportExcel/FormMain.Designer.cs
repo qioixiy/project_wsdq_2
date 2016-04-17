@@ -52,6 +52,8 @@
             this.ColumnDayConsumePower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDayFeedPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnConsumeTotalPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -72,6 +74,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.labelTitle);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -82,12 +86,12 @@
             // labelTitle
             // 
             this.labelTitle.AutoSize = true;
-            this.labelTitle.Font = new System.Drawing.Font("隶书", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelTitle.Location = new System.Drawing.Point(446, 6);
+            this.labelTitle.Font = new System.Drawing.Font("隶书", 23F, System.Drawing.FontStyle.Bold);
+            this.labelTitle.Location = new System.Drawing.Point(392, 6);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(449, 29);
+            this.labelTitle.Size = new System.Drawing.Size(410, 31);
             this.labelTitle.TabIndex = 5;
-            this.labelTitle.Text = "EEMS电能监控系统数据处理助手V1.1";
+            this.labelTitle.Text = "电能监控系统数据处理助手";
             this.labelTitle.Click += new System.EventHandler(this.labelTitle_Click);
             // 
             // panel2
@@ -260,6 +264,26 @@
             this.ColumnConsumeTotalPower.Name = "ColumnConsumeTotalPower";
             this.ColumnConsumeTotalPower.ReadOnly = true;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial", 17F, System.Drawing.FontStyle.Bold);
+            this.label2.Location = new System.Drawing.Point(325, 10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(76, 27);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "EEMS";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial", 17F, System.Drawing.FontStyle.Bold);
+            this.label3.Location = new System.Drawing.Point(807, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 27);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "V1.2";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -310,6 +334,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnConsumeTotalPower;
         private System.Windows.Forms.TextBox textBox_V_type;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
     }
 }
 
