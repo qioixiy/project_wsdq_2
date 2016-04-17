@@ -19,7 +19,8 @@ namespace ExportExcel
         public FormMain()
         {
             InitializeComponent();
-            //CheckForIllegalCrossThreadCalls = false;
+            this.label3.Text = ExportExcel.Properties.Resources.Version;
+            CheckForIllegalCrossThreadCalls = false;
         }
 
         public void SetEnergyDataFromFile(String filename)
@@ -109,6 +110,10 @@ namespace ExportExcel
         }
         private void buttonExportExcel_Click(object sender, EventArgs e)
         {
+            if (null == mEnergyData) {
+                MessageBox.Show("请先导入数据文件");
+                return;
+            }
             setExportExcelStatus("exporting");
 
             ExportExcelThread mExportExcelThread;
