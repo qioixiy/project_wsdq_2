@@ -138,7 +138,15 @@ namespace ExportExcel
             chartPage.SetSourceData(chartRange, misValue);
             chartPage.ChartType = type;
 
-            //myChart.Chart.ChartWizard(chartRange, type, Type.Missing, XlRowCol.xlColumns, 1, 1, true, "电能数据", "日期", "KW.h", Type.Missing);
+            try
+            {
+                myChart.Chart.ChartWizard(
+                    chartRange, type, Type.Missing, XlRowCol.xlColumns, 1, 1, true, "电能数据", "日期", "KW.h", Type.Missing);
+            }
+            catch
+            {
+                Console.WriteLine("ChartWizard error");
+            }
         }
 
         public static int GenExcel(FormMain form, EnergyData mEnergyData, string filename)
