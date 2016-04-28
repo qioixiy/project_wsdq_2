@@ -152,7 +152,18 @@ namespace ExportExcel
         public static int GenExcel(FormMain form, EnergyData mEnergyData, string filename)
         {
             CBExcel excel = new CBExcel();
+
             excel.Create();
+
+            // append file ext
+            if (Convert.ToDouble(excel.xlsApp.Version) >= 12.0)//office 2007
+            {
+                filename += ".xlsx";
+            }
+            else
+            {
+                filename += ".xls";
+            }
 
             excel.SelectWorksheet(1);
             ((Excel.Range)excel.CurXlsWorkSheet.Columns["A", Type.Missing]).HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;

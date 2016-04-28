@@ -105,7 +105,7 @@ namespace ExportExcel
             UInt16 num = System.BitConverter.ToUInt16(mEnergyData.carNum, 0);
             string carNum = num.ToString();
             string pre = System.Environment.CurrentDirectory + "\\";
-            ret = pre + carType + "-" + carNum + "_" + DateTime.Now.ToString("yyyyMMdd") + ".xls";
+            ret = pre + carType + "-" + carNum + "_" + DateTime.Now.ToString("yyyyMMdd");
             return ret;
         }
         private void buttonExportExcel_Click(object sender, EventArgs e)
@@ -139,7 +139,7 @@ namespace ExportExcel
             }
             String curDate = DateTime.Now.ToString("yyyyMMdd");
             String ret = System.Environment.CurrentDirectory
-                + "\\" + textBox_V_type.Text + "-" + append + "_" + curDate + ".xlsx";
+                + "\\" + textBox_V_type.Text + "-" + append + "_" + curDate;
 
             return ret;
         }
