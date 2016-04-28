@@ -43,12 +43,15 @@ namespace ExportExcel
                     BinaryReader br = new BinaryReader(fs);
                     try
                     {
-                        reserve = br.ReadBytes(1);
-                        carType = br.ReadBytes(1);
-                        carNum = br.ReadBytes(2);
-                        byte temp = carNum[0];
-                        carNum[0] = carNum[1];
-                        carNum[1] = temp;
+                        if (ExportExcel.Properties.Resources.Version != "V1.1")
+                        {
+                            reserve = br.ReadBytes(1);
+                            carType = br.ReadBytes(1);
+                            carNum = br.ReadBytes(2);
+                            byte temp = carNum[0];
+                            carNum[0] = carNum[1];
+                            carNum[1] = temp;
+                        }
                         while (true)
                         {
                             EnergyDataRaw _EnergyDataRaw = new EnergyDataRaw();

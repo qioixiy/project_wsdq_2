@@ -21,6 +21,14 @@ namespace ExportExcel
             InitializeComponent();
             this.label3.Text = ExportExcel.Properties.Resources.Version;
             CheckForIllegalCrossThreadCalls = false;
+
+            if (ExportExcel.Properties.Resources.Version == "V1.1")
+            {
+                labelNumber.Visible = true;
+                textBoxNumber.Visible = true;
+                label1.Visible = true;
+                textBox_V_type.Visible = true;
+            }
         }
 
         public void SetEnergyDataFromFile(String filename)
@@ -119,7 +127,12 @@ namespace ExportExcel
             ExportExcelThread mExportExcelThread;
             //mExportExcelThread = new ExportExcelThread(this, mEnergyData, GetExcelFileName(textBoxNumber.Text));
             // V1.2
-            string filename = GetExcelFileNameV1_2();
+            string filename = null;
+            if (ExportExcel.Properties.Resources.Version == "V1.1") {
+                filename = GetExcelFileName(textBoxNumber.Text);
+            } else {
+                filename = GetExcelFileNameV1_2();
+            }
             if (null == filename)
             {
                 MessageBox.Show("无效文件名");
