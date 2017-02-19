@@ -43,8 +43,8 @@ namespace ExportExcel
                     BinaryReader br = new BinaryReader(fs);
                     try
                     {
-                        if ((ExportExcel.Properties.Resources.Version != "V1.1")
-                            && (ExportExcel.Properties.Resources.Version != "V1.3"))
+                        if ((Myutility.GetMajorVersionNumber() != "V1.1")
+                            && (Myutility.GetMajorVersionNumber() != "V1.3"))
                         {
                             reserve = br.ReadBytes(1);
                             carType = br.ReadBytes(1);

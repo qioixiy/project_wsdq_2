@@ -22,8 +22,8 @@ namespace ExportExcel
             this.label3.Text = ExportExcel.Properties.Resources.Version;
             CheckForIllegalCrossThreadCalls = false;
 
-            if ((ExportExcel.Properties.Resources.Version == "V1.1")
-                || (ExportExcel.Properties.Resources.Version == "V1.3"))
+            if ((Myutility.GetMajorVersionNumber() == "V1.1")
+                || (Myutility.GetMajorVersionNumber() == "V1.3"))
             {
                 labelNumber.Visible = true;
                 textBoxNumber.Visible = true;
@@ -129,8 +129,8 @@ namespace ExportExcel
             //mExportExcelThread = new ExportExcelThread(this, mEnergyData, GetExcelFileName(textBoxNumber.Text));
             // V1.2
             string filename = null;
-            if ((ExportExcel.Properties.Resources.Version == "V1.1")
-                || (ExportExcel.Properties.Resources.Version == "V1.3"))
+            if ((Myutility.GetMajorVersionNumber() == "V1.1")
+                || (Myutility.GetMajorVersionNumber() == "V1.3"))
             {
                 filename = GetExcelFileName(textBoxNumber.Text);
             } else {
@@ -179,7 +179,7 @@ namespace ExportExcel
                     MessageBox.Show("数据文件内容为空");
                     return;
                 }
-                for (int j = 0,i = this.dataGridViewEnergy.RowCount - 1; i >= 0; i--)
+                for (int j = 0, count = 0, i = this.dataGridViewEnergy.RowCount - 1; i >= 0; i--, count++)
                 {
                     string v0_0, v0_1, v0_2, v0_3, v1, v2, v3, v4, v5, v6;
 
@@ -191,7 +191,7 @@ namespace ExportExcel
                     v1 = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0).ToString();
                     v2 = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0).ToString();
                     v3 = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0).ToString();
-                    if (j == this.dataGridViewEnergy.RowCount - 1)
+                    if (count == this.dataGridViewEnergy.RowCount - 1)
                     {
                         v4 = "0";
                         v5 = "0";
@@ -208,7 +208,7 @@ namespace ExportExcel
                     }
 
                     dataGridViewEnergy.Rows[j].Cells[0].Value = v0_0 + "年" +　v0_1 + "月" + v0_2 + "日";
-                    if (ExportExcel.Properties.Resources.Version == "V1.3")
+                    if (Myutility.GetMajorVersionNumber() == "V1.3")
                     {
                         // 验证有效性： 大于31或者小于等于0；时：大于等于24；分大于等于60；秒大于等于60；就丢弃这16个字节。
                         Int32 day = Int32.Parse(v0_0);
