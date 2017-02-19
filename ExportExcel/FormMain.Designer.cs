@@ -34,6 +34,8 @@
             this.openFileDialogData = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.labelTitle = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -52,8 +54,6 @@
             this.ColumnDayConsumePower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDayFeedPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnConsumeTotalPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -82,6 +82,26 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1278, 43);
             this.panel1.TabIndex = 7;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial", 17F, System.Drawing.FontStyle.Bold);
+            this.label3.Location = new System.Drawing.Point(807, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 27);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "V1.2";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial", 17F, System.Drawing.FontStyle.Bold);
+            this.label2.Location = new System.Drawing.Point(325, 10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(76, 27);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "EEMS";
             // 
             // labelTitle
             // 
@@ -228,7 +248,7 @@
             // 
             // ColumnDate
             // 
-            this.ColumnDate.HeaderText = "日期";
+            this.ColumnDate.HeaderText = "时间";
             this.ColumnDate.Name = "ColumnDate";
             this.ColumnDate.ReadOnly = true;
             // 
@@ -252,41 +272,21 @@
             // 
             // ColumnDayConsumePower
             // 
-            this.ColumnDayConsumePower.HeaderText = "日耗正向电能";
+            this.ColumnDayConsumePower.HeaderText = "阶段正向电能";
             this.ColumnDayConsumePower.Name = "ColumnDayConsumePower";
             this.ColumnDayConsumePower.ReadOnly = true;
             // 
             // ColumnDayFeedPower
             // 
-            this.ColumnDayFeedPower.HeaderText = "日馈反向电能";
+            this.ColumnDayFeedPower.HeaderText = "阶段反向电能";
             this.ColumnDayFeedPower.Name = "ColumnDayFeedPower";
             this.ColumnDayFeedPower.ReadOnly = true;
             // 
             // ColumnConsumeTotalPower
             // 
-            this.ColumnConsumeTotalPower.HeaderText = "单耗总电能";
+            this.ColumnConsumeTotalPower.HeaderText = "阶段总电能";
             this.ColumnConsumeTotalPower.Name = "ColumnConsumeTotalPower";
             this.ColumnConsumeTotalPower.ReadOnly = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 17F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(325, 10);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 27);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "EEMS";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 17F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(807, 9);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 27);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "V1.2";
             // 
             // FormMain
             // 
@@ -329,6 +329,10 @@
         private System.Windows.Forms.Label labelNumber;
         private System.Windows.Forms.Button buttonExportExcel;
         private System.Windows.Forms.DataGridView dataGridViewEnergy;
+        private System.Windows.Forms.TextBox textBox_V_type;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPositivePower;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNegativePower;
@@ -336,10 +340,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDayConsumePower;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDayFeedPower;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnConsumeTotalPower;
-        private System.Windows.Forms.TextBox textBox_V_type;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
     }
 }
 
