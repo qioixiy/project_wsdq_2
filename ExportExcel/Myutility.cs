@@ -17,5 +17,14 @@ namespace ExportExcel
 
             return dest;
         }
+        public static bool InInt32Scope(Int32 value, Int32 min, Int32 max)
+        {
+            bool ret = true;
+            if (value < min || value > max) {
+                ret = false;
+            }
+
+            return ret;
+        }
     }
 }

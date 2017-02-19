@@ -179,13 +179,15 @@ namespace ExportExcel
                     MessageBox.Show("数据文件内容为空");
                     return;
                 }
-                for (int j = 0,i = this.dataGridViewEnergy.RowCount - 1; i >= 0; i--,j++)
+                for (int j = 0,i = this.dataGridViewEnergy.RowCount - 1; i >= 0; i--)
                 {
-                    string v0_0, v0_1, v0_2, v1, v2, v3, v4, v5, v6;
+                    string v0_0, v0_1, v0_2, v0_3, v1, v2, v3, v4, v5, v6;
 
-                    v0_0 = BitConverter.ToUInt16(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].year), 0).ToString();
-                    v0_1 = Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth), System.Globalization.NumberStyles.HexNumber).ToString();
-                    v0_2 = Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day), System.Globalization.NumberStyles.HexNumber).ToString();
+                    v0_0 = mEnergyData.mEnergyDataRawList[i].year[0].ToString();
+                    v0_1 = mEnergyData.mEnergyDataRawList[i].year[1].ToString();
+                    v0_2 = Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth), System.Globalization.NumberStyles.HexNumber).ToString();
+                    v0_3 = Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day), System.Globalization.NumberStyles.HexNumber).ToString();
+                    
                     v1 = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0).ToString();
                     v2 = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0).ToString();
                     v3 = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0).ToString();
@@ -208,7 +210,21 @@ namespace ExportExcel
                     dataGridViewEnergy.Rows[j].Cells[0].Value = v0_0 + "年" +　v0_1 + "月" + v0_2 + "日";
                     if (ExportExcel.Properties.Resources.Version == "V1.3")
                     {
-                        dataGridViewEnergy.Rows[j].Cells[0].Value = v0_0 + "时" + v0_1 + "分" + v0_2 + "秒";
+                        // 验证有效性： 大于31或者小于等于0；时：大于等于24；分大于等于60；秒大于等于60；就丢弃这16个字节。
+                        Int32 day = Int32.Parse(v0_0);
+                        Int32 hour = Int32.Parse(v0_1);
+                        Int32 minuts = Int32.Parse(v0_2);
+                        Int32 second = Int32.Parse(v0_3);
+                        
+                        if (!(Myutility.InInt32Scope(day, 1, 31)
+                            && Myutility.InInt32Scope(hour, 0, 23)
+                            && Myutility.InInt32Scope(minuts, 0, 59)
+                            && Myutility.InInt32Scope(second, 0, 59)))
+                        {
+                            Console.WriteLine("无效数据" + v0_0 + "日" + v0_1 + "时" + v0_2 + "分" + v0_3 + "秒");
+                            continue;
+                        }
+                        dataGridViewEnergy.Rows[j].Cells[0].Value = v0_0 + "日" + v0_1 + "时" + v0_2 + "分" + v0_3 + "秒";
                     }
                     dataGridViewEnergy.Rows[j].Cells[1].Value = v1 + " kW.h";
                     dataGridViewEnergy.Rows[j].Cells[2].Value = v2 + " kW.h";
@@ -216,6 +232,7 @@ namespace ExportExcel
                     dataGridViewEnergy.Rows[j].Cells[4].Value = v4 + " kW.h";
                     dataGridViewEnergy.Rows[j].Cells[5].Value = v5 + " kW.h";
                     dataGridViewEnergy.Rows[j].Cells[6].Value = v6 + " kW.h";
+                    j++;
                  }
             }
         }
