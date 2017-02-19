@@ -22,8 +22,8 @@ namespace ExportExcel
             this.label3.Text = ExportExcel.Properties.Resources.Version;
             CheckForIllegalCrossThreadCalls = false;
 
-            if ((ExportExcel.Properties.Resources.Version == "V1.1")
-                || (ExportExcel.Properties.Resources.Version == "V1.3"))
+            if ((Myutility.GetMajorVersionNumber() == "V1.1")
+                || (Myutility.GetMajorVersionNumber() == "V1.3"))
             {
                 labelNumber.Visible = true;
                 textBoxNumber.Visible = true;
@@ -129,8 +129,8 @@ namespace ExportExcel
             //mExportExcelThread = new ExportExcelThread(this, mEnergyData, GetExcelFileName(textBoxNumber.Text));
             // V1.2
             string filename = null;
-            if ((ExportExcel.Properties.Resources.Version == "V1.1")
-                || (ExportExcel.Properties.Resources.Version == "V1.3"))
+            if ((Myutility.GetMajorVersionNumber() == "V1.1")
+                || (Myutility.GetMajorVersionNumber() == "V1.3"))
             {
                 filename = GetExcelFileName(textBoxNumber.Text);
             } else {
@@ -208,7 +208,7 @@ namespace ExportExcel
                     }
 
                     dataGridViewEnergy.Rows[j].Cells[0].Value = v0_0 + "年" +　v0_1 + "月" + v0_2 + "日";
-                    if (ExportExcel.Properties.Resources.Version == "V1.3")
+                    if (Myutility.GetMajorVersionNumber() == "V1.3")
                     {
                         // 验证有效性： 大于31或者小于等于0；时：大于等于24；分大于等于60；秒大于等于60；就丢弃这16个字节。
                         Int32 day = Int32.Parse(v0_0);

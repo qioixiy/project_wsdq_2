@@ -140,7 +140,7 @@ namespace ExportExcel
 
             try
             {
-                if (ExportExcel.Properties.Resources.Version == "V1.3")
+                if (Myutility.GetMajorVersionNumber() == "V1.3")
                 {
                     myChart.Chart.ChartWizard(
                         chartRange, type, Type.Missing, XlRowCol.xlColumns, 1, 1, true, "电能数据", "时间", "KW.h", Type.Missing);
@@ -253,7 +253,8 @@ namespace ExportExcel
                        - BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0));
                 }
                 excel.SetData(row, 1, v0_0 + "年" + v0_1 + "月" + v0_2 + "日");
-                if (ExportExcel.Properties.Resources.Version == "V1.3") {
+                if (Myutility.GetMajorVersionNumber() == "V1.3")
+                {
                     excel.SetData(row, 1, v0_0 + "时" + v0_1 + "分" + v0_2 + "秒");
                 }
                 excel.SetData(row, 2, v1);
@@ -323,7 +324,8 @@ namespace ExportExcel
                 s1 = BitConverter.ToUInt16(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].year), 0) + "年"
                      + Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth), System.Globalization.NumberStyles.HexNumber) + "月"
                      + Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day), System.Globalization.NumberStyles.HexNumber) + "日";
-                if (ExportExcel.Properties.Resources.Version == "V1.3") {
+                if (Myutility.GetMajorVersionNumber() == "V1.3")
+                {
                     s1 = BitConverter.ToUInt16(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].year), 0) + "时"
                      + Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth), System.Globalization.NumberStyles.HexNumber) + "分"
                      + Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day), System.Globalization.NumberStyles.HexNumber) + "秒";
@@ -348,7 +350,7 @@ namespace ExportExcel
                 }
 
                 excel.SetData(row, 1, v0_0 + "年" + v0_1 + "月" + v0_2 + "日");
-                if (ExportExcel.Properties.Resources.Version == "V1.3")
+                if (Myutility.GetMajorVersionNumber() == "V1.3")
                 {
                     excel.SetData(row, 1, v0_0 + "时" + v0_1 + "分" + v0_2 + "秒");
                 }
