@@ -126,7 +126,7 @@ namespace ExportExcel
                     MessageBox.Show("数据文件内容为空");
                     return;
                 }
-                for (int j = 0,i = this.dataGridViewEnergy.RowCount - 1; i >= 0; i--,j++)
+                for (int j = 0, count = 0, i = this.dataGridViewEnergy.RowCount - 1; i >= 0; i--, count++)
                 {
                     string v0_0, v0_1, v0_2, v1, v2, v3, v4, v5, v6;
 
@@ -136,7 +136,7 @@ namespace ExportExcel
                     v1 = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0).ToString();
                     v2 = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0).ToString();
                     v3 = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0).ToString();
-                    if (j == this.dataGridViewEnergy.RowCount - 1)
+                    if (count == this.dataGridViewEnergy.RowCount - 1)
                     {
                         v4 = "0";
                         v5 = "0";
@@ -152,6 +152,17 @@ namespace ExportExcel
                             - BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0)).ToString();
                     }
 
+                    // 有效数据检测：大于2099或者年小于2000 ；月：大于12或者小于等于0； 日：大于31或者小于等于0；就丢弃这16个字节
+                    Int32 year = Int32.Parse(v0_0);
+                    Int32 mouth = Int32.Parse(v0_1);
+                    Int32 day = Int32.Parse(v0_2);
+                    if (!(Myutility.InInt32Scope(year, 2000, 2099)
+                        && Myutility.InInt32Scope(mouth, 1, 12)
+                        && Myutility.InInt32Scope(day, 1, 31))){
+                         Console.WriteLine("无效数据" + v0_0 + "年" + v0_1 + "月" + v0_2 + "日");
+                        continue;
+                    }
+
                     dataGridViewEnergy.Rows[j].Cells[0].Value = v0_0 + "年" +　v0_1 + "月" + v0_2 + "日";
                     dataGridViewEnergy.Rows[j].Cells[1].Value = v1 + " kW.h";
                     dataGridViewEnergy.Rows[j].Cells[2].Value = v2 + " kW.h";
@@ -159,6 +170,8 @@ namespace ExportExcel
                     dataGridViewEnergy.Rows[j].Cells[4].Value = v4 + " kW.h";
                     dataGridViewEnergy.Rows[j].Cells[5].Value = v5 + " kW.h";
                     dataGridViewEnergy.Rows[j].Cells[6].Value = v6 + " kW.h";
+
+                    j++;
                  }
             }
         }

@@ -17,5 +17,29 @@ namespace ExportExcel
 
             return dest;
         }
+
+        public static bool InInt32Scope(Int32 value, Int32 min, Int32 max)
+        {
+            bool ret = true;
+            if (value < min || value > max) {
+                ret = false;
+            }
+
+            return ret;
+        }
+
+        public static string GetMajorVersionNumber() {
+            string originVer = ExportExcel.Properties.Resources.Version;
+            string ret = originVer;
+
+            switch (originVer) {
+                case "V1.11": ret = "V1.1"; break;
+                case "V1.21": ret = "V1.2"; break;
+                case "V1.31": ret = "V1.3"; break;
+                default: ret = "V1.3"; break;
+            }
+
+            return ret;
+        }
     }
 }
