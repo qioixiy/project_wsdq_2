@@ -210,20 +210,6 @@ namespace ExportExcel
                     dataGridViewEnergy.Rows[j].Cells[0].Value = v0_0 + "年" +　v0_1 + "月" + v0_2 + "日";
                     if (Myutility.GetMajorVersionNumber() == "V1.3")
                     {
-                        // 验证有效性： 大于31或者小于等于0；时：大于等于24；分大于等于60；秒大于等于60；就丢弃这16个字节。
-                        Int32 day = Int32.Parse(v0_0);
-                        Int32 hour = Int32.Parse(v0_1);
-                        Int32 minuts = Int32.Parse(v0_2);
-                        Int32 second = Int32.Parse(v0_3);
-                        
-                        if (!(Myutility.InInt32Scope(day, 1, 31)
-                            && Myutility.InInt32Scope(hour, 0, 23)
-                            && Myutility.InInt32Scope(minuts, 0, 59)
-                            && Myutility.InInt32Scope(second, 0, 59)))
-                        {
-                            Console.WriteLine("无效数据" + v0_0 + "日" + v0_1 + "时" + v0_2 + "分" + v0_3 + "秒");
-                            continue;
-                        }
                         dataGridViewEnergy.Rows[j].Cells[0].Value = v0_0 + "日" + v0_1 + "时" + v0_2 + "分" + v0_3 + "秒";
                     }
                     dataGridViewEnergy.Rows[j].Cells[1].Value = v1 + " kW.h";

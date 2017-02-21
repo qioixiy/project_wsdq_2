@@ -35,6 +35,7 @@ namespace ExportExcel
                 case "V1.11": ret = "V1.1"; break;
                 case "V1.21": ret = "V1.2"; break;
                 case "V1.31": ret = "V1.3"; break;
+                case "V1.32": ret = "V1.3"; break;
                 default: ret = "V1.3"; break;
             }
 

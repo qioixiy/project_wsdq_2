@@ -60,7 +60,7 @@ namespace ExportExcel
             // add function sheet
             xlsApp.Worksheets.Add(misValue);
             GetWorksheet(1).Name = "电能列表";
-            GetWorksheet(2).Name = "单日电能柱状图";
+            GetWorksheet(2).Name = "阶段电能柱状图";
             GetWorksheet(3).Name = "总电能曲线图";
             GetWorksheet(4).Name = "...";
 
@@ -187,13 +187,13 @@ namespace ExportExcel
             //excel.CurXlsWorkSheet.get_Range(excel.CurXlsWorkSheet.Cells[1, 1], excel.CurXlsWorkSheet.Cells[1, 7]).VerticalAlignment = true;
             excel.CurXlsWorkSheet.get_Range(excel.CurXlsWorkSheet.Cells[1, 1], excel.CurXlsWorkSheet.Cells[1, 7]).Interior.ColorIndex = 16;
 
-            excel.SetData(1, 1, "日期");
+            excel.SetData(1, 1, "时间");
             excel.SetData(1, 2, "正向电能(kW.h)");
             excel.SetData(1, 3, "反向电能(kW.h)");
             excel.SetData(1, 4, "总电能(kW.h)");
-            excel.SetData(1, 5, "日耗电能(kW.h)");
-            excel.SetData(1, 6, "日馈电能(kW.h)");
-            excel.SetData(1, 7, "单日总耗电能(kW.h)");
+            excel.SetData(1, 5, "阶段耗电能(kW.h)");
+            excel.SetData(1, 6, "阶段馈电能(kW.h)");
+            excel.SetData(1, 7, "阶段总耗电能(kW.h)");
 
             if (mEnergyData == null || mEnergyData.mEnergyDataRawList.Count == 0)
             {
@@ -206,11 +206,12 @@ namespace ExportExcel
             {
                 row = i + 2;
 
-                string v0_0, v0_1, v0_2, v1, v2, v3, v4, v5, v6;
+                string v0_0, v0_1, v0_2, v0_3, v1, v2, v3, v4, v5, v6;
 
-                v0_0 = BitConverter.ToUInt16(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].year), 0).ToString();
-                v0_1 = Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth), System.Globalization.NumberStyles.HexNumber).ToString();
-                v0_2 = Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day), System.Globalization.NumberStyles.HexNumber).ToString();
+                v0_0 = mEnergyData.mEnergyDataRawList[i].year[0].ToString();
+                v0_1 = mEnergyData.mEnergyDataRawList[i].year[1].ToString();
+                v0_2 = Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth), System.Globalization.NumberStyles.HexNumber).ToString();
+                v0_3 = Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day), System.Globalization.NumberStyles.HexNumber).ToString();
                 v1 = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0).ToString();
                 v2 = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0).ToString();
                 v3 = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0).ToString();
@@ -255,7 +256,7 @@ namespace ExportExcel
                 excel.SetData(row, 1, v0_0 + "年" + v0_1 + "月" + v0_2 + "日");
                 if (Myutility.GetMajorVersionNumber() == "V1.3")
                 {
-                    excel.SetData(row, 1, v0_0 + "时" + v0_1 + "分" + v0_2 + "秒");
+                    excel.SetData(row, 1, v0_0 + "日" + v0_1 + "时" + v0_2 + "分" + v0_3 + "秒");
                 }
                 excel.SetData(row, 2, v1);
                 excel.SetData(row, 3, v2);
@@ -280,10 +281,10 @@ namespace ExportExcel
             //excel.CurXlsWorkSheet.get_Range(excel.CurXlsWorkSheet.Cells[1, 1], excel.CurXlsWorkSheet.Cells[1, 4]).VerticalAlignment = true;
             excel.CurXlsWorkSheet.get_Range(excel.CurXlsWorkSheet.Cells[1, 1], excel.CurXlsWorkSheet.Cells[1, 4]).Interior.ColorIndex = 16;
 
-            excel.SetData(1, 1, "日期");
+            excel.SetData(1, 1, "时间");
             excel.SetData(1, 2, "日耗电能(kW.h)");
             excel.SetData(1, 3, "日馈电能(kW.h)");
-            excel.SetData(1, 4, "单日总耗电能(kW.h)");
+            excel.SetData(1, 4, "阶段总耗电能(kW.h)");
 
             if (mEnergyData == null || mEnergyData.mEnergyDataRawList.Count == 0)
             {

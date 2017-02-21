@@ -28,7 +28,36 @@ namespace ExportExcel
         {
             ReadFromFile(filename);
         }
+        bool ValidData(EnergyDataRaw _EnergyDataRaw)
+        { 
+            bool ret = true;
 
+            if (Myutility.GetMajorVersionNumber() == "V1.3")
+            {
+                string v0_0, v0_1, v0_2, v0_3;
+
+                v0_0 = _EnergyDataRaw.year[0].ToString();
+                v0_1 = _EnergyDataRaw.year[1].ToString();
+                v0_2 = Int32.Parse(BitConverter.ToString(_EnergyDataRaw.mouth), System.Globalization.NumberStyles.HexNumber).ToString();
+                v0_3 = Int32.Parse(BitConverter.ToString(_EnergyDataRaw.day), System.Globalization.NumberStyles.HexNumber).ToString();
+                // 验证有效性： 大于31或者小于等于0；时：大于等于24；分大于等于60；秒大于等于60；就丢弃这16个字节。
+                Int32 day = Int32.Parse(v0_0);
+                Int32 hour = Int32.Parse(v0_1);
+                Int32 minuts = Int32.Parse(v0_2);
+                Int32 second = Int32.Parse(v0_3);
+
+                if (!(Myutility.InInt32Scope(day, 1, 31)
+                    && Myutility.InInt32Scope(hour, 0, 23)
+                    && Myutility.InInt32Scope(minuts, 0, 59)
+                    && Myutility.InInt32Scope(second, 0, 59)))
+                {
+                    Console.WriteLine("无效数据" + v0_0 + "日" + v0_1 + "时" + v0_2 + "分" + v0_3 + "秒");
+                    ret = false;
+                }
+            }
+
+            return ret;
+        }
         bool ReadFromFile(String filename)
         {
             if (!File.Exists(filename))
@@ -88,7 +117,9 @@ namespace ExportExcel
                                 + " power2:" + BitConverter.ToUInt32(ToHostEndian(_EnergyDataRaw.power2), 0)
                                 + " powerAll:" + BitConverter.ToUInt32(ToHostEndian(_EnergyDataRaw.powerAll), 0));//*/
                            
-                            mEnergyDataRawList.Add(_EnergyDataRaw);
+                            if (ValidData(_EnergyDataRaw)) {
+                                mEnergyDataRawList.Add(_EnergyDataRaw);
+                            }
                         }
                     }
                     catch (Exception)
