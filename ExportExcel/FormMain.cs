@@ -189,17 +189,6 @@ namespace ExportExcel
                             - BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0)).ToString();
                     }
 
-                    // 检测有效性：大于2099或者年小于2000 ；月：大于12或者小于等于0； 日：大于31或者小于等于0；就丢弃这16个字节
-                    Int32 year = Int32.Parse(v0_0);
-                    Int32 mouth = Int32.Parse(v0_1);
-                    Int32 day = Int32.Parse(v0_2);
-                    if (!(Myutility.InInt32Scope(year, 2000, 2099)
-                        && Myutility.InInt32Scope(mouth, 1, 12)
-                        && Myutility.InInt32Scope(day, 1, 31))){
-                        Console.WriteLine("无效数据" + v0_0 + "年" + v0_1 + "月" + v0_2 + "日");
-                        continue;
-                    }
-
                     dataGridViewEnergy.Rows[j].Cells[0].Value = v0_0 + "年" +　v0_1 + "月" + v0_2 + "日";
                     dataGridViewEnergy.Rows[j].Cells[1].Value = v1 + " kW.h";
                     dataGridViewEnergy.Rows[j].Cells[2].Value = v2 + " kW.h";
