@@ -31,7 +31,7 @@ namespace ExportExcel
             bool ret = true;
 
             string v0_0, v0_1, v0_2;
-            v0_0 = BitConverter.ToUInt16(Myutility.ToHostEndian(_EnergyDataRaw.year), 0).ToString();
+            v0_0 = BitConverter.ToInt16(Myutility.ToHostEndian(_EnergyDataRaw.year), 0).ToString();
             v0_1 = Int32.Parse(BitConverter.ToString(_EnergyDataRaw.mouth), System.Globalization.NumberStyles.HexNumber).ToString();
             v0_2 = Int32.Parse(BitConverter.ToString(_EnergyDataRaw.day), System.Globalization.NumberStyles.HexNumber).ToString();
             // 检测有效性：大于2099或者年小于2000 ；月：大于12或者小于等于0； 日：大于31或者小于等于0；就丢弃这16个字节
@@ -91,12 +91,12 @@ namespace ExportExcel
                                 break;
                             }
                             /*
-                            Console.WriteLine("year:" + BitConverter.ToUInt16(ToHostEndian(_EnergyDataRaw.year),0)
+                            Console.WriteLine("year:" + BitConverter.ToInt16(ToHostEndian(_EnergyDataRaw.year),0)
                                 + " mouth:" + BitConverter.ToString(_EnergyDataRaw.mouth)
                                 + " day:" + BitConverter.ToString(_EnergyDataRaw.day)
-                                + " power1:" + BitConverter.ToUInt32(ToHostEndian(_EnergyDataRaw.power1), 0)
-                                + " power2:" + BitConverter.ToUInt32(ToHostEndian(_EnergyDataRaw.power2), 0)
-                                + " powerAll:" + BitConverter.ToUInt32(ToHostEndian(_EnergyDataRaw.powerAll), 0));//*/
+                                + " power1:" + BitConverter.ToInt32(ToHostEndian(_EnergyDataRaw.power1), 0)
+                                + " power2:" + BitConverter.ToInt32(ToHostEndian(_EnergyDataRaw.power2), 0)
+                                + " powerAll:" + BitConverter.ToInt32(ToHostEndian(_EnergyDataRaw.powerAll), 0));//*/
                            
                             if (ValidData(_EnergyDataRaw)) {
                                 mEnergyDataRawList.Add(_EnergyDataRaw);
