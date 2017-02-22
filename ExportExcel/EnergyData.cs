@@ -28,8 +28,14 @@ namespace ExportExcel
         {
             ReadFromFile(filename);
         }
+
+        static int count = 0;
         bool ValidData(EnergyDataRaw _EnergyDataRaw)
-        { 
+        {
+            if (count++ > 300) {
+                // for test
+                //return false;
+            } 
             bool ret = true;
 
             if (Myutility.GetMajorVersionNumber() == "V1.3")

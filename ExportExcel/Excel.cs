@@ -173,6 +173,7 @@ namespace ExportExcel
                 filename += ".xls";
             }
 
+            // worksheet1 电能列表
             excel.SelectWorksheet(1);
             ((Excel.Range)excel.CurXlsWorkSheet.Columns["A", Type.Missing]).HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
             ((Excel.Range)excel.CurXlsWorkSheet.Columns["A", Type.Missing]).ColumnWidth = 20;
@@ -208,6 +209,7 @@ namespace ExportExcel
 
                 string v0_0, v0_1, v0_2, v0_3, v1, v2, v3, v4, v5, v6;
 
+                // v1.3
                 v0_0 = mEnergyData.mEnergyDataRawList[i].year[0].ToString();
                 v0_1 = mEnergyData.mEnergyDataRawList[i].year[1].ToString();
                 v0_2 = Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth), System.Globalization.NumberStyles.HexNumber).ToString();
@@ -232,9 +234,14 @@ namespace ExportExcel
                         - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0)).ToString();
                 }
                 object s1, s2, s3, s4, s5, s6, s7;
-                s1 = BitConverter.ToInt16(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].year), 0) + "年"
-                     + Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth), System.Globalization.NumberStyles.HexNumber) + "月"
-                     + Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day), System.Globalization.NumberStyles.HexNumber) + "日";
+                //s1 = BitConverter.ToInt16(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].year), 0) + "年"
+                //     + Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth), System.Globalization.NumberStyles.HexNumber) + "月"
+                //     + Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day), System.Globalization.NumberStyles.HexNumber) + "日";
+                s1 = v0_0 + "年" + v0_1 + "月" + v0_2 + "日";
+                if (Myutility.GetMajorVersionNumber() == "V1.3")
+                {
+                    s1 = v0_0 + "日" + v0_1 + "时" + v0_2 + "分" + v0_3 + "秒";
+                }
                 s2 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0);
                 s3 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0);
                 s4 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0);
@@ -253,11 +260,7 @@ namespace ExportExcel
                     s7 = (BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0)
                        - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0));
                 }
-                excel.SetData(row, 1, v0_0 + "年" + v0_1 + "月" + v0_2 + "日");
-                if (Myutility.GetMajorVersionNumber() == "V1.3")
-                {
-                    excel.SetData(row, 1, v0_0 + "日" + v0_1 + "时" + v0_2 + "分" + v0_3 + "秒");
-                }
+                excel.SetData(row, 1, (string)s1);
                 excel.SetData(row, 2, v1);
                 excel.SetData(row, 3, v2);
                 excel.SetData(row, 4, v3);
@@ -297,11 +300,13 @@ namespace ExportExcel
             {
                 row = i + 2;
 
-                string v0_0, v0_1, v0_2, v1, v2, v3, v4, v5, v6;
+                string v0_0, v0_1, v0_2, v0_3, v1, v2, v3, v4, v5, v6;
 
-                v0_0 = BitConverter.ToInt16(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].year), 0).ToString();
-                v0_1 = Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth), System.Globalization.NumberStyles.HexNumber).ToString();
-                v0_2 = Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day), System.Globalization.NumberStyles.HexNumber).ToString();
+                // v1.3
+                v0_0 = mEnergyData.mEnergyDataRawList[i].year[0].ToString();
+                v0_1 = mEnergyData.mEnergyDataRawList[i].year[1].ToString();
+                v0_2 = Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth), System.Globalization.NumberStyles.HexNumber).ToString();
+                v0_3 = Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day), System.Globalization.NumberStyles.HexNumber).ToString();
                 v1 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0).ToString();
                 v2 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0).ToString();
                 v3 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0).ToString();
@@ -322,14 +327,14 @@ namespace ExportExcel
                         - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0)).ToString();
                 }
                 object s1, s2, s3, s4, s5, s6, s7;
-                s1 = BitConverter.ToInt16(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].year), 0) + "年"
-                     + Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth), System.Globalization.NumberStyles.HexNumber) + "月"
-                     + Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day), System.Globalization.NumberStyles.HexNumber) + "日";
+                //s1 = BitConverter.ToInt16(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].year), 0) + "年"
+                //     + Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth), System.Globalization.NumberStyles.HexNumber) + "月"
+                //     + Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day), System.Globalization.NumberStyles.HexNumber) + "日";
+
+                s1 = v0_0 + "年" + v0_1 + "月" + v0_2 + "日";
                 if (Myutility.GetMajorVersionNumber() == "V1.3")
                 {
-                    s1 = BitConverter.ToInt16(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].year), 0) + "时"
-                     + Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth), System.Globalization.NumberStyles.HexNumber) + "分"
-                     + Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day), System.Globalization.NumberStyles.HexNumber) + "秒";
+                    s1 = v0_0 + "日" + v0_1 + "时" + v0_2 + "分" + v0_3 + "秒";
                 }
                 s2 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0);
                 s3 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0);
@@ -350,22 +355,19 @@ namespace ExportExcel
                        - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0));
                 }
 
-                excel.SetData(row, 1, v0_0 + "年" + v0_1 + "月" + v0_2 + "日");
-                if (Myutility.GetMajorVersionNumber() == "V1.3")
-                {
-                    excel.SetData(row, 1, v0_0 + "时" + v0_1 + "分" + v0_2 + "秒");
-                }
+                excel.SetData(row, 1, (string)s1);
                 excel.SetData(row, 2, v4);
                 excel.SetData(row, 3, v5);
                 excel.SetData(row, 4, v6);
             }
             excel.CurXlsWorkSheet.Visible = Excel.XlSheetVisibility.xlSheetHidden;
 
-            // sheet 2
+            // sheet2 阶段电能柱状图
             excel.SelectWorksheet(2);
             int chart_width = row * 10;
             excel.SetChart(4, Excel.XlChartType.xlColumnClustered, "A1", "D" + row, chart_width);
 
+            // sheet3 总电能曲线图
             excel.SelectWorksheet(3);
             excel.SetChart(1, Excel.XlChartType.xlLine, "A1", "D" + row, chart_width);
 
