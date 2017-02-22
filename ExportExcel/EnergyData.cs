@@ -26,6 +26,29 @@ namespace ExportExcel
             ReadFromFile(filename);
         }
 
+        bool ValidData(EnergyDataRaw _EnergyDataRaw)
+        {
+            bool ret = true;
+
+            string v0_0, v0_1, v0_2;
+            v0_0 = BitConverter.ToUInt16(Myutility.ToHostEndian(_EnergyDataRaw.year), 0).ToString();
+            v0_1 = Int32.Parse(BitConverter.ToString(_EnergyDataRaw.mouth), System.Globalization.NumberStyles.HexNumber).ToString();
+            v0_2 = Int32.Parse(BitConverter.ToString(_EnergyDataRaw.day), System.Globalization.NumberStyles.HexNumber).ToString();
+            // 检测有效性：大于2099或者年小于2000 ；月：大于12或者小于等于0； 日：大于31或者小于等于0；就丢弃这16个字节
+            Int32 year = Int32.Parse(v0_0);
+            Int32 mouth = Int32.Parse(v0_1);
+            Int32 day = Int32.Parse(v0_2);
+            if (!(Myutility.InInt32Scope(year, 2000, 2099)
+                && Myutility.InInt32Scope(mouth, 1, 12)
+                && Myutility.InInt32Scope(day, 1, 31)))
+            {
+                Console.WriteLine("无效数据" + v0_0 + "年" + v0_1 + "月" + v0_2 + "日");
+                ret = false;
+            }
+
+            return ret;
+        }
+
         bool ReadFromFile(String filename)
         {
             if (!File.Exists(filename))
@@ -75,7 +98,9 @@ namespace ExportExcel
                                 + " power2:" + BitConverter.ToUInt32(ToHostEndian(_EnergyDataRaw.power2), 0)
                                 + " powerAll:" + BitConverter.ToUInt32(ToHostEndian(_EnergyDataRaw.powerAll), 0));//*/
                            
-                            mEnergyDataRawList.Add(_EnergyDataRaw);
+                            if (ValidData(_EnergyDataRaw)) {
+                                mEnergyDataRawList.Add(_EnergyDataRaw);
+                            }
                         }
                     }
                     catch (Exception)
