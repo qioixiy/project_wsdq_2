@@ -102,7 +102,7 @@ namespace ExportExcel
                 return null;
             }
 
-            UInt16 num = System.BitConverter.ToUInt16(mEnergyData.carNum, 0);
+            short num = System.BitConverter.ToInt16(mEnergyData.carNum, 0);
             string carNum = num.ToString();
             string pre = System.Environment.CurrentDirectory + "\\";
             ret = pre + carType + "-" + carNum + "_" + DateTime.Now.ToString("yyyyMMdd") + ".xls";
@@ -167,12 +167,12 @@ namespace ExportExcel
                 {
                     string v0_0, v0_1, v0_2, v1, v2, v3, v4, v5, v6;
 
-                    v0_0 = BitConverter.ToUInt16(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].year), 0).ToString();
+                    v0_0 = BitConverter.ToInt16(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].year), 0).ToString();
                     v0_1 = Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth), System.Globalization.NumberStyles.HexNumber).ToString();
                     v0_2 = Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day), System.Globalization.NumberStyles.HexNumber).ToString();
-                    v1 = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0).ToString();
-                    v2 = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0).ToString();
-                    v3 = BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0).ToString();
+                    v1 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0).ToString();
+                    v2 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0).ToString();
+                    v3 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0).ToString();
                     if (count == this.dataGridViewEnergy.RowCount - 1)
                     {
                         v4 = "0";
@@ -181,11 +181,11 @@ namespace ExportExcel
                     }
                     else
                     {
-                        v4 = (BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0)
-                            - BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power1), 0)).ToString();
-                        v5 = (BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0)
-                            - BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power2), 0)).ToString();
-                        v6 = (BitConverter.ToUInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0)
+                        v4 = (BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0)
+                            - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power1), 0)).ToString();
+                        v5 = (BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0)
+                            - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power2), 0)).ToString();
+                        v6 = (BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0)
                             - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0)).ToString();
                     }
 
