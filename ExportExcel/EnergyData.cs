@@ -110,12 +110,12 @@ namespace ExportExcel
                                 break;
                             }
                             /*
-                            Console.WriteLine("year:" + BitConverter.ToUInt16(ToHostEndian(_EnergyDataRaw.year),0)
+                            Console.WriteLine("year:" + BitConverter.ToInt16(ToHostEndian(_EnergyDataRaw.year),0)
                                 + " mouth:" + BitConverter.ToString(_EnergyDataRaw.mouth)
                                 + " day:" + BitConverter.ToString(_EnergyDataRaw.day)
-                                + " power1:" + BitConverter.ToUInt32(ToHostEndian(_EnergyDataRaw.power1), 0)
-                                + " power2:" + BitConverter.ToUInt32(ToHostEndian(_EnergyDataRaw.power2), 0)
-                                + " powerAll:" + BitConverter.ToUInt32(ToHostEndian(_EnergyDataRaw.powerAll), 0));//*/
+                                + " power1:" + BitConverter.ToInt32(ToHostEndian(_EnergyDataRaw.power1), 0)
+                                + " power2:" + BitConverter.ToInt32(ToHostEndian(_EnergyDataRaw.power2), 0)
+                                + " powerAll:" + BitConverter.ToInt32(ToHostEndian(_EnergyDataRaw.powerAll), 0));//*/
                            
                             if (ValidData(_EnergyDataRaw)) {
                                 mEnergyDataRawList.Add(_EnergyDataRaw);
