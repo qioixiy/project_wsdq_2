@@ -88,8 +88,12 @@ namespace ExportExcel
                             carNum[0] = carNum[1];
                             carNum[1] = temp;
                         }
+                        int count = 0;
                         while (true)
                         {
+                            if (count++ > 1000) {
+                                //break;
+                            } 
                             EnergyDataRaw _EnergyDataRaw = new EnergyDataRaw();
                             // 2 1 1 4 4 4
                             _EnergyDataRaw.year = br.ReadBytes(2);

@@ -26,6 +26,18 @@ namespace ExportExcel
             ;
         }
 
+        private class RowColumData
+        {
+            public RowColumData(int row, int col, string data) {
+                this.row = row;
+                this.col = col;
+                this.data = data;
+            }
+            public int row;
+            public int col;
+            public string data;
+        }
+
         public void SetData(int i, int j, string data)
         {
             CurXlsWorkSheet.Cells[i, j] = data;
@@ -156,7 +168,7 @@ namespace ExportExcel
                 Console.WriteLine("ChartWizard error");
             }
         }
-
+        
         public static int GenExcel(FormMain form, EnergyData mEnergyData, string filename)
         {
             CBExcel excel = new CBExcel();
@@ -202,6 +214,7 @@ namespace ExportExcel
                 return -1;
             }
 
+            List<RowColumData> tRowColumDataList = new List<RowColumData>();
             int row = 2;
             for (int i = 0; i < mEnergyData.mEnergyDataRawList.Count; i++)
             {
@@ -260,13 +273,27 @@ namespace ExportExcel
                     s7 = (BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0)
                        - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0));
                 }
-                excel.SetData(row, 1, (string)s1);
-                excel.SetData(row, 2, v1);
-                excel.SetData(row, 3, v2);
-                excel.SetData(row, 4, v3);
-                excel.SetData(row, 5, v4);
-                excel.SetData(row, 6, v5);
-                excel.SetData(row, 7, v6);
+
+                if (false)
+                {
+                    excel.SetData(row, 1, (string)s1);
+                    excel.SetData(row, 2, v1);
+                    excel.SetData(row, 3, v2);
+                    excel.SetData(row, 4, v3);
+                    excel.SetData(row, 5, v4);
+                    excel.SetData(row, 6, v5);
+                    excel.SetData(row, 7, v6);
+                }
+                else
+                {
+                    tRowColumDataList.Add(new RowColumData(row, 1, (string)s1));
+                    tRowColumDataList.Add(new RowColumData(row, 2, v1));
+                    tRowColumDataList.Add(new RowColumData(row, 3, v2));
+                    tRowColumDataList.Add(new RowColumData(row, 4, v3));
+                    tRowColumDataList.Add(new RowColumData(row, 5, v4));
+                    tRowColumDataList.Add(new RowColumData(row, 6, v5));
+                    tRowColumDataList.Add(new RowColumData(row, 7, v6));
+                }
             }
 
             // sheet 4
@@ -355,11 +382,29 @@ namespace ExportExcel
                        - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0));
                 }
 
-                excel.SetData(row, 1, (string)s1);
-                excel.SetData(row, 2, v4);
-                excel.SetData(row, 3, v5);
-                excel.SetData(row, 4, v6);
+                if (false)
+                {
+                    excel.SetData(row, 1, (string)s1);
+                    excel.SetData(row, 2, v4);
+                    excel.SetData(row, 3, v5);
+                    excel.SetData(row, 4, v6);
+                }
+                else
+                {
+                    tRowColumDataList.Add(new RowColumData(row, 1, (string)s1));
+                    tRowColumDataList.Add(new RowColumData(row, 2, v4));
+                    tRowColumDataList.Add(new RowColumData(row, 3, v5));
+                    tRowColumDataList.Add(new RowColumData(row, 4, v6));
+                }
             }
+            int listCount = tRowColumDataList.Count;
+            int index = 0;
+            foreach (RowColumData item in tRowColumDataList)
+            {
+                form.setExportExcelStatus("processing", listCount + "/" + index++);
+                excel.SetData(item.row, item.col, item.data);
+            }
+
             excel.CurXlsWorkSheet.Visible = Excel.XlSheetVisibility.xlSheetHidden;
 
             // sheet2 阶段电能柱状图

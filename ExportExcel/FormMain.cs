@@ -55,7 +55,7 @@ namespace ExportExcel
             }
         }
         
-        public void setExportExcelStatus(string status)
+        public void setExportExcelStatus(string status, string detail = "")
         {
             bool enable = true;
             if (status.Equals("unknown-data"))
@@ -78,6 +78,11 @@ namespace ExportExcel
             {
                 buttonExportExcel.Text = "导出为Excel";
                 enable = true;
+            }
+            else if (status.Equals("processing"))
+            {
+                buttonExportExcel.Text = detail;
+                return;
             }
 
             if (enable == true)
