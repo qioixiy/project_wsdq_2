@@ -239,7 +239,7 @@ namespace ExportExcel
                        - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0));
                 }
 
-                if (false)
+                if (true)
                 {
                     excel.SetData(row, 1, v0_0 + "年" + v0_1 + "月" + v0_2 + "日");
                     excel.SetData(row, 2, v1);
@@ -339,7 +339,7 @@ namespace ExportExcel
                        - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0));
                 }
 
-                if (false)
+                if (true)
                 {
                     excel.SetData(row, 1, v0_0 + "年" + v0_1 + "月" + v0_2 + "日");
                     excel.SetData(row, 2, v4);
