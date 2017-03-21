@@ -274,7 +274,7 @@ namespace ExportExcel
                        - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0));
                 }
 
-                if (false)
+                if (true)
                 {
                     excel.SetData(row, 1, (string)s1);
                     excel.SetData(row, 2, v1);
@@ -283,6 +283,7 @@ namespace ExportExcel
                     excel.SetData(row, 5, v4);
                     excel.SetData(row, 6, v5);
                     excel.SetData(row, 7, v6);
+                    form.setExportExcelStatus("processing", "S1:" + i + "/" + mEnergyData.mEnergyDataRawList.Count);
                 }
                 else
                 {
@@ -382,12 +383,13 @@ namespace ExportExcel
                        - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0));
                 }
 
-                if (false)
+                if (true)
                 {
                     excel.SetData(row, 1, (string)s1);
                     excel.SetData(row, 2, v4);
                     excel.SetData(row, 3, v5);
                     excel.SetData(row, 4, v6);
+                    form.setExportExcelStatus("processing", "S2:" + i + "/" + mEnergyData.mEnergyDataRawList.Count);
                 }
                 else
                 {

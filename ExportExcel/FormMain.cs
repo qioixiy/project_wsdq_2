@@ -197,6 +197,8 @@ namespace ExportExcel
 
         private void buttonSelect_Click(object sender, EventArgs e)
         {
+            comboBox1.Items.Clear();
+
             this.openFileDialog1.Filter = "数据文件(*.txt)|*.txt|所有文件(*.*)|*.*";
             this.openFileDialog1.FileName = "电能列表2016-03-02.TXT";
             if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -296,6 +298,11 @@ namespace ExportExcel
             {
 
             }  
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
 

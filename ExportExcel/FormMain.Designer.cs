@@ -39,6 +39,7 @@
             this.labelTitle = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox_V_type = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonExit = new System.Windows.Forms.Button();
@@ -54,7 +55,6 @@
             this.ColumnDayConsumePower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDayFeedPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnConsumeTotalPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -140,6 +140,16 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(200, 533);
             this.panel3.TabIndex = 12;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(39, 79);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(131, 25);
+            this.comboBox1.TabIndex = 19;
+            this.comboBox1.Text = "请选择日期";
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // textBox_V_type
             // 
@@ -289,15 +299,6 @@
             this.ColumnConsumeTotalPower.HeaderText = "阶段总电能";
             this.ColumnConsumeTotalPower.Name = "ColumnConsumeTotalPower";
             this.ColumnConsumeTotalPower.ReadOnly = true;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(38, 327);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(131, 25);
-            this.comboBox1.TabIndex = 19;
-            this.comboBox1.Text = "请选择日期";
             // 
             // FormMain
             // 
