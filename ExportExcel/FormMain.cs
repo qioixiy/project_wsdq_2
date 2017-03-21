@@ -20,6 +20,9 @@ namespace ExportExcel
         {
             InitializeComponent();
             this.label3.Text = ExportExcel.Properties.Resources.Version;
+            //this.dateTimePicker1.MaxDate = new DateTime(;
+            
+
             CheckForIllegalCrossThreadCalls = false;
 
             if ((Myutility.GetMajorVersionNumber() == "V1.1")
@@ -122,8 +125,30 @@ namespace ExportExcel
             ret = pre + carType + "-" + carNum + "_" + DateTime.Now.ToString("yyyyMMdd");
             return ret;
         }
+
+        private void filterEnergyDataWithDateTime(int dateTime)
+        {
+            List<ExportExcel.EnergyData.EnergyDataRaw> tEnergyDataRawList = new List<ExportExcel.EnergyData.EnergyDataRaw>();
+
+            for (int i = 0; i < mEnergyData.mEnergyDataRawList.Count; i++)
+            {
+                if (dateTime == (int)mEnergyData.mEnergyDataRawList[i].year[0])
+                {
+                    tEnergyDataRawList.Add(mEnergyData.mEnergyDataRawList[i]);
+                }
+            }
+
+            mEnergyData.mEnergyDataRawList = tEnergyDataRawList;
+        }
         private void buttonExportExcel_Click(object sender, EventArgs e)
         {
+            if (comboBox1.Text == "请选择日期") {
+                MessageBox.Show("请先选择日期");
+                return;
+            } else {
+                filterEnergyDataWithDateTime(Int32.Parse(comboBox1.Text));
+            }
+
             if (null == mEnergyData) {
                 MessageBox.Show("请先导入数据文件");
                 return;
@@ -184,8 +209,14 @@ namespace ExportExcel
                     MessageBox.Show("数据文件内容为空");
                     return;
                 }
+
+                // 记录时间段
+                bool[] dateTimesFlag = new bool[31];
+
                 for (int j = 0, count = 0, i = this.dataGridViewEnergy.RowCount - 1; i >= 0; i--, count++)
                 {
+                    dateTimesFlag[mEnergyData.mEnergyDataRawList[i].year[0] - 1] = true;
+
                     string v0_0, v0_1, v0_2, v0_3, v1, v2, v3, v4, v5, v6;
 
                     v0_0 = mEnergyData.mEnergyDataRawList[i].year[0].ToString();
@@ -225,6 +256,14 @@ namespace ExportExcel
                     dataGridViewEnergy.Rows[j].Cells[6].Value = v6 + " kW.h";
                     j++;
                  }
+
+                for (int index = 0; index < dateTimesFlag.Length; index++ )
+                {
+                    if (dateTimesFlag[index])
+                    {
+                        comboBox1.Items.Add(index + 1);
+                    }
+                }
             }
         }
 
