@@ -28,7 +28,8 @@ namespace ExportExcel
 
         private class RowColumData
         {
-            public RowColumData(int row, int col, string data) {
+            public RowColumData(int row, int col, string data)
+            {
                 this.row = row;
                 this.col = col;
                 this.data = data;
@@ -109,7 +110,7 @@ namespace ExportExcel
         {
             return (Excel.Worksheet)xlsWorkBook.Worksheets.get_Item(index);
         }
-        
+
         public void SelectWorksheet(int index)
         {
             CurXlsWorkSheet = (Excel.Worksheet)xlsWorkBook.Worksheets.get_Item(index);
@@ -168,7 +169,7 @@ namespace ExportExcel
                 Console.WriteLine("ChartWizard error");
             }
         }
-        
+
         public static int GenExcel(FormMain form, EnergyData mEnergyData, string filename)
         {
             CBExcel excel = new CBExcel();
@@ -176,14 +177,12 @@ namespace ExportExcel
             excel.Create();
 
             // append file ext
+            string ext = ".xls";
             if (Convert.ToDouble(excel.xlsApp.Version) >= 12.0)//office 2007
             {
-                filename += ".xlsx";
+                ext = ".xlsx";
             }
-            else
-            {
-                filename += ".xls";
-            }
+            filename += ext;
 
             // worksheet1 电能列表
             excel.SelectWorksheet(1);
@@ -274,162 +273,28 @@ namespace ExportExcel
                        - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0));
                 }
 
-                if (true)
+                excel.SetData(row, 1, (string)s1);
+                excel.SetData(row, 2, v1);
+                excel.SetData(row, 3, v2);
+                excel.SetData(row, 4, v3);
+                excel.SetData(row, 5, v4);
+                excel.SetData(row, 6, v5);
+                excel.SetData(row, 7, v6);
+                form.setExportExcelStatus("processing", "S1:" + i + "/" + mEnergyData.mEnergyDataRawList.Count);
+
+                if (excel.SaveAs(filename))
                 {
-                    excel.SetData(row, 1, (string)s1);
-                    excel.SetData(row, 2, v1);
-                    excel.SetData(row, 3, v2);
-                    excel.SetData(row, 4, v3);
-                    excel.SetData(row, 5, v4);
-                    excel.SetData(row, 6, v5);
-                    excel.SetData(row, 7, v6);
-                    form.setExportExcelStatus("processing", "S1:" + i + "/" + mEnergyData.mEnergyDataRawList.Count);
+                    form.setExportExcelStatus("export-success");
                 }
                 else
                 {
-                    tRowColumDataList.Add(new RowColumData(row, 1, (string)s1));
-                    tRowColumDataList.Add(new RowColumData(row, 2, v1));
-                    tRowColumDataList.Add(new RowColumData(row, 3, v2));
-                    tRowColumDataList.Add(new RowColumData(row, 4, v3));
-                    tRowColumDataList.Add(new RowColumData(row, 5, v4));
-                    tRowColumDataList.Add(new RowColumData(row, 6, v5));
-                    tRowColumDataList.Add(new RowColumData(row, 7, v6));
+                    form.setExportExcelStatus("export-fail");
                 }
+
+                excel.Release();
+
+                return 0;
             }
-
-            // sheet 4
-            excel.SelectWorksheet(4);
-            ((Excel.Range)excel.CurXlsWorkSheet.Columns["A", Type.Missing]).HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
-            ((Excel.Range)excel.CurXlsWorkSheet.Columns["A", Type.Missing]).ColumnWidth = 20;
-            ((Excel.Range)excel.CurXlsWorkSheet.Columns["B", Type.Missing]).ColumnWidth = 20;
-            ((Excel.Range)excel.CurXlsWorkSheet.Columns["C", Type.Missing]).ColumnWidth = 20;
-            ((Excel.Range)excel.CurXlsWorkSheet.Columns["D", Type.Missing]).ColumnWidth = 20;
-            //((Excel.Range)excel.CurXlsWorkSheet.Columns["E", Type.Missing]).ColumnWidth = 20;
-            //((Excel.Range)excel.CurXlsWorkSheet.Columns["F", Type.Missing]).ColumnWidth = 20;
-            //((Excel.Range)excel.CurXlsWorkSheet.Columns["G", Type.Missing]).ColumnWidth = 20;
-            excel.CurXlsWorkSheet.get_Range(excel.CurXlsWorkSheet.Cells[1, 1], excel.CurXlsWorkSheet.Cells[1, 4]).Font.Name = "微软雅黑";
-            excel.CurXlsWorkSheet.get_Range(excel.CurXlsWorkSheet.Cells[1, 1], excel.CurXlsWorkSheet.Cells[1, 4]).Font.Bold = true;
-            //excel.CurXlsWorkSheet.get_Range(excel.CurXlsWorkSheet.Cells[1, 1], excel.CurXlsWorkSheet.Cells[1, 4]).VerticalAlignment = true;
-            excel.CurXlsWorkSheet.get_Range(excel.CurXlsWorkSheet.Cells[1, 1], excel.CurXlsWorkSheet.Cells[1, 4]).Interior.ColorIndex = 16;
-
-            excel.SetData(1, 1, "时间");
-            excel.SetData(1, 2, "日耗电能(kW.h)");
-            excel.SetData(1, 3, "日馈电能(kW.h)");
-            excel.SetData(1, 4, "阶段总耗电能(kW.h)");
-
-            if (mEnergyData == null || mEnergyData.mEnergyDataRawList.Count == 0)
-            {
-                form.setExportExcelStatus("unknown-data");
-                return -1;
-            }
-
-            row = 2;
-            for (int i = 0; i < mEnergyData.mEnergyDataRawList.Count; i++)
-            {
-                row = i + 2;
-
-                string v0_0, v0_1, v0_2, v0_3, v1, v2, v3, v4, v5, v6;
-
-                // v1.3
-                v0_0 = mEnergyData.mEnergyDataRawList[i].year[0].ToString();
-                v0_1 = mEnergyData.mEnergyDataRawList[i].year[1].ToString();
-                v0_2 = Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth), System.Globalization.NumberStyles.HexNumber).ToString();
-                v0_3 = Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day), System.Globalization.NumberStyles.HexNumber).ToString();
-                v1 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0).ToString();
-                v2 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0).ToString();
-                v3 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0).ToString();
-
-                if (i == 0)
-                {
-                    v4 = "0";
-                    v5 = "0";
-                    v6 = "0";
-                }
-                else
-                {
-                    v4 = (BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0)
-                        - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power1), 0)).ToString();
-                    v5 = (BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0)
-                        - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power2), 0)).ToString();
-                    v6 = (BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0)
-                        - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0)).ToString();
-                }
-                object s1, s2, s3, s4, s5, s6, s7;
-                //s1 = BitConverter.ToInt16(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].year), 0) + "年"
-                //     + Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth), System.Globalization.NumberStyles.HexNumber) + "月"
-                //     + Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day), System.Globalization.NumberStyles.HexNumber) + "日";
-
-                s1 = v0_0 + "年" + v0_1 + "月" + v0_2 + "日";
-                if (Myutility.GetMajorVersionNumber() == "V1.3")
-                {
-                    s1 = v0_0 + "日" + v0_1 + "时" + v0_2 + "分" + v0_3 + "秒";
-                }
-                s2 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0);
-                s3 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0);
-                s4 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0);
-                if (i == 0)
-                {
-                    s5 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0);
-                    s6 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0);
-                    s7 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0);
-                }
-                else
-                {
-                    s5 = (BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0)
-                       - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power1), 0));
-                    s6 = (BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0)
-                       - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power2), 0));
-                    s7 = (BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0)
-                       - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0));
-                }
-
-                if (true)
-                {
-                    excel.SetData(row, 1, (string)s1);
-                    excel.SetData(row, 2, v4);
-                    excel.SetData(row, 3, v5);
-                    excel.SetData(row, 4, v6);
-                    form.setExportExcelStatus("processing", "S2:" + i + "/" + mEnergyData.mEnergyDataRawList.Count);
-                }
-                else
-                {
-                    tRowColumDataList.Add(new RowColumData(row, 1, (string)s1));
-                    tRowColumDataList.Add(new RowColumData(row, 2, v4));
-                    tRowColumDataList.Add(new RowColumData(row, 3, v5));
-                    tRowColumDataList.Add(new RowColumData(row, 4, v6));
-                }
-            }
-            int listCount = tRowColumDataList.Count;
-            int index = 0;
-            foreach (RowColumData item in tRowColumDataList)
-            {
-                form.setExportExcelStatus("processing", listCount + "/" + index++);
-                excel.SetData(item.row, item.col, item.data);
-            }
-
-            excel.CurXlsWorkSheet.Visible = Excel.XlSheetVisibility.xlSheetHidden;
-
-            // sheet2 阶段电能柱状图
-            excel.SelectWorksheet(2);
-            int chart_width = row * 10;
-            excel.SetChart(4, Excel.XlChartType.xlColumnClustered, "A1", "D" + row, chart_width);
-
-            // sheet3 总电能曲线图
-            excel.SelectWorksheet(3);
-            excel.SetChart(1, Excel.XlChartType.xlLine, "A1", "D" + row, chart_width);
-
-           if (excel.SaveAs(filename))
-            {
-                form.setExportExcelStatus("export-success");
-            }
-            else
-            {
-                form.setExportExcelStatus("export-fail");
-            }
-
-            excel.Release();
-
-            return 0;
         }
 
     }

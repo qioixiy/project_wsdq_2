@@ -18,7 +18,7 @@ namespace ExportExcel
             public byte[] power2;//负向电能 4byte
             public byte[] powerAll;//总电能 4byte
         }
-        
+
         public byte[] reserve = new byte[1];
         public byte[] carType = new byte[1];
         public byte[] carNum = new byte[2];
@@ -32,10 +32,11 @@ namespace ExportExcel
         static int count = 0;
         bool ValidData(EnergyDataRaw _EnergyDataRaw)
         {
-            if (count++ > 300) {
+            if (count++ > 300)
+            {
                 // for test
                 //return false;
-            } 
+            }
             bool ret = true;
 
             if (Myutility.GetMajorVersionNumber() == "V1.3")
@@ -71,7 +72,8 @@ namespace ExportExcel
                 MessageBox.Show("不存在此文件");
                 return false;
             }
-            else {
+            else
+            {
                 try
                 {
                     FileStream fs = new FileStream(filename, FileMode.Open);
@@ -91,9 +93,10 @@ namespace ExportExcel
                         int count = 0;
                         while (true)
                         {
-                            if (count++ > 1000) {
+                            if (count++ > 1000)
+                            {
                                 //break;
-                            } 
+                            }
                             EnergyDataRaw _EnergyDataRaw = new EnergyDataRaw();
                             // 2 1 1 4 4 4
                             _EnergyDataRaw.year = br.ReadBytes(2);
@@ -126,8 +129,9 @@ namespace ExportExcel
                                 + " power1:" + BitConverter.ToInt32(ToHostEndian(_EnergyDataRaw.power1), 0)
                                 + " power2:" + BitConverter.ToInt32(ToHostEndian(_EnergyDataRaw.power2), 0)
                                 + " powerAll:" + BitConverter.ToInt32(ToHostEndian(_EnergyDataRaw.powerAll), 0));//*/
-                           
-                            if (ValidData(_EnergyDataRaw)) {
+
+                            if (ValidData(_EnergyDataRaw))
+                            {
                                 mEnergyDataRawList.Add(_EnergyDataRaw);
                             }
                         }
@@ -158,6 +162,6 @@ namespace ExportExcel
 
             return dest;
         }
-       
+
     }
 }
