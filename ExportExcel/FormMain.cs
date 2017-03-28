@@ -22,6 +22,15 @@ namespace ExportExcel
             this.label3.Text = ExportExcel.Properties.Resources.Version;
 
             CheckForIllegalCrossThreadCalls = false;
+
+            if ((Myutility.GetMajorVersionNumber() == "V1.1")
+                || (Myutility.GetMajorVersionNumber() == "V1.3"))
+            {
+                labelNumber.Visible = true;
+                textBoxNumber.Visible = true;
+                label1.Visible = true;
+                textBox_V_type.Visible = true;
+            }
         }
 
         public void SetEnergyDataFromFile(String filename)

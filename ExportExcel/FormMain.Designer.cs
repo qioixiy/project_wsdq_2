@@ -45,6 +45,8 @@
             this.radioButtonDay = new System.Windows.Forms.RadioButton();
             this.radioButtonMonth = new System.Windows.Forms.RadioButton();
             this.radioButtonYear = new System.Windows.Forms.RadioButton();
+            this.textBox_V_type = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.buttonExit = new System.Windows.Forms.Button();
             this.buttonSelect = new System.Windows.Forms.Button();
             this.textBoxNumber = new System.Windows.Forms.TextBox();
@@ -130,6 +132,8 @@
             // panel3
             // 
             this.panel3.Controls.Add(this.groupBoxUnit);
+            this.panel3.Controls.Add(this.textBox_V_type);
+            this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.buttonExit);
             this.panel3.Controls.Add(this.buttonSelect);
             this.panel3.Controls.Add(this.textBoxNumber);
@@ -209,6 +213,25 @@
             this.radioButtonYear.Text = "年";
             this.radioButtonYear.UseVisualStyleBackColor = true;
             // 
+            // textBox_V_type
+            // 
+            this.textBox_V_type.Location = new System.Drawing.Point(76, 39);
+            this.textBox_V_type.Name = "textBox_V_type";
+            this.textBox_V_type.Size = new System.Drawing.Size(85, 23);
+            this.textBox_V_type.TabIndex = 18;
+            this.textBox_V_type.Text = "CRH";
+            this.textBox_V_type.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(36, 45);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(32, 17);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "车型";
+            this.label1.Visible = false;
+            // 
             // buttonExit
             // 
             this.buttonExit.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
@@ -247,6 +270,7 @@
             this.textBoxNumber.Size = new System.Drawing.Size(85, 23);
             this.textBoxNumber.TabIndex = 14;
             this.textBoxNumber.Text = "0000";
+            this.textBoxNumber.Visible = false;
             // 
             // labelNumber
             // 
@@ -256,6 +280,7 @@
             this.labelNumber.Size = new System.Drawing.Size(35, 17);
             this.labelNumber.TabIndex = 13;
             this.labelNumber.Text = "车号:";
+            this.labelNumber.Visible = false;
             // 
             // dataGridViewEnergy
             // 
@@ -364,6 +389,8 @@
         private System.Windows.Forms.TextBox textBoxNumber;
         private System.Windows.Forms.Label labelNumber;
         private System.Windows.Forms.DataGridView dataGridViewEnergy;
+        private System.Windows.Forms.TextBox textBox_V_type;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
