@@ -17,6 +17,7 @@ namespace ExportExcel
 
             return dest;
         }
+
         public static bool InInt32Scope(Int32 value, Int32 min, Int32 max)
         {
             bool ret = true;
@@ -40,6 +41,25 @@ namespace ExportExcel
             }
 
             return ret;
+        }
+
+        public static byte[] SubByte(byte[] srcBytes, int startIndex, int length)
+        {
+            System.IO.MemoryStream bufferStream = new System.IO.MemoryStream();
+            byte[] returnByte = new byte[] { };
+            if (srcBytes == null) { return returnByte; }
+            if (startIndex < 0) { startIndex = 0; }
+            if (startIndex < srcBytes.Length)
+            {
+                if (length < 1 || length > srcBytes.Length - startIndex) { length = srcBytes.Length - startIndex; }
+                bufferStream.Write(srcBytes, startIndex, length);
+                returnByte = bufferStream.ToArray();
+                bufferStream.SetLength(0);
+                bufferStream.Position = 0;
+            }
+            bufferStream.Close();
+            bufferStream.Dispose();
+            return returnByte;
         }
     }
 }

@@ -61,7 +61,7 @@ namespace ExportExcel.Properties {
         }
         
         /// <summary>
-        ///   查找类似 V1.32 的本地化字符串。
+        ///   查找类似 V1.00 的本地化字符串。
         /// </summary>
         public static string Version {
             get {

@@ -14,11 +14,53 @@ namespace ExportExcel
             public byte[] year;//年 2byte
             public byte[] mouth;//月 1byte
             public byte[] day;//日 1byte
-            public byte[] power1;//正向电能 4byte
-            public byte[] power2;//负向电能 4byte
-            public byte[] powerAll;//总电能 4byte
+            public byte[] hour;//时 1byte
+            public byte[] minute;//分 1byte
+            public byte[] consumePower;//消耗电能 4byte
+            public byte[] revivePower;//再生电能 4byte
+
+            public int getYear()
+            {
+                int ret = Int32.Parse(BitConverter.ToString(year), System.Globalization.NumberStyles.HexNumber);
+                return ret;
+            }
+            public int getMouth()
+            {
+                int ret = Int32.Parse(BitConverter.ToString(mouth), System.Globalization.NumberStyles.HexNumber); ;
+                return ret;
+            }
+            public int getDay()
+            {
+                int ret = Int32.Parse(BitConverter.ToString(day), System.Globalization.NumberStyles.HexNumber); ;
+                return ret;
+            }
+            public int getHour()
+            {
+                int ret = Int32.Parse(BitConverter.ToString(hour), System.Globalization.NumberStyles.HexNumber); ;
+                return ret;
+            }
+            public int getMinute()
+            {
+                int ret = Int32.Parse(BitConverter.ToString(minute), System.Globalization.NumberStyles.HexNumber); ;
+                return ret;
+            }
+            public int getConsumePower()
+            {
+                int ret = BitConverter.ToInt32(Myutility.ToHostEndian(consumePower), 0);
+                return ret;
+            }
+            public int getRevivePower()
+            {
+
+                int ret = BitConverter.ToInt32(Myutility.ToHostEndian(revivePower), 0);
+                return ret;
+            }
+            // 总消耗能量=消耗电能-再生电能
+            public int getTotalPower()
+            {
+                return getConsumePower() - getRevivePower();
+            }
         }
-        
         public byte[] reserve = new byte[1];
         public byte[] carType = new byte[1];
         public byte[] carNum = new byte[2];
@@ -29,37 +71,25 @@ namespace ExportExcel
             ReadFromFile(filename);
         }
 
-        static int count = 0;
         bool ValidData(EnergyDataRaw _EnergyDataRaw)
         {
-            if (count++ > 300) {
-                // for test
-                //return false;
-            } 
             bool ret = true;
 
-            if (Myutility.GetMajorVersionNumber() == "V1.3")
+            // 验证有效性： 大于31或者小于等于0；时：大于等于24；分大于等于60；秒大于等于60；就丢弃这16个字节。
+            Int32 year = _EnergyDataRaw.getYear();
+            Int32 mount = _EnergyDataRaw.getMouth();
+            Int32 day = _EnergyDataRaw.getDay();
+            Int32 hour = _EnergyDataRaw.getHour();
+            Int32 minute = _EnergyDataRaw.getMinute();
+
+            if (!(Myutility.InInt32Scope(year, 2000, 2900)
+                && Myutility.InInt32Scope(mount, 0, 23)
+                && Myutility.InInt32Scope(day, 0, 31)
+                && Myutility.InInt32Scope(hour, 0, 24)
+                && Myutility.InInt32Scope(minute, 0, 59)))
             {
-                string v0_0, v0_1, v0_2, v0_3;
-
-                v0_0 = _EnergyDataRaw.year[0].ToString();
-                v0_1 = _EnergyDataRaw.year[1].ToString();
-                v0_2 = Int32.Parse(BitConverter.ToString(_EnergyDataRaw.mouth), System.Globalization.NumberStyles.HexNumber).ToString();
-                v0_3 = Int32.Parse(BitConverter.ToString(_EnergyDataRaw.day), System.Globalization.NumberStyles.HexNumber).ToString();
-                // 验证有效性： 大于31或者小于等于0；时：大于等于24；分大于等于60；秒大于等于60；就丢弃这16个字节。
-                Int32 day = Int32.Parse(v0_0);
-                Int32 hour = Int32.Parse(v0_1);
-                Int32 minuts = Int32.Parse(v0_2);
-                Int32 second = Int32.Parse(v0_3);
-
-                if (!(Myutility.InInt32Scope(day, 1, 31)
-                    && Myutility.InInt32Scope(hour, 0, 23)
-                    && Myutility.InInt32Scope(minuts, 0, 59)
-                    && Myutility.InInt32Scope(second, 0, 59)))
-                {
-                    Console.WriteLine("无效数据" + v0_0 + "日" + v0_1 + "时" + v0_2 + "分" + v0_3 + "秒");
-                    ret = false;
-                }
+                Console.WriteLine("无效数据： " + year + "年" + mount + "月" + day + "日" + hour + "时" + minute + "分");
+                ret = false;
             }
 
             return ret;
@@ -78,54 +108,38 @@ namespace ExportExcel
                     BinaryReader br = new BinaryReader(fs);
                     try
                     {
-                        if ((Myutility.GetMajorVersionNumber() != "V1.1")
-                            && (Myutility.GetMajorVersionNumber() != "V1.3"))
-                        {
-                            reserve = br.ReadBytes(1);
-                            carType = br.ReadBytes(1);
-                            carNum = br.ReadBytes(2);
-                            byte temp = carNum[0];
-                            carNum[0] = carNum[1];
-                            carNum[1] = temp;
-                        }
-                        int count = 0;
                         while (true)
                         {
-                            if (count++ > 1000) {
-                                //break;
-                            } 
+                            byte[] buffer = br.ReadBytes(14);
                             EnergyDataRaw _EnergyDataRaw = new EnergyDataRaw();
-                            // 2 1 1 4 4 4
-                            _EnergyDataRaw.year = br.ReadBytes(2);
-                            _EnergyDataRaw.mouth = br.ReadBytes(1);
-                            _EnergyDataRaw.day = br.ReadBytes(1);
-                            _EnergyDataRaw.power1 = br.ReadBytes(4);
-                            _EnergyDataRaw.power2 = br.ReadBytes(4);
-                            _EnergyDataRaw.powerAll = br.ReadBytes(4);
-
+                            // 2 1 1 1 1 4 4
+                            _EnergyDataRaw.year = Myutility.SubByte(buffer, 0, 2); //年 2byte
+                            _EnergyDataRaw.mouth = Myutility.SubByte(buffer, 2, 1); //月 1byte
+                            _EnergyDataRaw.day = Myutility.SubByte(buffer, 3, 1); //日 1byte
+                            _EnergyDataRaw.hour = Myutility.SubByte(buffer, 4, 1); //时 1byte
+                            _EnergyDataRaw.minute = Myutility.SubByte(buffer, 5, 1); //分 1byte
+                            _EnergyDataRaw.consumePower = Myutility.SubByte(buffer, 6, 4); //消耗电能 4byte
+                            _EnergyDataRaw.revivePower = Myutility.SubByte(buffer, 10, 4); //再生电能 4byte
+                           
                             if (_EnergyDataRaw.year == null
                                 || _EnergyDataRaw.mouth == null
                                 || _EnergyDataRaw.day == null
-                                || _EnergyDataRaw.power1 == null
-                                || _EnergyDataRaw.power2 == null
-                                || _EnergyDataRaw.powerAll == null
-                                || _EnergyDataRaw.year.Length == 0
-                                || _EnergyDataRaw.mouth.Length == 0
-                                || _EnergyDataRaw.day.Length == 0
-                                || _EnergyDataRaw.power1.Length == 0
-                                || _EnergyDataRaw.power2.Length == 0
-                                || _EnergyDataRaw.powerAll.Length == 0)
+                                || _EnergyDataRaw.hour == null
+                                || _EnergyDataRaw.minute == null
+                                || _EnergyDataRaw.consumePower == null
+                                || _EnergyDataRaw.revivePower == null
+
+                                || _EnergyDataRaw.year.Length != 2
+                                || _EnergyDataRaw.mouth.Length != 1
+                                || _EnergyDataRaw.day.Length != 1
+                                || _EnergyDataRaw.hour.Length != 1
+                                || _EnergyDataRaw.minute.Length != 1
+                                || _EnergyDataRaw.consumePower.Length != 4
+                                || _EnergyDataRaw.revivePower.Length != 4)
                             {
                                 _EnergyDataRaw = null;
                                 break;
                             }
-                            /*
-                            Console.WriteLine("year:" + BitConverter.ToInt16(ToHostEndian(_EnergyDataRaw.year),0)
-                                + " mouth:" + BitConverter.ToString(_EnergyDataRaw.mouth)
-                                + " day:" + BitConverter.ToString(_EnergyDataRaw.day)
-                                + " power1:" + BitConverter.ToInt32(ToHostEndian(_EnergyDataRaw.power1), 0)
-                                + " power2:" + BitConverter.ToInt32(ToHostEndian(_EnergyDataRaw.power2), 0)
-                                + " powerAll:" + BitConverter.ToInt32(ToHostEndian(_EnergyDataRaw.powerAll), 0));//*/
                            
                             if (ValidData(_EnergyDataRaw)) {
                                 mEnergyDataRawList.Add(_EnergyDataRaw);
@@ -147,17 +161,5 @@ namespace ExportExcel
                 return true;
             }
         }
-
-        byte[] ToHostEndian(byte[] src)
-        {
-            byte[] dest = new byte[src.Length];
-            for (int i = src.Length - 1, j = 0; i >= 0; i--, j++)
-            {
-                dest[j] = src[i];
-            }
-
-            return dest;
-        }
-       
     }
 }

@@ -30,8 +30,6 @@ namespace ExportExcel
             {
                 labelNumber.Visible = true;
                 textBoxNumber.Visible = true;
-                label1.Visible = true;
-                textBox_V_type.Visible = true;
             }
         }
 
@@ -185,7 +183,7 @@ namespace ExportExcel
             }
             String curDate = DateTime.Now.ToString("yyyyMMdd");
             String ret = System.Environment.CurrentDirectory
-                + "\\" + textBox_V_type.Text + "-" + append + "_" + curDate;
+                + "\\" + "-" + append + "_" + curDate;
 
             return ret;
         }
@@ -200,7 +198,7 @@ namespace ExportExcel
             comboBox1.Items.Clear();
 
             this.openFileDialog1.Filter = "数据文件(*.txt)|*.txt|所有文件(*.*)|*.*";
-            this.openFileDialog1.FileName = "电能列表2016-03-02.TXT";
+            this.openFileDialog1.FileName = "*.TXT";
             if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string FileName = this.openFileDialog1.FileName;
@@ -212,60 +210,32 @@ namespace ExportExcel
                     return;
                 }
 
-                // 记录时间段
-                bool[] dateTimesFlag = new bool[31];
-
                 for (int j = 0, count = 0, i = this.dataGridViewEnergy.RowCount - 1; i >= 0; i--, count++)
                 {
-                    dateTimesFlag[mEnergyData.mEnergyDataRawList[i].year[0] - 1] = true;
+                    string year = mEnergyData.mEnergyDataRawList[i].getYear().ToString();
+                    string mouth = mEnergyData.mEnergyDataRawList[i].getMouth().ToString();
+                    string day = mEnergyData.mEnergyDataRawList[i].getDay().ToString();
+                    string hour = mEnergyData.mEnergyDataRawList[i].getHour().ToString();
+                    string minute = mEnergyData.mEnergyDataRawList[i].getMinute().ToString();
+                    string consumePower = "0";
+                    string revivePower = "0";
+                    string totalPower = "0";
 
-                    string v0_0, v0_1, v0_2, v0_3, v1, v2, v3, v4, v5, v6;
-
-                    v0_0 = mEnergyData.mEnergyDataRawList[i].year[0].ToString();
-                    v0_1 = mEnergyData.mEnergyDataRawList[i].year[1].ToString();
-                    v0_2 = Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth), System.Globalization.NumberStyles.HexNumber).ToString();
-                    v0_3 = Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day), System.Globalization.NumberStyles.HexNumber).ToString();
-                    
-                    v1 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0).ToString();
-                    v2 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0).ToString();
-                    v3 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0).ToString();
-                    if (count == this.dataGridViewEnergy.RowCount - 1)
+                    if (i != 0)
                     {
-                        v4 = "0";
-                        v5 = "0";
-                        v6 = "0";
-                    }
-                    else
-                    {
-                        v4 = (BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0)
-                            - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power1), 0)).ToString();
-                        v5 = (BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0)
-                            - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power2), 0)).ToString();
-                        v6 = (BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0)
-                            - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0)).ToString();
+                        consumePower = (mEnergyData.mEnergyDataRawList[i].getConsumePower() - mEnergyData.mEnergyDataRawList[i - 1].getConsumePower()).ToString();
+                        revivePower = (mEnergyData.mEnergyDataRawList[i].getRevivePower() - mEnergyData.mEnergyDataRawList[i - 1].getRevivePower()).ToString();
+                        totalPower = (mEnergyData.mEnergyDataRawList[i].getTotalPower() - mEnergyData.mEnergyDataRawList[i - 1].getTotalPower()).ToString();
                     }
 
-                    dataGridViewEnergy.Rows[j].Cells[0].Value = v0_0 + "年" +　v0_1 + "月" + v0_2 + "日";
-                    if (Myutility.GetMajorVersionNumber() == "V1.3")
-                    {
-                        dataGridViewEnergy.Rows[j].Cells[0].Value = v0_0 + "日" + v0_1 + "时" + v0_2 + "分" + v0_3 + "秒";
-                    }
-                    dataGridViewEnergy.Rows[j].Cells[1].Value = v1 + " kW.h";
-                    dataGridViewEnergy.Rows[j].Cells[2].Value = v2 + " kW.h";
-                    dataGridViewEnergy.Rows[j].Cells[3].Value = v3 + " kW.h";
-                    dataGridViewEnergy.Rows[j].Cells[4].Value = v4 + " kW.h";
-                    dataGridViewEnergy.Rows[j].Cells[5].Value = v5 + " kW.h";
-                    dataGridViewEnergy.Rows[j].Cells[6].Value = v6 + " kW.h";
+                    string datetime = year + "年" + mouth + "月" + day + "日" + hour + "时" + minute + "分";
+                    dataGridViewEnergy.Rows[j].Cells[0].Value = datetime;
+                    dataGridViewEnergy.Rows[j].Cells[1].Value = consumePower + " kW.h";
+                    dataGridViewEnergy.Rows[j].Cells[2].Value = revivePower + " kW.h";
+                    dataGridViewEnergy.Rows[j].Cells[3].Value = totalPower + " kW.h";
                     j++;
                  }
 
-                for (int index = 0; index < dateTimesFlag.Length; index++ )
-                {
-                    if (dateTimesFlag[index])
-                    {
-                        comboBox1.Items.Add(index + 1);
-                    }
-                }
             }
         }
 

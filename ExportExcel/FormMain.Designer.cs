@@ -39,9 +39,8 @@
             this.labelTitle = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.groupBoxUnit = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox_V_type = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.buttonExit = new System.Windows.Forms.Button();
             this.buttonSelect = new System.Windows.Forms.Button();
             this.textBoxNumber = new System.Windows.Forms.TextBox();
@@ -52,20 +51,12 @@
             this.ColumnPositivePower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnNegativePower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnTotalPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnDayConsumePower = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnDayFeedPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnConsumeTotalPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBoxUnit = new System.Windows.Forms.GroupBox();
-            this.radioButtonYear = new System.Windows.Forms.RadioButton();
-            this.radioButtonMonth = new System.Windows.Forms.RadioButton();
-            this.radioButtonDay = new System.Windows.Forms.RadioButton();
-            this.radioButtonHour = new System.Windows.Forms.RadioButton();
-            this.radioButtonMinute = new System.Windows.Forms.RadioButton();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEnergy)).BeginInit();
             this.groupBoxUnit.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEnergy)).BeginInit();
             this.SuspendLayout();
             // 
             // imageList1
@@ -88,7 +79,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1278, 43);
+            this.panel1.Size = new System.Drawing.Size(1264, 43);
             this.panel1.TabIndex = 7;
             // 
             // label3
@@ -114,7 +105,7 @@
             // labelTitle
             // 
             this.labelTitle.AutoSize = true;
-            this.labelTitle.Font = new System.Drawing.Font("LiSu", 23F, System.Drawing.FontStyle.Bold);
+            this.labelTitle.Font = new System.Drawing.Font("隶书", 23F, System.Drawing.FontStyle.Bold);
             this.labelTitle.Location = new System.Drawing.Point(392, 6);
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(377, 31);
@@ -129,54 +120,44 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 43);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1278, 533);
+            this.panel2.Size = new System.Drawing.Size(1264, 639);
             this.panel2.TabIndex = 8;
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.groupBoxUnit);
             this.panel3.Controls.Add(this.comboBox1);
-            this.panel3.Controls.Add(this.textBox_V_type);
-            this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.buttonExit);
             this.panel3.Controls.Add(this.buttonSelect);
             this.panel3.Controls.Add(this.textBoxNumber);
             this.panel3.Controls.Add(this.labelNumber);
             this.panel3.Controls.Add(this.buttonExportExcel);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(1078, 0);
+            this.panel3.Location = new System.Drawing.Point(1064, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(200, 533);
+            this.panel3.Size = new System.Drawing.Size(200, 639);
             this.panel3.TabIndex = 12;
+            // 
+            // groupBoxUnit
+            // 
+            this.groupBoxUnit.Controls.Add(this.comboBox2);
+            this.groupBoxUnit.Location = new System.Drawing.Point(39, 84);
+            this.groupBoxUnit.Name = "groupBoxUnit";
+            this.groupBoxUnit.Size = new System.Drawing.Size(140, 62);
+            this.groupBoxUnit.TabIndex = 9;
+            this.groupBoxUnit.TabStop = false;
+            this.groupBoxUnit.Text = "柱状图单位";
             // 
             // comboBox1
             // 
+            this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 7F);
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(39, 79);
+            this.comboBox1.Location = new System.Drawing.Point(38, 445);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(131, 25);
+            this.comboBox1.Size = new System.Drawing.Size(131, 22);
             this.comboBox1.TabIndex = 19;
-            this.comboBox1.Text = "请选择日期";
+            this.comboBox1.Text = "请选择需要导出的日期";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // textBox_V_type
-            // 
-            this.textBox_V_type.Location = new System.Drawing.Point(76, 39);
-            this.textBox_V_type.Name = "textBox_V_type";
-            this.textBox_V_type.Size = new System.Drawing.Size(85, 23);
-            this.textBox_V_type.TabIndex = 18;
-            this.textBox_V_type.Text = "CRH";
-            this.textBox_V_type.Visible = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(36, 45);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 17);
-            this.label1.TabIndex = 17;
-            this.label1.Text = "车型";
-            this.label1.Visible = false;
             // 
             // buttonExit
             // 
@@ -184,7 +165,7 @@
             this.buttonExit.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.buttonExit.ImageIndex = 2;
             this.buttonExit.ImageList = this.imageList1;
-            this.buttonExit.Location = new System.Drawing.Point(39, 486);
+            this.buttonExit.Location = new System.Drawing.Point(39, 592);
             this.buttonExit.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(131, 33);
@@ -199,7 +180,7 @@
             this.buttonSelect.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.buttonSelect.ImageIndex = 1;
             this.buttonSelect.ImageList = this.imageList1;
-            this.buttonSelect.Location = new System.Drawing.Point(39, 430);
+            this.buttonSelect.Location = new System.Drawing.Point(39, 536);
             this.buttonSelect.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.buttonSelect.Name = "buttonSelect";
             this.buttonSelect.Size = new System.Drawing.Size(131, 33);
@@ -234,7 +215,7 @@
             this.buttonExportExcel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.buttonExportExcel.ImageIndex = 0;
             this.buttonExportExcel.ImageList = this.imageList1;
-            this.buttonExportExcel.Location = new System.Drawing.Point(38, 372);
+            this.buttonExportExcel.Location = new System.Drawing.Point(38, 478);
             this.buttonExportExcel.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.buttonExportExcel.Name = "buttonExportExcel";
             this.buttonExportExcel.Size = new System.Drawing.Size(131, 34);
@@ -254,15 +235,12 @@
             this.ColumnDate,
             this.ColumnPositivePower,
             this.ColumnNegativePower,
-            this.ColumnTotalPower,
-            this.ColumnDayConsumePower,
-            this.ColumnDayFeedPower,
-            this.ColumnConsumeTotalPower});
+            this.ColumnTotalPower});
             this.dataGridViewEnergy.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewEnergy.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.dataGridViewEnergy.Name = "dataGridViewEnergy";
             this.dataGridViewEnergy.RowTemplate.Height = 23;
-            this.dataGridViewEnergy.Size = new System.Drawing.Size(1077, 533);
+            this.dataGridViewEnergy.Size = new System.Drawing.Size(1063, 639);
             this.dataGridViewEnergy.TabIndex = 4;
             this.dataGridViewEnergy.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridViewEnergy_CellPainting);
             // 
@@ -274,119 +252,47 @@
             // 
             // ColumnPositivePower
             // 
-            this.ColumnPositivePower.HeaderText = "正向电能";
+            this.ColumnPositivePower.HeaderText = "消耗电能";
             this.ColumnPositivePower.Name = "ColumnPositivePower";
             this.ColumnPositivePower.ReadOnly = true;
             // 
             // ColumnNegativePower
             // 
-            this.ColumnNegativePower.HeaderText = "反向电能";
+            this.ColumnNegativePower.HeaderText = "再生电能";
             this.ColumnNegativePower.Name = "ColumnNegativePower";
             this.ColumnNegativePower.ReadOnly = true;
             // 
             // ColumnTotalPower
             // 
-            this.ColumnTotalPower.HeaderText = "总电能";
+            this.ColumnTotalPower.HeaderText = "总消耗能量";
             this.ColumnTotalPower.Name = "ColumnTotalPower";
             this.ColumnTotalPower.ReadOnly = true;
             // 
-            // ColumnDayConsumePower
+            // comboBox2
             // 
-            this.ColumnDayConsumePower.HeaderText = "阶段正向电能";
-            this.ColumnDayConsumePower.Name = "ColumnDayConsumePower";
-            this.ColumnDayConsumePower.ReadOnly = true;
-            // 
-            // ColumnDayFeedPower
-            // 
-            this.ColumnDayFeedPower.HeaderText = "阶段反向电能";
-            this.ColumnDayFeedPower.Name = "ColumnDayFeedPower";
-            this.ColumnDayFeedPower.ReadOnly = true;
-            // 
-            // ColumnConsumeTotalPower
-            // 
-            this.ColumnConsumeTotalPower.HeaderText = "阶段总电能";
-            this.ColumnConsumeTotalPower.Name = "ColumnConsumeTotalPower";
-            this.ColumnConsumeTotalPower.ReadOnly = true;
-            // 
-            // groupBoxUnit
-            // 
-            this.groupBoxUnit.Controls.Add(this.radioButtonMinute);
-            this.groupBoxUnit.Controls.Add(this.radioButtonHour);
-            this.groupBoxUnit.Controls.Add(this.radioButtonDay);
-            this.groupBoxUnit.Controls.Add(this.radioButtonMonth);
-            this.groupBoxUnit.Controls.Add(this.radioButtonYear);
-            this.groupBoxUnit.Location = new System.Drawing.Point(5, 167);
-            this.groupBoxUnit.Name = "groupBoxUnit";
-            this.groupBoxUnit.Size = new System.Drawing.Size(192, 156);
-            this.groupBoxUnit.TabIndex = 9;
-            this.groupBoxUnit.TabStop = false;
-            this.groupBoxUnit.Text = "柱状图单位";
-            // 
-            // radioButtonYear
-            // 
-            this.radioButtonYear.AutoSize = true;
-            this.radioButtonYear.Location = new System.Drawing.Point(23, 19);
-            this.radioButtonYear.Name = "radioButtonYear";
-            this.radioButtonYear.Size = new System.Drawing.Size(38, 21);
-            this.radioButtonYear.TabIndex = 0;
-            this.radioButtonYear.TabStop = true;
-            this.radioButtonYear.Text = "年";
-            this.radioButtonYear.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonMonth
-            // 
-            this.radioButtonMonth.AutoSize = true;
-            this.radioButtonMonth.Location = new System.Drawing.Point(23, 46);
-            this.radioButtonMonth.Name = "radioButtonMonth";
-            this.radioButtonMonth.Size = new System.Drawing.Size(38, 21);
-            this.radioButtonMonth.TabIndex = 1;
-            this.radioButtonMonth.TabStop = true;
-            this.radioButtonMonth.Text = "月";
-            this.radioButtonMonth.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonDay
-            // 
-            this.radioButtonDay.AutoSize = true;
-            this.radioButtonDay.Location = new System.Drawing.Point(23, 73);
-            this.radioButtonDay.Name = "radioButtonDay";
-            this.radioButtonDay.Size = new System.Drawing.Size(38, 21);
-            this.radioButtonDay.TabIndex = 2;
-            this.radioButtonDay.TabStop = true;
-            this.radioButtonDay.Text = "日";
-            this.radioButtonDay.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonHour
-            // 
-            this.radioButtonHour.AutoSize = true;
-            this.radioButtonHour.Location = new System.Drawing.Point(23, 100);
-            this.radioButtonHour.Name = "radioButtonHour";
-            this.radioButtonHour.Size = new System.Drawing.Size(38, 21);
-            this.radioButtonHour.TabIndex = 3;
-            this.radioButtonHour.TabStop = true;
-            this.radioButtonHour.Text = "时";
-            this.radioButtonHour.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonMinute
-            // 
-            this.radioButtonMinute.AutoSize = true;
-            this.radioButtonMinute.Location = new System.Drawing.Point(23, 127);
-            this.radioButtonMinute.Name = "radioButtonMinute";
-            this.radioButtonMinute.Size = new System.Drawing.Size(38, 21);
-            this.radioButtonMinute.TabIndex = 4;
-            this.radioButtonMinute.TabStop = true;
-            this.radioButtonMinute.Text = "分";
-            this.radioButtonMinute.UseVisualStyleBackColor = true;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "年",
+            "月",
+            "日",
+            "时",
+            "分"});
+            this.comboBox2.Location = new System.Drawing.Point(6, 22);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 25);
+            this.comboBox2.TabIndex = 0;
+            this.comboBox2.Text = "请选择";
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1278, 576);
+            this.ClientSize = new System.Drawing.Size(1264, 682);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "FormMain";
@@ -398,9 +304,8 @@
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEnergy)).EndInit();
             this.groupBoxUnit.ResumeLayout(false);
-            this.groupBoxUnit.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEnergy)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -420,24 +325,15 @@
         private System.Windows.Forms.Label labelNumber;
         private System.Windows.Forms.Button buttonExportExcel;
         private System.Windows.Forms.DataGridView dataGridViewEnergy;
-        private System.Windows.Forms.TextBox textBox_V_type;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.GroupBox groupBoxUnit;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPositivePower;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNegativePower;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTotalPower;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDayConsumePower;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDayFeedPower;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnConsumeTotalPower;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.GroupBox groupBoxUnit;
-        private System.Windows.Forms.RadioButton radioButtonMinute;
-        private System.Windows.Forms.RadioButton radioButtonHour;
-        private System.Windows.Forms.RadioButton radioButtonDay;
-        private System.Windows.Forms.RadioButton radioButtonMonth;
-        private System.Windows.Forms.RadioButton radioButtonYear;
+        private System.Windows.Forms.ComboBox comboBox2;
     }
 }
 
