@@ -40,6 +40,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBoxUnit = new System.Windows.Forms.GroupBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.buttonExit = new System.Windows.Forms.Button();
             this.buttonSelect = new System.Windows.Forms.Button();
@@ -51,7 +52,10 @@
             this.ColumnPositivePower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnNegativePower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnTotalPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label4 = new System.Windows.Forms.Label();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -125,6 +129,10 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.dateTimePicker2);
+            this.panel3.Controls.Add(this.label4);
+            this.panel3.Controls.Add(this.dateTimePicker1);
+            this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.groupBoxUnit);
             this.panel3.Controls.Add(this.comboBox1);
             this.panel3.Controls.Add(this.buttonExit);
@@ -141,18 +149,34 @@
             // groupBoxUnit
             // 
             this.groupBoxUnit.Controls.Add(this.comboBox2);
-            this.groupBoxUnit.Location = new System.Drawing.Point(39, 84);
+            this.groupBoxUnit.Location = new System.Drawing.Point(35, 43);
             this.groupBoxUnit.Name = "groupBoxUnit";
             this.groupBoxUnit.Size = new System.Drawing.Size(140, 62);
             this.groupBoxUnit.TabIndex = 9;
             this.groupBoxUnit.TabStop = false;
             this.groupBoxUnit.Text = "柱状图单位";
             // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "年",
+            "月",
+            "日",
+            "时",
+            "分"});
+            this.comboBox2.Location = new System.Drawing.Point(6, 22);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 25);
+            this.comboBox2.TabIndex = 0;
+            this.comboBox2.Text = "请选择";
+            // 
             // comboBox1
             // 
+            this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 7F);
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(38, 445);
+            this.comboBox1.Location = new System.Drawing.Point(39, 434);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(131, 22);
             this.comboBox1.TabIndex = 19;
@@ -268,20 +292,37 @@
             this.ColumnTotalPower.Name = "ColumnTotalPower";
             this.ColumnTotalPower.ReadOnly = true;
             // 
-            // comboBox2
+            // label1
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "年",
-            "月",
-            "日",
-            "时",
-            "分"});
-            this.comboBox2.Location = new System.Drawing.Point(6, 22);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 25);
-            this.comboBox2.TabIndex = 0;
-            this.comboBox2.Text = "请选择";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(38, 119);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 17);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "起始时间";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(41, 139);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(134, 23);
+            this.dateTimePicker1.TabIndex = 21;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(38, 169);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(56, 17);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "终止时间";
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Location = new System.Drawing.Point(41, 189);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(134, 23);
+            this.dateTimePicker2.TabIndex = 21;
             // 
             // FormMain
             // 
@@ -334,6 +375,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNegativePower;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTotalPower;
         private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.Label label4;
     }
 }
 
