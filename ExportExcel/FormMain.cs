@@ -8,20 +8,20 @@ using System.Text;
 using System.IO;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
-using System.Threading; 
+using System.Threading;
 
 namespace ExportExcel
 {
     public partial class FormMain : Form
     {
         public EnergyData mEnergyData;
-        
+
         public FormMain()
         {
             InitializeComponent();
             this.label3.Text = ExportExcel.Properties.Resources.Version;
             //this.dateTimePicker1.MaxDate = new DateTime(;
-            
+
 
             CheckForIllegalCrossThreadCalls = false;
 
@@ -57,7 +57,7 @@ namespace ExportExcel
                 GC.Collect();
             }
         }
-        
+
         public void setExportExcelStatus(string status, string detail = "")
         {
             bool enable = true;
@@ -93,7 +93,8 @@ namespace ExportExcel
                 buttonExportExcel.Text = "导出为Excel";
                 buttonExportExcel.Enabled = true;
             }
-            else {
+            else
+            {
                 buttonExportExcel.Enabled = false;
             }
         }
@@ -118,7 +119,7 @@ namespace ExportExcel
                 MessageBox.Show("未识别的车型");
                 return null;
             }
-            
+
             short num = System.BitConverter.ToInt16(mEnergyData.carNum, 0);
             string carNum = num.ToString();
             string pre = System.Environment.CurrentDirectory + "\\";
@@ -132,7 +133,7 @@ namespace ExportExcel
 
             for (int i = 0; i < mEnergyData.mEnergyDataRawList.Count; i++)
             {
-                if (dateTime == (int)mEnergyData.mEnergyDataRawList[i].year[0])
+                if (dateTime == (int)mEnergyData.mEnergyDataRawList[i].getDay())
                 {
                     tEnergyDataRawList.Add(mEnergyData.mEnergyDataRawList[i]);
                 }
@@ -142,14 +143,22 @@ namespace ExportExcel
         }
         private void buttonExportExcel_Click(object sender, EventArgs e)
         {
-            if (comboBox1.Text == "请选择日期") {
-                MessageBox.Show("请先选择日期");
-                return;
-            } else {
-                filterEnergyDataWithDateTime(Int32.Parse(comboBox1.Text));
+            bool filter = false;
+            if (filter)
+            {
+                if (comboBox1.Text == "请选择日期")
+                {
+                    MessageBox.Show("请先选择日期");
+                    return;
+                }
+                else
+                {
+                    filterEnergyDataWithDateTime(Int32.Parse(comboBox1.Text));
+                }
             }
 
-            if (null == mEnergyData) {
+            if (null == mEnergyData)
+            {
                 MessageBox.Show("请先导入数据文件");
                 return;
             }
@@ -163,7 +172,9 @@ namespace ExportExcel
                 || (Myutility.GetMajorVersionNumber() == "V1.3"))
             {
                 filename = GetExcelFileName(textBoxNumber.Text);
-            } else {
+            }
+            else
+            {
                 filename = GetExcelFileNameV1_2();
             }
             if (null == filename)
@@ -180,7 +191,8 @@ namespace ExportExcel
 
         public String GetExcelFileName(String append)
         {
-            if (append.Equals("")) {
+            if (append.Equals(""))
+            {
                 append = "xxxx";
             }
             String curDate = DateTime.Now.ToString("yyyyMMdd");
@@ -200,7 +212,7 @@ namespace ExportExcel
             comboBox1.Items.Clear();
 
             this.openFileDialog1.Filter = "数据文件(*.txt)|*.txt|所有文件(*.*)|*.*";
-            this.openFileDialog1.FileName = "电能列表2016-03-02.TXT";
+            this.openFileDialog1.FileName = "*.TXT";
             if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string FileName = this.openFileDialog1.FileName;
@@ -217,49 +229,36 @@ namespace ExportExcel
 
                 for (int j = 0, count = 0, i = this.dataGridViewEnergy.RowCount - 1; i >= 0; i--, count++)
                 {
-                    dateTimesFlag[mEnergyData.mEnergyDataRawList[i].year[0] - 1] = true;
+                    dateTimesFlag[1] = true;
 
-                    string v0_0, v0_1, v0_2, v0_3, v1, v2, v3, v4, v5, v6;
+                    string day = mEnergyData.mEnergyDataRawList[i].getDay().ToString();
+                    string hour = mEnergyData.mEnergyDataRawList[i].getHour().ToString();
+                    string minutes = mEnergyData.mEnergyDataRawList[i].getMinuts().ToString();
+                    string second = mEnergyData.mEnergyDataRawList[i].getSecond().ToString();
+                    string power1 = mEnergyData.mEnergyDataRawList[i].getPower1().ToString();
+                    string power2 = mEnergyData.mEnergyDataRawList[i].getPower2().ToString();
+                    string powerAll = mEnergyData.mEnergyDataRawList[i].getPowerAll().ToString();
+                    string step_power1 = "0";
+                    string step_power2 = "0";
+                    string step_powerAll = "0";
 
-                    v0_0 = mEnergyData.mEnergyDataRawList[i].year[0].ToString();
-                    v0_1 = mEnergyData.mEnergyDataRawList[i].year[1].ToString();
-                    v0_2 = Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth), System.Globalization.NumberStyles.HexNumber).ToString();
-                    v0_3 = Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day), System.Globalization.NumberStyles.HexNumber).ToString();
-                    
-                    v1 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0).ToString();
-                    v2 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0).ToString();
-                    v3 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0).ToString();
-                    if (count == this.dataGridViewEnergy.RowCount - 1)
+                    if (count != dataGridViewEnergy.RowCount - 1)
                     {
-                        v4 = "0";
-                        v5 = "0";
-                        v6 = "0";
+                        step_power1 = (mEnergyData.mEnergyDataRawList[i].getPower1() - mEnergyData.mEnergyDataRawList[i - 1].getPower1()).ToString();
+                        step_power2 = (mEnergyData.mEnergyDataRawList[i].getPower2() - mEnergyData.mEnergyDataRawList[i - 1].getPower2()).ToString();
+                        step_powerAll = (mEnergyData.mEnergyDataRawList[i].getPowerAll() - mEnergyData.mEnergyDataRawList[i - 1].getPowerAll()).ToString();
                     }
-                    else
-                    {
-                        v4 = (BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0)
-                            - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power1), 0)).ToString();
-                        v5 = (BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0)
-                            - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power2), 0)).ToString();
-                        v6 = (BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0)
-                            - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0)).ToString();
-                    }
-
-                    dataGridViewEnergy.Rows[j].Cells[0].Value = v0_0 + "年" +　v0_1 + "月" + v0_2 + "日";
-                    if (Myutility.GetMajorVersionNumber() == "V1.3")
-                    {
-                        dataGridViewEnergy.Rows[j].Cells[0].Value = v0_0 + "日" + v0_1 + "时" + v0_2 + "分" + v0_3 + "秒";
-                    }
-                    dataGridViewEnergy.Rows[j].Cells[1].Value = v1 + " kW.h";
-                    dataGridViewEnergy.Rows[j].Cells[2].Value = v2 + " kW.h";
-                    dataGridViewEnergy.Rows[j].Cells[3].Value = v3 + " kW.h";
-                    dataGridViewEnergy.Rows[j].Cells[4].Value = v4 + " kW.h";
-                    dataGridViewEnergy.Rows[j].Cells[5].Value = v5 + " kW.h";
-                    dataGridViewEnergy.Rows[j].Cells[6].Value = v6 + " kW.h";
+                    dataGridViewEnergy.Rows[j].Cells[0].Value = day + "日" + hour + "时" + minutes + "分" + second + "秒";
+                    dataGridViewEnergy.Rows[j].Cells[1].Value = power1 + " kW.h";
+                    dataGridViewEnergy.Rows[j].Cells[2].Value = power2 + " kW.h";
+                    dataGridViewEnergy.Rows[j].Cells[3].Value = powerAll + " kW.h";
+                    dataGridViewEnergy.Rows[j].Cells[4].Value = step_power1 + " kW.h";
+                    dataGridViewEnergy.Rows[j].Cells[5].Value = step_power2 + " kW.h";
+                    dataGridViewEnergy.Rows[j].Cells[6].Value = step_powerAll + " kW.h";
                     j++;
-                 }
+                }
 
-                for (int index = 0; index < dateTimesFlag.Length; index++ )
+                for (int index = 0; index < dateTimesFlag.Length; index++)
                 {
                     if (dateTimesFlag[index])
                     {
@@ -276,14 +275,14 @@ namespace ExportExcel
 
         private void FormMain_Shown(object sender, EventArgs e)
         {
-            dataGridViewEnergy.Font = new Font("Arial",9);
+            dataGridViewEnergy.Font = new Font("Arial", 9);
         }
 
         private void dataGridViewEnergy_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex < 0)
             {
-                e.CellStyle.Font = new Font("微软雅黑",9);  
+                e.CellStyle.Font = new Font("微软雅黑", 9);
                 return;
             }
 
@@ -291,13 +290,13 @@ namespace ExportExcel
             {
                 if (e.ColumnIndex == 0)//定位到第1列日期 
                 {
-                    e.CellStyle.Font = new Font("微软雅黑",9);  
+                    e.CellStyle.Font = new Font("微软雅黑", 9);
                 }
             }
             catch
             {
 
-            }  
+            }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)

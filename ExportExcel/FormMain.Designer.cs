@@ -149,6 +149,7 @@
             this.comboBox1.Size = new System.Drawing.Size(131, 25);
             this.comboBox1.TabIndex = 19;
             this.comboBox1.Text = "请选择日期";
+            this.comboBox1.Visible = false;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // textBox_V_type

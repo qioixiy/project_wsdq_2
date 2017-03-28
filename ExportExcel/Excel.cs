@@ -73,9 +73,6 @@ namespace ExportExcel
             // add function sheet
             xlsApp.Worksheets.Add(misValue);
             GetWorksheet(1).Name = "电能列表";
-            GetWorksheet(2).Name = "阶段电能柱状图";
-            GetWorksheet(3).Name = "总电能曲线图";
-            GetWorksheet(4).Name = "...";
 
             xlsWorkBook.EnableAutoRecover = false;
         }
@@ -170,6 +167,28 @@ namespace ExportExcel
             }
         }
 
+        private static string datetime_str = "时间";
+        private static string power1_str = "正向电能(kW.h)";
+        private static string power2_str = "反向电能(kW.h)";
+        private static string powerall_str = "总电能(kW.h)";
+        private static string step_power1_str = "阶段耗电能(kW.h)";
+        private static string step_power2_str = "阶段馈电能(kW.h)";
+        private static string step_powerall_str = "阶段总耗电能(kW.h)";
+        // 1.33增加的项
+        private static string step_v_str = "电压(kV)";
+        private static string step_i_str = "电流(A)";
+        private static string step_powerFactor_str = "功率因素";
+        private static string step_powerRealTime_str = "实时功率(kW)";
+        private static string step_v3rd_str = "电压3次谐波含有率(%)";
+        private static string step_v5rd_str = "电压5次谐波含有率(%)";
+        private static string step_v7rd_str = "电压7次谐波含有率(%)";
+        private static string step_v9rd_str = "电压9次谐波含有率(%)";
+        private static string step_i3rd_str = "电流3次谐波含有率(%)";
+        private static string step_i5rd_str = "电流5次谐波含有率(%)";
+        private static string step_i7rd_str = "电流7次谐波含有率(%)";
+        private static string step_i9rd_str = "电流9次谐波含有率(%)";
+        private static string step_Rosebowcar_str = "升弓车厢";
+
         public static int GenExcel(FormMain form, EnergyData mEnergyData, string filename)
         {
             CBExcel excel = new CBExcel();
@@ -194,18 +213,43 @@ namespace ExportExcel
             ((Excel.Range)excel.CurXlsWorkSheet.Columns["E", Type.Missing]).ColumnWidth = 20;
             ((Excel.Range)excel.CurXlsWorkSheet.Columns["F", Type.Missing]).ColumnWidth = 20;
             ((Excel.Range)excel.CurXlsWorkSheet.Columns["G", Type.Missing]).ColumnWidth = 20;
-            excel.CurXlsWorkSheet.get_Range(excel.CurXlsWorkSheet.Cells[1, 1], excel.CurXlsWorkSheet.Cells[1, 7]).Font.Name = "微软雅黑";
-            excel.CurXlsWorkSheet.get_Range(excel.CurXlsWorkSheet.Cells[1, 1], excel.CurXlsWorkSheet.Cells[1, 7]).Font.Bold = true;
-            //excel.CurXlsWorkSheet.get_Range(excel.CurXlsWorkSheet.Cells[1, 1], excel.CurXlsWorkSheet.Cells[1, 7]).VerticalAlignment = true;
-            excel.CurXlsWorkSheet.get_Range(excel.CurXlsWorkSheet.Cells[1, 1], excel.CurXlsWorkSheet.Cells[1, 7]).Interior.ColorIndex = 16;
+            ((Excel.Range)excel.CurXlsWorkSheet.Columns["H", Type.Missing]).ColumnWidth = 20;
+            ((Excel.Range)excel.CurXlsWorkSheet.Columns["I", Type.Missing]).ColumnWidth = 20;
+            ((Excel.Range)excel.CurXlsWorkSheet.Columns["J", Type.Missing]).ColumnWidth = 20;
+            ((Excel.Range)excel.CurXlsWorkSheet.Columns["K", Type.Missing]).ColumnWidth = 20;
+            ((Excel.Range)excel.CurXlsWorkSheet.Columns["L", Type.Missing]).ColumnWidth = 20;
+            ((Excel.Range)excel.CurXlsWorkSheet.Columns["M", Type.Missing]).ColumnWidth = 20;
+            ((Excel.Range)excel.CurXlsWorkSheet.Columns["N", Type.Missing]).ColumnWidth = 20;
+            ((Excel.Range)excel.CurXlsWorkSheet.Columns["O", Type.Missing]).ColumnWidth = 20;
+            ((Excel.Range)excel.CurXlsWorkSheet.Columns["P", Type.Missing]).ColumnWidth = 20;
+            ((Excel.Range)excel.CurXlsWorkSheet.Columns["Q", Type.Missing]).ColumnWidth = 20;
+            int sum_title = 17;
+            excel.CurXlsWorkSheet.get_Range(excel.CurXlsWorkSheet.Cells[1, 1], excel.CurXlsWorkSheet.Cells[1, sum_title]).Font.Name = "微软雅黑";
+            excel.CurXlsWorkSheet.get_Range(excel.CurXlsWorkSheet.Cells[1, 1], excel.CurXlsWorkSheet.Cells[1, sum_title]).Font.Bold = true;
+            //excel.CurXlsWorkSheet.get_Range(excel.CurXlsWorkSheet.Cells[1, 1], excel.CurXlsWorkSheet.Cells[1, sum_title]).VerticalAlignment = true;
+            excel.CurXlsWorkSheet.get_Range(excel.CurXlsWorkSheet.Cells[1, 1], excel.CurXlsWorkSheet.Cells[1, sum_title]).Interior.ColorIndex = 16;
 
-            excel.SetData(1, 1, "时间");
-            excel.SetData(1, 2, "正向电能(kW.h)");
-            excel.SetData(1, 3, "反向电能(kW.h)");
-            excel.SetData(1, 4, "总电能(kW.h)");
-            excel.SetData(1, 5, "阶段耗电能(kW.h)");
-            excel.SetData(1, 6, "阶段馈电能(kW.h)");
-            excel.SetData(1, 7, "阶段总耗电能(kW.h)");
+            excel.SetData(1, 1, datetime_str);
+            excel.SetData(1, 2, power1_str);
+            excel.SetData(1, 3, power2_str);
+            excel.SetData(1, 4, powerall_str);
+            //excel.SetData(1, 5, step_power1_str);
+            //excel.SetData(1, 6, step_power2_str);
+            //excel.SetData(1, 7, step_powerall_str);
+
+            excel.SetData(1, 5, step_v_str);
+            excel.SetData(1, 6, step_i_str);
+            excel.SetData(1, 7, step_powerFactor_str);
+            excel.SetData(1, 8, step_powerRealTime_str);
+            excel.SetData(1, 9, step_v3rd_str);
+            excel.SetData(1, 10, step_v5rd_str);
+            excel.SetData(1, 11, step_v7rd_str);
+            excel.SetData(1, 12, step_v9rd_str);
+            excel.SetData(1, 13, step_i3rd_str);
+            excel.SetData(1, 14, step_i5rd_str);
+            excel.SetData(1, 15, step_i7rd_str);
+            excel.SetData(1, 16, step_i9rd_str);
+            excel.SetData(1, 17, step_Rosebowcar_str);
 
             if (mEnergyData == null || mEnergyData.mEnergyDataRawList.Count == 0)
             {
@@ -219,83 +263,86 @@ namespace ExportExcel
             {
                 row = i + 2;
 
-                string v0_0, v0_1, v0_2, v0_3, v1, v2, v3, v4, v5, v6;
+                string day = mEnergyData.mEnergyDataRawList[i].getDay().ToString();
+                string hour = mEnergyData.mEnergyDataRawList[i].getHour().ToString();
+                string minutes = mEnergyData.mEnergyDataRawList[i].getMinuts().ToString();
+                string second = mEnergyData.mEnergyDataRawList[i].getSecond().ToString();
+                string power1 = mEnergyData.mEnergyDataRawList[i].getPower1().ToString();
+                string power2 = mEnergyData.mEnergyDataRawList[i].getPower2().ToString();
+                string powerAll = mEnergyData.mEnergyDataRawList[i].getPowerAll().ToString();
+                string step_power1 = "0";
+                string step_power2 = "0";
+                string step_powerAll = "0";
 
-                // v1.3
-                v0_0 = mEnergyData.mEnergyDataRawList[i].year[0].ToString();
-                v0_1 = mEnergyData.mEnergyDataRawList[i].year[1].ToString();
-                v0_2 = Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth), System.Globalization.NumberStyles.HexNumber).ToString();
-                v0_3 = Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day), System.Globalization.NumberStyles.HexNumber).ToString();
-                v1 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0).ToString();
-                v2 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0).ToString();
-                v3 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0).ToString();
-
-                if (i == 0)
+                if (i != 0)
                 {
-                    v4 = "0";
-                    v5 = "0";
-                    v6 = "0";
-                }
-                else
-                {
-                    v4 = (BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0)
-                        - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power1), 0)).ToString();
-                    v5 = (BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0)
-                        - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power2), 0)).ToString();
-                    v6 = (BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0)
-                        - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0)).ToString();
-                }
-                object s1, s2, s3, s4, s5, s6, s7;
-                //s1 = BitConverter.ToInt16(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].year), 0) + "年"
-                //     + Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].mouth), System.Globalization.NumberStyles.HexNumber) + "月"
-                //     + Int32.Parse(BitConverter.ToString(mEnergyData.mEnergyDataRawList[i].day), System.Globalization.NumberStyles.HexNumber) + "日";
-                s1 = v0_0 + "年" + v0_1 + "月" + v0_2 + "日";
-                if (Myutility.GetMajorVersionNumber() == "V1.3")
-                {
-                    s1 = v0_0 + "日" + v0_1 + "时" + v0_2 + "分" + v0_3 + "秒";
-                }
-                s2 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0);
-                s3 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0);
-                s4 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0);
-                if (i == 0)
-                {
-                    s5 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0);
-                    s6 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0);
-                    s7 = BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0);
-                }
-                else
-                {
-                    s5 = (BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power1), 0)
-                       - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power1), 0));
-                    s6 = (BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].power2), 0)
-                       - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].power2), 0));
-                    s7 = (BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i].powerAll), 0)
-                       - BitConverter.ToInt32(Myutility.ToHostEndian(mEnergyData.mEnergyDataRawList[i - 1].powerAll), 0));
+                    step_power1 = (mEnergyData.mEnergyDataRawList[i].getPower1() - mEnergyData.mEnergyDataRawList[i - 1].getPower1()).ToString();
+                    step_power2 = (mEnergyData.mEnergyDataRawList[i].getPower2() - mEnergyData.mEnergyDataRawList[i - 1].getPower2()).ToString();
+                    step_powerAll = (mEnergyData.mEnergyDataRawList[i].getPowerAll() - mEnergyData.mEnergyDataRawList[i - 1].getPowerAll()).ToString();
                 }
 
-                excel.SetData(row, 1, (string)s1);
-                excel.SetData(row, 2, v1);
-                excel.SetData(row, 3, v2);
-                excel.SetData(row, 4, v3);
-                excel.SetData(row, 5, v4);
-                excel.SetData(row, 6, v5);
-                excel.SetData(row, 7, v6);
+                string step_v = mEnergyData.mEnergyDataRawList[i].getV().ToString();
+                string step_i = mEnergyData.mEnergyDataRawList[i].getI().ToString();
+                string step_powerFactor = mEnergyData.mEnergyDataRawList[i].getPowerFactor().ToString();
+                string step_powerRealTime = mEnergyData.mEnergyDataRawList[i].getPowerRealTime().ToString();
+                string step_v3rd = mEnergyData.mEnergyDataRawList[i].getV3rd().ToString();
+                string step_v5rd = mEnergyData.mEnergyDataRawList[i].getV5rd().ToString();
+                string step_v7rd = mEnergyData.mEnergyDataRawList[i].getV7rd().ToString();
+                string step_v9rd = mEnergyData.mEnergyDataRawList[i].getV9rd().ToString();
+                string step_i3rd = mEnergyData.mEnergyDataRawList[i].getI3rd().ToString();
+                string step_i5rd = mEnergyData.mEnergyDataRawList[i].getI5rd().ToString();
+                string step_i7rd = mEnergyData.mEnergyDataRawList[i].getI7rd().ToString();
+                string step_i9rd = mEnergyData.mEnergyDataRawList[i].getI9rd().ToString();
+                string step_Rosebowcar = "0";
+                switch (mEnergyData.mEnergyDataRawList[i].getRosebowcar())
+                {
+                    default:
+                    case 0: break;
+                    case 1:
+                        step_Rosebowcar = "3";
+                        break;
+                    case 2:
+                        step_Rosebowcar = "6";
+                        break;
+                }
+                
+                excel.SetData(row, 1, day + "日" + hour + "时" + minutes + "分" + second + "秒");
+                excel.SetData(row, 2, power1);
+                excel.SetData(row, 3, power2);
+                excel.SetData(row, 4, powerAll);
+                excel.SetData(row, 5, step_power1);
+                excel.SetData(row, 6, step_power2);
+                excel.SetData(row, 7, step_powerAll);
+
+                excel.SetData(row, 5, step_v);
+                excel.SetData(row, 6, step_i);
+                excel.SetData(row, 7, step_powerFactor);
+                excel.SetData(row, 8, step_powerRealTime);
+                excel.SetData(row, 9, step_v3rd);
+                excel.SetData(row, 10, step_v5rd);
+                excel.SetData(row, 11, step_v7rd);
+                excel.SetData(row, 12, step_v9rd);
+                excel.SetData(row, 13, step_i3rd);
+                excel.SetData(row, 14, step_i5rd);
+                excel.SetData(row, 15, step_i7rd);
+                excel.SetData(row, 16, step_i9rd);
+                excel.SetData(row, 17, step_Rosebowcar);
+
+                // 及时更新状态
                 form.setExportExcelStatus("processing", "S1:" + i + "/" + mEnergyData.mEnergyDataRawList.Count);
-
-                if (excel.SaveAs(filename))
-                {
-                    form.setExportExcelStatus("export-success");
-                }
-                else
-                {
-                    form.setExportExcelStatus("export-fail");
-                }
-
-                excel.Release();
-
-                return 0;
             }
-        }
+            if (excel.SaveAs(filename))
+            {
+                form.setExportExcelStatus("export-success");
+            }
+            else
+            {
+                form.setExportExcelStatus("export-fail");
+            }
 
+            excel.Release();
+
+            return 0;
+        }
     }
 }
