@@ -55,10 +55,17 @@
             this.ColumnDayConsumePower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDayFeedPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnConsumeTotalPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBoxUnit = new System.Windows.Forms.GroupBox();
+            this.radioButtonYear = new System.Windows.Forms.RadioButton();
+            this.radioButtonMonth = new System.Windows.Forms.RadioButton();
+            this.radioButtonDay = new System.Windows.Forms.RadioButton();
+            this.radioButtonHour = new System.Windows.Forms.RadioButton();
+            this.radioButtonMinute = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEnergy)).BeginInit();
+            this.groupBoxUnit.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList1
@@ -127,6 +134,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.groupBoxUnit);
             this.panel3.Controls.Add(this.comboBox1);
             this.panel3.Controls.Add(this.textBox_V_type);
             this.panel3.Controls.Add(this.label1);
@@ -300,6 +308,75 @@
             this.ColumnConsumeTotalPower.Name = "ColumnConsumeTotalPower";
             this.ColumnConsumeTotalPower.ReadOnly = true;
             // 
+            // groupBoxUnit
+            // 
+            this.groupBoxUnit.Controls.Add(this.radioButtonMinute);
+            this.groupBoxUnit.Controls.Add(this.radioButtonHour);
+            this.groupBoxUnit.Controls.Add(this.radioButtonDay);
+            this.groupBoxUnit.Controls.Add(this.radioButtonMonth);
+            this.groupBoxUnit.Controls.Add(this.radioButtonYear);
+            this.groupBoxUnit.Location = new System.Drawing.Point(5, 167);
+            this.groupBoxUnit.Name = "groupBoxUnit";
+            this.groupBoxUnit.Size = new System.Drawing.Size(192, 156);
+            this.groupBoxUnit.TabIndex = 9;
+            this.groupBoxUnit.TabStop = false;
+            this.groupBoxUnit.Text = "柱状图单位";
+            // 
+            // radioButtonYear
+            // 
+            this.radioButtonYear.AutoSize = true;
+            this.radioButtonYear.Location = new System.Drawing.Point(23, 19);
+            this.radioButtonYear.Name = "radioButtonYear";
+            this.radioButtonYear.Size = new System.Drawing.Size(38, 21);
+            this.radioButtonYear.TabIndex = 0;
+            this.radioButtonYear.TabStop = true;
+            this.radioButtonYear.Text = "年";
+            this.radioButtonYear.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonMonth
+            // 
+            this.radioButtonMonth.AutoSize = true;
+            this.radioButtonMonth.Location = new System.Drawing.Point(23, 46);
+            this.radioButtonMonth.Name = "radioButtonMonth";
+            this.radioButtonMonth.Size = new System.Drawing.Size(38, 21);
+            this.radioButtonMonth.TabIndex = 1;
+            this.radioButtonMonth.TabStop = true;
+            this.radioButtonMonth.Text = "月";
+            this.radioButtonMonth.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonDay
+            // 
+            this.radioButtonDay.AutoSize = true;
+            this.radioButtonDay.Location = new System.Drawing.Point(23, 73);
+            this.radioButtonDay.Name = "radioButtonDay";
+            this.radioButtonDay.Size = new System.Drawing.Size(38, 21);
+            this.radioButtonDay.TabIndex = 2;
+            this.radioButtonDay.TabStop = true;
+            this.radioButtonDay.Text = "日";
+            this.radioButtonDay.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonHour
+            // 
+            this.radioButtonHour.AutoSize = true;
+            this.radioButtonHour.Location = new System.Drawing.Point(23, 100);
+            this.radioButtonHour.Name = "radioButtonHour";
+            this.radioButtonHour.Size = new System.Drawing.Size(38, 21);
+            this.radioButtonHour.TabIndex = 3;
+            this.radioButtonHour.TabStop = true;
+            this.radioButtonHour.Text = "时";
+            this.radioButtonHour.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonMinute
+            // 
+            this.radioButtonMinute.AutoSize = true;
+            this.radioButtonMinute.Location = new System.Drawing.Point(23, 127);
+            this.radioButtonMinute.Name = "radioButtonMinute";
+            this.radioButtonMinute.Size = new System.Drawing.Size(38, 21);
+            this.radioButtonMinute.TabIndex = 4;
+            this.radioButtonMinute.TabStop = true;
+            this.radioButtonMinute.Text = "分";
+            this.radioButtonMinute.UseVisualStyleBackColor = true;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -322,6 +399,8 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEnergy)).EndInit();
+            this.groupBoxUnit.ResumeLayout(false);
+            this.groupBoxUnit.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -353,6 +432,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDayFeedPower;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnConsumeTotalPower;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.GroupBox groupBoxUnit;
+        private System.Windows.Forms.RadioButton radioButtonMinute;
+        private System.Windows.Forms.RadioButton radioButtonHour;
+        private System.Windows.Forms.RadioButton radioButtonDay;
+        private System.Windows.Forms.RadioButton radioButtonMonth;
+        private System.Windows.Forms.RadioButton radioButtonYear;
     }
 }
 
