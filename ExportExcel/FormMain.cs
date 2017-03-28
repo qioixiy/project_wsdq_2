@@ -20,8 +20,6 @@ namespace ExportExcel
         {
             InitializeComponent();
             this.label3.Text = ExportExcel.Properties.Resources.Version;
-            //this.dateTimePicker1.MaxDate = new DateTime(;
-            
 
             CheckForIllegalCrossThreadCalls = false;
 
@@ -40,167 +38,10 @@ namespace ExportExcel
             mEnergyData = new EnergyData(filename);
         }
 
-        private void releaseObject(object obj)
-        {
-            try
-            {
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
-                obj = null;
-            }
-            catch (Exception ex)
-            {
-                obj = null;
-                MessageBox.Show("Exception Occured while releasing object " + ex.ToString());
-            }
-            finally
-            {
-                GC.Collect();
-            }
-        }
-        
-        public void setExportExcelStatus(string status, string detail = "")
-        {
-            bool enable = true;
-            if (status.Equals("unknown-data"))
-            {
-                MessageBox.Show("请先导入正确的数据文件！");
-                enable = true;
-            }
-            else if (status.Equals("exporting"))
-            {
-                buttonExportExcel.Text = "导出...";
-                enable = false;
-            }
-            else if (status.Equals("export-success"))
-            {
-                MessageBox.Show("导出成功！");
-                buttonExportExcel.Text = "导出为Excel";
-                enable = true;
-            }
-            else if (status.Equals("export-fail"))
-            {
-                buttonExportExcel.Text = "导出为Excel";
-                enable = true;
-            }
-            else if (status.Equals("processing"))
-            {
-                buttonExportExcel.Text = detail;
-                return;
-            }
-
-            if (enable == true)
-            {
-                buttonExportExcel.Text = "导出为Excel";
-                buttonExportExcel.Enabled = true;
-            }
-            else {
-                buttonExportExcel.Enabled = false;
-            }
-        }
-        private string GetExcelFileNameV1_2()
-        {
-            string ret;
-            string carType = "";
-            if (mEnergyData.carType[0] == 0x01)
-            {
-                carType = "CRH1A";
-            }
-            else if (mEnergyData.carType[0] == 0x02)
-            {
-                carType = "CRH1E";
-            }
-            else if (mEnergyData.carType[0] == 0x03)
-            {
-                carType = "CRH380D";
-            }
-            else
-            {
-                MessageBox.Show("未识别的车型");
-                return null;
-            }
-            
-            short num = System.BitConverter.ToInt16(mEnergyData.carNum, 0);
-            string carNum = num.ToString();
-            string pre = System.Environment.CurrentDirectory + "\\";
-            ret = pre + carType + "-" + carNum + "_" + DateTime.Now.ToString("yyyyMMdd");
-            return ret;
-        }
-
-        private void filterEnergyDataWithDateTime(int dateTime)
-        {
-            List<ExportExcel.EnergyData.EnergyDataRaw> tEnergyDataRawList = new List<ExportExcel.EnergyData.EnergyDataRaw>();
-
-            for (int i = 0; i < mEnergyData.mEnergyDataRawList.Count; i++)
-            {
-                if (dateTime == (int)mEnergyData.mEnergyDataRawList[i].year[0])
-                {
-                    tEnergyDataRawList.Add(mEnergyData.mEnergyDataRawList[i]);
-                }
-            }
-
-            mEnergyData.mEnergyDataRawList = tEnergyDataRawList;
-        }
-        private void buttonExportExcel_Click(object sender, EventArgs e)
-        {
-            if (comboBox1.Text == "请选择日期") {
-                MessageBox.Show("请先选择日期");
-                return;
-            } else {
-                filterEnergyDataWithDateTime(Int32.Parse(comboBox1.Text));
-            }
-
-            if (null == mEnergyData) {
-                MessageBox.Show("请先导入数据文件");
-                return;
-            }
-            setExportExcelStatus("exporting");
-
-            ExportExcelThread mExportExcelThread;
-            //mExportExcelThread = new ExportExcelThread(this, mEnergyData, GetExcelFileName(textBoxNumber.Text));
-            // V1.2
-            string filename = null;
-            if ((Myutility.GetMajorVersionNumber() == "V1.1")
-                || (Myutility.GetMajorVersionNumber() == "V1.3"))
-            {
-                filename = GetExcelFileName(textBoxNumber.Text);
-            } else {
-                filename = GetExcelFileNameV1_2();
-            }
-            if (null == filename)
-            {
-                MessageBox.Show("无效文件名");
-                setExportExcelStatus("export-fail");
-                return;
-            }
-            mExportExcelThread = new ExportExcelThread(this, mEnergyData, filename);
-            Thread th = new Thread(mExportExcelThread.ThreadMethod);
-
-            th.Start();
-        }
-
-        public String GetExcelFileName(String append)
-        {
-            if (append.Equals("")) {
-                append = "xxxx";
-            }
-            String curDate = DateTime.Now.ToString("yyyyMMdd");
-            String ret = System.Environment.CurrentDirectory
-                + "\\" + textBox_V_type.Text + "-" + append + "_" + curDate;
-
-            return ret;
-        }
-
-        private void labelTitle_Click(object sender, EventArgs e)
-        {
-            ;
-        }
-
         private void buttonSelect_Click(object sender, EventArgs e)
         {
-            comboBox1.Items.Clear();
-
             this.openFileDialog1.Filter = "数据文件(*.txt)|*.txt|所有文件(*.*)|*.*";
-            this.openFileDialog1.FileName = "电能列表2016-03-02.TXT";
+            this.openFileDialog1.FileName = "*.TXT";
             if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string FileName = this.openFileDialog1.FileName;
@@ -258,14 +99,6 @@ namespace ExportExcel
                     dataGridViewEnergy.Rows[j].Cells[6].Value = v6 + " kW.h";
                     j++;
                  }
-
-                for (int index = 0; index < dateTimesFlag.Length; index++ )
-                {
-                    if (dateTimesFlag[index])
-                    {
-                        comboBox1.Items.Add(index + 1);
-                    }
-                }
             }
         }
 
