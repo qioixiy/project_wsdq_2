@@ -88,11 +88,11 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 17F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(807, 9);
+            this.label3.Location = new System.Drawing.Point(761, 11);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 27);
+            this.label3.Size = new System.Drawing.Size(72, 27);
             this.label3.TabIndex = 7;
-            this.label3.Text = "V1.2";
+            this.label3.Text = "V1.00";
             // 
             // label2
             // 
@@ -107,12 +107,12 @@
             // labelTitle
             // 
             this.labelTitle.AutoSize = true;
-            this.labelTitle.Font = new System.Drawing.Font("隶书", 23F, System.Drawing.FontStyle.Bold);
+            this.labelTitle.Font = new System.Drawing.Font("LiSu", 23F, System.Drawing.FontStyle.Bold);
             this.labelTitle.Location = new System.Drawing.Point(392, 6);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(410, 31);
+            this.labelTitle.Size = new System.Drawing.Size(377, 31);
             this.labelTitle.TabIndex = 5;
-            this.labelTitle.Text = "电能监控系统数据处理助手";
+            this.labelTitle.Text = "能耗仪电能数据处理助手";
             this.labelTitle.Click += new System.EventHandler(this.labelTitle_Click);
             // 
             // panel2
@@ -309,7 +309,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "FormMain";
