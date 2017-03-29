@@ -21,27 +21,27 @@ namespace ExportExcel
 
             public int getYear()
             {
-                int ret = Int32.Parse(BitConverter.ToString(year), System.Globalization.NumberStyles.HexNumber);
+                int ret = BitConverter.ToInt16(Myutility.ToHostEndian(year), 0);
                 return ret;
             }
             public int getMouth()
             {
-                int ret = Int32.Parse(BitConverter.ToString(mouth), System.Globalization.NumberStyles.HexNumber); ;
+                int ret = mouth[0];
                 return ret;
             }
             public int getDay()
             {
-                int ret = Int32.Parse(BitConverter.ToString(day), System.Globalization.NumberStyles.HexNumber); ;
+                int ret = day[0];
                 return ret;
             }
             public int getHour()
             {
-                int ret = Int32.Parse(BitConverter.ToString(hour), System.Globalization.NumberStyles.HexNumber); ;
+                int ret = hour[0];
                 return ret;
             }
             public int getMinute()
             {
-                int ret = Int32.Parse(BitConverter.ToString(minute), System.Globalization.NumberStyles.HexNumber); ;
+                int ret = minute[0];
                 return ret;
             }
             public string GetDateTime()        //时间用于显示
@@ -120,7 +120,7 @@ namespace ExportExcel
                     {
                         while (true)
                         {
-                            byte[] buffer = br.ReadBytes(14);
+                            byte[] buffer = br.ReadBytes(16);
                             EnergyDataRaw _EnergyDataRaw = new EnergyDataRaw();
                             // 2 1 1 1 1 4 4
                             _EnergyDataRaw.year = Myutility.SubByte(buffer, 0, 2); //年 2byte
@@ -156,9 +156,9 @@ namespace ExportExcel
                             }
                         }
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
-                        Console.WriteLine("读取结束！");
+                        Console.WriteLine("读取异常结束！" + e.ToString());
                     }
                     br.Close();
                     fs.Close();
