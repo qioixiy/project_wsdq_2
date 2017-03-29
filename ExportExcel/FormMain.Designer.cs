@@ -39,7 +39,7 @@
             this.labelTitle = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxSelectDateTime = new System.Windows.Forms.ComboBox();
             this.textBox_V_type = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonExit = new System.Windows.Forms.Button();
@@ -55,6 +55,19 @@
             this.ColumnDayConsumePower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDayFeedPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnConsumeTotalPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnRealTimePower = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnV3rd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnV5rd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnV7rd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnV9rd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnI3rd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnI5rd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnI7rd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnI9rd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -127,7 +140,7 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.comboBox1);
+            this.panel3.Controls.Add(this.comboBoxSelectDateTime);
             this.panel3.Controls.Add(this.textBox_V_type);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.buttonExit);
@@ -141,16 +154,15 @@
             this.panel3.Size = new System.Drawing.Size(200, 533);
             this.panel3.TabIndex = 12;
             // 
-            // comboBox1
+            // comboBoxSelectDateTime
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(39, 79);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(131, 25);
-            this.comboBox1.TabIndex = 19;
-            this.comboBox1.Text = "请选择日期";
-            this.comboBox1.Visible = false;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBoxSelectDateTime.FormattingEnabled = true;
+            this.comboBoxSelectDateTime.Location = new System.Drawing.Point(39, 79);
+            this.comboBoxSelectDateTime.Name = "comboBoxSelectDateTime";
+            this.comboBoxSelectDateTime.Size = new System.Drawing.Size(131, 25);
+            this.comboBoxSelectDateTime.TabIndex = 19;
+            this.comboBoxSelectDateTime.Text = "请选择日期";
+            this.comboBoxSelectDateTime.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // textBox_V_type
             // 
@@ -241,7 +253,6 @@
             this.dataGridViewEnergy.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridViewEnergy.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewEnergy.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewEnergy.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnDate,
@@ -250,12 +261,25 @@
             this.ColumnTotalPower,
             this.ColumnDayConsumePower,
             this.ColumnDayFeedPower,
-            this.ColumnConsumeTotalPower});
-            this.dataGridViewEnergy.Location = new System.Drawing.Point(0, 0);
+            this.ColumnConsumeTotalPower,
+            this.ColumnV,
+            this.ColumnI,
+            this.ColumnPower,
+            this.ColumnRealTimePower,
+            this.ColumnV3rd,
+            this.ColumnV5rd,
+            this.ColumnV7rd,
+            this.ColumnV9rd,
+            this.ColumnI3rd,
+            this.ColumnI5rd,
+            this.ColumnI7rd,
+            this.ColumnI9rd,
+            this.Column1});
+            this.dataGridViewEnergy.Location = new System.Drawing.Point(2, 0);
             this.dataGridViewEnergy.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.dataGridViewEnergy.Name = "dataGridViewEnergy";
             this.dataGridViewEnergy.RowTemplate.Height = 23;
-            this.dataGridViewEnergy.Size = new System.Drawing.Size(1077, 533);
+            this.dataGridViewEnergy.Size = new System.Drawing.Size(1070, 523);
             this.dataGridViewEnergy.TabIndex = 4;
             this.dataGridViewEnergy.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridViewEnergy_CellPainting);
             // 
@@ -264,42 +288,126 @@
             this.ColumnDate.HeaderText = "时间";
             this.ColumnDate.Name = "ColumnDate";
             this.ColumnDate.ReadOnly = true;
+            this.ColumnDate.Width = 107;
             // 
             // ColumnPositivePower
             // 
             this.ColumnPositivePower.HeaderText = "正向电能";
             this.ColumnPositivePower.Name = "ColumnPositivePower";
             this.ColumnPositivePower.ReadOnly = true;
+            this.ColumnPositivePower.Width = 107;
             // 
             // ColumnNegativePower
             // 
             this.ColumnNegativePower.HeaderText = "反向电能";
             this.ColumnNegativePower.Name = "ColumnNegativePower";
             this.ColumnNegativePower.ReadOnly = true;
+            this.ColumnNegativePower.Width = 107;
             // 
             // ColumnTotalPower
             // 
             this.ColumnTotalPower.HeaderText = "总电能";
             this.ColumnTotalPower.Name = "ColumnTotalPower";
             this.ColumnTotalPower.ReadOnly = true;
+            this.ColumnTotalPower.Width = 107;
             // 
             // ColumnDayConsumePower
             // 
             this.ColumnDayConsumePower.HeaderText = "阶段正向电能";
             this.ColumnDayConsumePower.Name = "ColumnDayConsumePower";
             this.ColumnDayConsumePower.ReadOnly = true;
+            this.ColumnDayConsumePower.Width = 107;
             // 
             // ColumnDayFeedPower
             // 
             this.ColumnDayFeedPower.HeaderText = "阶段反向电能";
             this.ColumnDayFeedPower.Name = "ColumnDayFeedPower";
             this.ColumnDayFeedPower.ReadOnly = true;
+            this.ColumnDayFeedPower.Width = 107;
             // 
             // ColumnConsumeTotalPower
             // 
             this.ColumnConsumeTotalPower.HeaderText = "阶段总电能";
             this.ColumnConsumeTotalPower.Name = "ColumnConsumeTotalPower";
             this.ColumnConsumeTotalPower.ReadOnly = true;
+            this.ColumnConsumeTotalPower.Width = 107;
+            // 
+            // ColumnV
+            // 
+            this.ColumnV.HeaderText = "电压";
+            this.ColumnV.Name = "ColumnV";
+            this.ColumnV.Width = 107;
+            // 
+            // ColumnI
+            // 
+            this.ColumnI.HeaderText = "电流";
+            this.ColumnI.Name = "ColumnI";
+            this.ColumnI.Width = 107;
+            // 
+            // ColumnPower
+            // 
+            this.ColumnPower.HeaderText = "功率因素";
+            this.ColumnPower.Name = "ColumnPower";
+            this.ColumnPower.Width = 108;
+            // 
+            // ColumnRealTimePower
+            // 
+            this.ColumnRealTimePower.HeaderText = "实时功率";
+            this.ColumnRealTimePower.Name = "ColumnRealTimePower";
+            this.ColumnRealTimePower.Width = 107;
+            // 
+            // ColumnV3rd
+            // 
+            this.ColumnV3rd.HeaderText = "电压3次谐波含有率";
+            this.ColumnV3rd.Name = "ColumnV3rd";
+            this.ColumnV3rd.Width = 107;
+            // 
+            // ColumnV5rd
+            // 
+            this.ColumnV5rd.HeaderText = "电压5次谐波含有率";
+            this.ColumnV5rd.Name = "ColumnV5rd";
+            this.ColumnV5rd.Width = 107;
+            // 
+            // ColumnV7rd
+            // 
+            this.ColumnV7rd.HeaderText = "电压7次谐波含有率";
+            this.ColumnV7rd.Name = "ColumnV7rd";
+            this.ColumnV7rd.Width = 107;
+            // 
+            // ColumnV9rd
+            // 
+            this.ColumnV9rd.HeaderText = "电压7次谐波含有率";
+            this.ColumnV9rd.Name = "ColumnV9rd";
+            this.ColumnV9rd.Width = 107;
+            // 
+            // ColumnI3rd
+            // 
+            this.ColumnI3rd.HeaderText = "电流3次谐波含有率";
+            this.ColumnI3rd.Name = "ColumnI3rd";
+            this.ColumnI3rd.Width = 107;
+            // 
+            // ColumnI5rd
+            // 
+            this.ColumnI5rd.HeaderText = "电流5次谐波含有率";
+            this.ColumnI5rd.Name = "ColumnI5rd";
+            this.ColumnI5rd.Width = 107;
+            // 
+            // ColumnI7rd
+            // 
+            this.ColumnI7rd.HeaderText = "电流7次谐波含有率";
+            this.ColumnI7rd.Name = "ColumnI7rd";
+            this.ColumnI7rd.Width = 107;
+            // 
+            // ColumnI9rd
+            // 
+            this.ColumnI9rd.HeaderText = "电流9次谐波含有率";
+            this.ColumnI9rd.Name = "ColumnI9rd";
+            this.ColumnI9rd.Width = 107;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "升弓车厢";
+            this.Column1.Name = "Column1";
             // 
             // FormMain
             // 
@@ -346,6 +454,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboBoxSelectDateTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPositivePower;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNegativePower;
@@ -353,7 +462,19 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDayConsumePower;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDayFeedPower;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnConsumeTotalPower;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnI;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPower;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnRealTimePower;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnV3rd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnV5rd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnV7rd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnV9rd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnI3rd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnI5rd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnI7rd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnI9rd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
     }
 }
 

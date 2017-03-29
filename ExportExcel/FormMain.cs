@@ -143,17 +143,17 @@ namespace ExportExcel
         }
         private void buttonExportExcel_Click(object sender, EventArgs e)
         {
-            bool filter = false;
+            bool filter = true;
             if (filter)
             {
-                if (comboBox1.Text == "请选择日期")
+                if (comboBoxSelectDateTime.Text == "请选择日期")
                 {
                     MessageBox.Show("请先选择日期");
                     return;
                 }
                 else
                 {
-                    filterEnergyDataWithDateTime(Int32.Parse(comboBox1.Text));
+                    filterEnergyDataWithDateTime(Int32.Parse(comboBoxSelectDateTime.Text));
                 }
             }
 
@@ -209,7 +209,7 @@ namespace ExportExcel
 
         private void buttonSelect_Click(object sender, EventArgs e)
         {
-            comboBox1.Items.Clear();
+            comboBoxSelectDateTime.Items.Clear();
 
             this.openFileDialog1.Filter = "数据文件(*.txt)|*.txt|所有文件(*.*)|*.*";
             this.openFileDialog1.FileName = "*.TXT";
@@ -229,7 +229,7 @@ namespace ExportExcel
 
                 for (int j = 0, count = 0, i = this.dataGridViewEnergy.RowCount - 1; i >= 0; i--, count++)
                 {
-                    dateTimesFlag[1] = true;
+                    dateTimesFlag[mEnergyData.mEnergyDataRawList[i].getDay()-1] = true;
 
                     string day = mEnergyData.mEnergyDataRawList[i].getDay().ToString();
                     string hour = mEnergyData.mEnergyDataRawList[i].getHour().ToString();
@@ -248,13 +248,53 @@ namespace ExportExcel
                         step_power2 = (mEnergyData.mEnergyDataRawList[i].getPower2() - mEnergyData.mEnergyDataRawList[i - 1].getPower2()).ToString();
                         step_powerAll = (mEnergyData.mEnergyDataRawList[i].getPowerAll() - mEnergyData.mEnergyDataRawList[i - 1].getPowerAll()).ToString();
                     }
-                    dataGridViewEnergy.Rows[j].Cells[0].Value = day + "日" + hour + "时" + minutes + "分" + second + "秒";
-                    dataGridViewEnergy.Rows[j].Cells[1].Value = power1 + " kW.h";
-                    dataGridViewEnergy.Rows[j].Cells[2].Value = power2 + " kW.h";
-                    dataGridViewEnergy.Rows[j].Cells[3].Value = powerAll + " kW.h";
-                    dataGridViewEnergy.Rows[j].Cells[4].Value = step_power1 + " kW.h";
-                    dataGridViewEnergy.Rows[j].Cells[5].Value = step_power2 + " kW.h";
-                    dataGridViewEnergy.Rows[j].Cells[6].Value = step_powerAll + " kW.h";
+                    string step_v = mEnergyData.mEnergyDataRawList[i].getV().ToString();
+                    string step_i = mEnergyData.mEnergyDataRawList[i].getI().ToString();
+                    string step_powerFactor = mEnergyData.mEnergyDataRawList[i].getPowerFactor().ToString();
+                    string step_powerRealTime = mEnergyData.mEnergyDataRawList[i].getPowerRealTime().ToString();
+                    string step_v3rd = mEnergyData.mEnergyDataRawList[i].getV3rd().ToString();
+                    string step_v5rd = mEnergyData.mEnergyDataRawList[i].getV5rd().ToString();
+                    string step_v7rd = mEnergyData.mEnergyDataRawList[i].getV7rd().ToString();
+                    string step_v9rd = mEnergyData.mEnergyDataRawList[i].getV9rd().ToString();
+                    string step_i3rd = mEnergyData.mEnergyDataRawList[i].getI3rd().ToString();
+                    string step_i5rd = mEnergyData.mEnergyDataRawList[i].getI5rd().ToString();
+                    string step_i7rd = mEnergyData.mEnergyDataRawList[i].getI7rd().ToString();
+                    string step_i9rd = mEnergyData.mEnergyDataRawList[i].getI9rd().ToString();
+                    string step_Rosebowcar = "0";
+                    switch (mEnergyData.mEnergyDataRawList[i].getRosebowcar())
+                    {
+                        default:
+                        case 0: break;
+                        case 1:
+                            step_Rosebowcar = "3";
+                            break;
+                        case 2:
+                            step_Rosebowcar = "6";
+                            break;
+                    }
+
+                    int index = 0;
+                    dataGridViewEnergy.Rows[j].Cells[index++].Value = day + "日" + hour + "时" + minutes + "分" + second + "秒";
+                    dataGridViewEnergy.Rows[j].Cells[index++].Value = power1 + " kW.h";
+                    dataGridViewEnergy.Rows[j].Cells[index++].Value = power2 + " kW.h";
+                    dataGridViewEnergy.Rows[j].Cells[index++].Value = powerAll + " kW.h";
+                    dataGridViewEnergy.Rows[j].Cells[index++].Value = step_power1 + " kW.h";
+                    dataGridViewEnergy.Rows[j].Cells[index++].Value = step_power2 + " kW.h";
+                    dataGridViewEnergy.Rows[j].Cells[index++].Value = step_powerAll + " kW.h";
+                    dataGridViewEnergy.Rows[j].Cells[index++].Value = step_v + "kV";
+                    dataGridViewEnergy.Rows[j].Cells[index++].Value = step_i + "A";
+                    dataGridViewEnergy.Rows[j].Cells[index++].Value = step_powerFactor;
+                    dataGridViewEnergy.Rows[j].Cells[index++].Value = step_powerRealTime + "kW";
+                    dataGridViewEnergy.Rows[j].Cells[index++].Value = step_v3rd + "%";
+                    dataGridViewEnergy.Rows[j].Cells[index++].Value = step_v5rd + "%";
+                    dataGridViewEnergy.Rows[j].Cells[index++].Value = step_v7rd + "%";
+                    dataGridViewEnergy.Rows[j].Cells[index++].Value = step_v9rd + "%";
+                    dataGridViewEnergy.Rows[j].Cells[index++].Value = step_i3rd + "%";
+                    dataGridViewEnergy.Rows[j].Cells[index++].Value = step_i5rd + "%";
+                    dataGridViewEnergy.Rows[j].Cells[index++].Value = step_i7rd + "%";
+                    dataGridViewEnergy.Rows[j].Cells[index++].Value = step_i9rd + "%";
+                    dataGridViewEnergy.Rows[j].Cells[index++].Value = step_Rosebowcar;
+
                     j++;
                 }
 
@@ -262,7 +302,7 @@ namespace ExportExcel
                 {
                     if (dateTimesFlag[index])
                     {
-                        comboBox1.Items.Add(index + 1);
+                        comboBoxSelectDateTime.Items.Add(index + 1);
                     }
                 }
             }
