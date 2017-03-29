@@ -212,11 +212,6 @@ namespace ExportExcel
 
                 for (int j = 0, count = 0, i = this.dataGridViewEnergy.RowCount - 1; i >= 0; i--, count++)
                 {
-                    string year = mEnergyData.mEnergyDataRawList[i].getYear().ToString();
-                    string mouth = mEnergyData.mEnergyDataRawList[i].getMouth().ToString();
-                    string day = mEnergyData.mEnergyDataRawList[i].getDay().ToString();
-                    string hour = mEnergyData.mEnergyDataRawList[i].getHour().ToString();
-                    string minute = mEnergyData.mEnergyDataRawList[i].getMinute().ToString();
                     string consumePower = "0";
                     string revivePower = "0";
                     string totalPower = "0";
@@ -228,8 +223,7 @@ namespace ExportExcel
                         totalPower = (mEnergyData.mEnergyDataRawList[i].getTotalPower() - mEnergyData.mEnergyDataRawList[i - 1].getTotalPower()).ToString();
                     }
 
-                    string datetime = year + "年" + mouth + "月" + day + "日" + hour + "时" + minute + "分";
-                    dataGridViewEnergy.Rows[j].Cells[0].Value = datetime;
+                    dataGridViewEnergy.Rows[j].Cells[0].Value = mEnergyData.mEnergyDataRawList[i].GetDateTime();
                     dataGridViewEnergy.Rows[j].Cells[1].Value = consumePower + " kW.h";
                     dataGridViewEnergy.Rows[j].Cells[2].Value = revivePower + " kW.h";
                     dataGridViewEnergy.Rows[j].Cells[3].Value = totalPower + " kW.h";

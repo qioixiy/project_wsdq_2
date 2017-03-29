@@ -17,7 +17,7 @@ namespace ExportExcel
             public byte[] hour;//时 1byte
             public byte[] minute;//分 1byte
             public byte[] consumePower;//消耗电能 4byte
-            public byte[] revivePower;//再生电能 4byte
+            public byte[] revivePower;//再生电能 4byte            
 
             public int getYear()
             {
@@ -44,6 +44,16 @@ namespace ExportExcel
                 int ret = Int32.Parse(BitConverter.ToString(minute), System.Globalization.NumberStyles.HexNumber); ;
                 return ret;
             }
+            public string GetDateTime()        //时间用于显示
+            {
+                string year = this.getYear().ToString();
+                string mouth = this.getMouth().ToString();
+                string day = this.getDay().ToString();
+                string hour = this.getHour().ToString();
+                string minute = this.getMinute().ToString();
+                string ret = year + "年" + mouth + "月" + day + "日" + hour + "时" + minute + "分";
+                return ret;
+            }  
             public int getConsumePower()
             {
                 int ret = BitConverter.ToInt32(Myutility.ToHostEndian(consumePower), 0);
