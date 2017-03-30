@@ -30,6 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.openFileDialogData = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -57,11 +60,14 @@
             this.ColumnNegativePower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnTotalPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.chartPower = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.buttonSaveImage = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBoxUnit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEnergy)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartPower)).BeginInit();
             this.SuspendLayout();
             // 
             // imageList1
@@ -71,6 +77,7 @@
             this.imageList1.Images.SetKeyName(0, "Excel.ico");
             this.imageList1.Images.SetKeyName(1, "document.ico");
             this.imageList1.Images.SetKeyName(2, "Exit.ico");
+            this.imageList1.Images.SetKeyName(3, "image.ico");
             // 
             // openFileDialog1
             // 
@@ -120,6 +127,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.chartPower);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.dataGridViewEnergy);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -130,6 +138,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.buttonSaveImage);
             this.panel3.Controls.Add(this.dateTimePicker2);
             this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.dateTimePicker1);
@@ -213,7 +222,7 @@
             this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.comboBox1.Font = new System.Drawing.Font("Microsoft YaHei", 7F);
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(39, 434);
+            this.comboBox1.Location = new System.Drawing.Point(40, 400);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(131, 22);
             this.comboBox1.TabIndex = 19;
@@ -276,7 +285,7 @@
             this.buttonExportExcel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.buttonExportExcel.ImageIndex = 0;
             this.buttonExportExcel.ImageList = this.imageList1;
-            this.buttonExportExcel.Location = new System.Drawing.Point(38, 478);
+            this.buttonExportExcel.Location = new System.Drawing.Point(39, 444);
             this.buttonExportExcel.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.buttonExportExcel.Name = "buttonExportExcel";
             this.buttonExportExcel.Size = new System.Drawing.Size(131, 34);
@@ -301,7 +310,7 @@
             this.dataGridViewEnergy.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.dataGridViewEnergy.Name = "dataGridViewEnergy";
             this.dataGridViewEnergy.RowTemplate.Height = 23;
-            this.dataGridViewEnergy.Size = new System.Drawing.Size(1063, 639);
+            this.dataGridViewEnergy.Size = new System.Drawing.Size(1063, 371);
             this.dataGridViewEnergy.TabIndex = 4;
             this.dataGridViewEnergy.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridViewEnergy_CellPainting);
             // 
@@ -329,6 +338,36 @@
             this.ColumnTotalPower.Name = "ColumnTotalPower";
             this.ColumnTotalPower.ReadOnly = true;
             // 
+            // chartPower
+            // 
+            chartArea2.Name = "ChartArea1";
+            this.chartPower.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chartPower.Legends.Add(legend2);
+            this.chartPower.Location = new System.Drawing.Point(0, 370);
+            this.chartPower.Name = "chartPower";
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chartPower.Series.Add(series2);
+            this.chartPower.Size = new System.Drawing.Size(1063, 269);
+            this.chartPower.TabIndex = 13;
+            this.chartPower.Text = "chart1";
+            // 
+            // buttonSaveImage
+            // 
+            this.buttonSaveImage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.buttonSaveImage.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.buttonSaveImage.ImageIndex = 3;
+            this.buttonSaveImage.ImageList = this.imageList1;
+            this.buttonSaveImage.Location = new System.Drawing.Point(40, 488);
+            this.buttonSaveImage.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.buttonSaveImage.Name = "buttonSaveImage";
+            this.buttonSaveImage.Size = new System.Drawing.Size(131, 33);
+            this.buttonSaveImage.TabIndex = 22;
+            this.buttonSaveImage.Text = "保存为图片";
+            this.buttonSaveImage.UseVisualStyleBackColor = true;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -352,6 +391,7 @@
             this.panel3.PerformLayout();
             this.groupBoxUnit.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEnergy)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartPower)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -385,6 +425,8 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Label label4;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartPower;
+        private System.Windows.Forms.Button buttonSaveImage;
     }
 }
 
