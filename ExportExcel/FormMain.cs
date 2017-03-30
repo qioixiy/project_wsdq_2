@@ -8,7 +8,8 @@ using System.Text;
 using System.IO;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
-using System.Threading; 
+using System.Threading;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace ExportExcel
 {
@@ -271,9 +272,28 @@ namespace ExportExcel
 
         private void buttonSaveImage_Click(object sender, EventArgs e)
         {
+            
             string ImagePath = Directory.GetCurrentDirectory();
             string FileName = ImagePath + "\\" + "Test" + ".Jpeg";
-            chartPower.SaveImage(FileName, System.Windows.Forms.DataVisualization.Charting.ChartImageFormat.Jpeg);
+            chartPower.SaveImage(FileName, ChartImageFormat.Jpeg);
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            chartPower.Series["Series1"].ChartType = SeriesChartType.Column;
+            chartPower.Legends[0].Enabled = false;
+            chartPower.Series["Series1"].LegendText = "";
+            chartPower.Series["Series1"].Label = "#VALY";
+            chartPower.Series["Series1"].ToolTip = "#VALX";
+            chartPower.Series["Series1"]["PointWidth"] = "0.5";
+            //开启三维模式的原因是为了避免标签重叠
+            chartPower.ChartAreas["ChartArea1"].Area3DStyle.Enable3D = true;//开启三维模式;PointDepth:厚度BorderWidth:边框宽
+            chartPower.ChartAreas["ChartArea1"].Area3DStyle.Rotation = 15;//起始角度
+            chartPower.ChartAreas["ChartArea1"].Area3DStyle.Inclination = 30;//倾斜度(0～90)
+            chartPower.ChartAreas["ChartArea1"].Area3DStyle.LightStyle = LightStyle.Realistic;//表面光泽度
+            chartPower.ChartAreas["ChartArea1"].AxisX.Interval = 1; //决定x轴显示文本的间隔，1为强制每个柱状体都显示，3则间隔3个显示
+            chartPower.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new Font("宋体", 9, FontStyle.Regular);
+            chartPower.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
         }
 
     }

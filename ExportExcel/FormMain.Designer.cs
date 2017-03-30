@@ -30,9 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.LegendCellColumn legendCellColumn7 = new System.Windows.Forms.DataVisualization.Charting.LegendCellColumn();
+            System.Windows.Forms.DataVisualization.Charting.LegendCellColumn legendCellColumn8 = new System.Windows.Forms.DataVisualization.Charting.LegendCellColumn();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.openFileDialogData = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -216,6 +218,7 @@
             this.comboBox2.Size = new System.Drawing.Size(160, 25);
             this.comboBox2.TabIndex = 0;
             this.comboBox2.Text = "请选择";
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // comboBox1
             // 
@@ -340,19 +343,26 @@
             // 
             // chartPower
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chartPower.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chartPower.Legends.Add(legend3);
+            chartArea4.Name = "ChartArea1";
+            this.chartPower.ChartAreas.Add(chartArea4);
+            legendCellColumn7.ColumnType = System.Windows.Forms.DataVisualization.Charting.LegendCellColumnType.SeriesSymbol;
+            legendCellColumn7.Name = "Column1";
+            legendCellColumn7.Text = "#VALX#LEGENDTEXT";
+            legendCellColumn8.Name = "Column2";
+            legend4.CellColumns.Add(legendCellColumn7);
+            legend4.CellColumns.Add(legendCellColumn8);
+            legend4.Enabled = false;
+            legend4.Name = "Legend1";
+            this.chartPower.Legends.Add(legend4);
             this.chartPower.Location = new System.Drawing.Point(0, 370);
             this.chartPower.Name = "chartPower";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chartPower.Series.Add(series3);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chartPower.Series.Add(series4);
             this.chartPower.Size = new System.Drawing.Size(1063, 269);
             this.chartPower.TabIndex = 13;
-            this.chartPower.Text = "chart1";
+            this.chartPower.Text = "能耗仪图表";
             // 
             // buttonSaveImage
             // 
