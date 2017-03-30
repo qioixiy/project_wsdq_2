@@ -269,6 +269,12 @@ namespace ExportExcel
 
         }
 
+        private void buttonSaveImage_Click(object sender, EventArgs e)
+        {
+            string ImagePath = Directory.GetCurrentDirectory();
+            string FileName = ImagePath + "\\" + "Test" + ".Jpeg";
+            chartPower.SaveImage(FileName, System.Windows.Forms.DataVisualization.Charting.ChartImageFormat.Jpeg);
+        }
 
     }
 }

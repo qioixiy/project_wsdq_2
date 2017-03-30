@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.openFileDialogData = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -340,16 +340,16 @@
             // 
             // chartPower
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartPower.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chartPower.Legends.Add(legend2);
+            chartArea3.Name = "ChartArea1";
+            this.chartPower.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chartPower.Legends.Add(legend3);
             this.chartPower.Location = new System.Drawing.Point(0, 370);
             this.chartPower.Name = "chartPower";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chartPower.Series.Add(series2);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chartPower.Series.Add(series3);
             this.chartPower.Size = new System.Drawing.Size(1063, 269);
             this.chartPower.TabIndex = 13;
             this.chartPower.Text = "chart1";
@@ -367,6 +367,7 @@
             this.buttonSaveImage.TabIndex = 22;
             this.buttonSaveImage.Text = "保存为图片";
             this.buttonSaveImage.UseVisualStyleBackColor = true;
+            this.buttonSaveImage.Click += new System.EventHandler(this.buttonSaveImage_Click);
             // 
             // FormMain
             // 
