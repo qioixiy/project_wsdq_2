@@ -231,6 +231,10 @@ namespace ExportExcel
                     j++;
                  }
 
+                //初始默认显示全部数据
+                dateTimePickerFrom.Value = mEnergyData.mEnergyDataRawList[0].GetDateTimeFilter();
+                dateTimePickerTo.Value = mEnergyData.mEnergyDataRawList[mEnergyData.mEnergyDataRawList.Count - 1].GetDateTimeFilter();
+
             }
         }
 
@@ -278,23 +282,91 @@ namespace ExportExcel
             chartPower.SaveImage(FileName, ChartImageFormat.Jpeg);
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBoxUnit_SelectedIndexChanged(object sender, EventArgs e)
         {
-            chartPower.Series["Series1"].ChartType = SeriesChartType.Column;
-            chartPower.Legends[0].Enabled = false;
-            chartPower.Series["Series1"].LegendText = "";
-            chartPower.Series["Series1"].Label = "#VALY";
-            chartPower.Series["Series1"].ToolTip = "#VALX";
-            chartPower.Series["Series1"]["PointWidth"] = "0.5";
-            //开启三维模式的原因是为了避免标签重叠
-            chartPower.ChartAreas["ChartArea1"].Area3DStyle.Enable3D = true;//开启三维模式;PointDepth:厚度BorderWidth:边框宽
-            chartPower.ChartAreas["ChartArea1"].Area3DStyle.Rotation = 15;//起始角度
-            chartPower.ChartAreas["ChartArea1"].Area3DStyle.Inclination = 30;//倾斜度(0～90)
-            chartPower.ChartAreas["ChartArea1"].Area3DStyle.LightStyle = LightStyle.Realistic;//表面光泽度
-            chartPower.ChartAreas["ChartArea1"].AxisX.Interval = 1; //决定x轴显示文本的间隔，1为强制每个柱状体都显示，3则间隔3个显示
-            chartPower.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new Font("宋体", 9, FontStyle.Regular);
-            chartPower.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-        }
+            if (comboBoxUnit.SelectedIndex == 1)
+            {             
+                chartPower.Series.Clear();
+                Series SeriesConsumePower = new Series("ConsumePower");
+                SeriesConsumePower.ChartType = SeriesChartType.Column;
+                SeriesConsumePower.BorderWidth = 7;
+                SeriesConsumePower.ShadowOffset = 2;
+                SeriesConsumePower.Points.AddY(20);
+                SeriesConsumePower.Points.AddY(30);
+                SeriesConsumePower.Points.AddY(40);
+                SeriesConsumePower.Points.AddY(50);
+                SeriesConsumePower.Points.AddY(60);
 
+
+                //X轴显示的名称
+                SeriesConsumePower.Points[0].AxisLabel = "时间";
+                SeriesConsumePower.Points[1].AxisLabel = "时间";
+                SeriesConsumePower.Points[2].AxisLabel = "时间";
+                SeriesConsumePower.Points[3].AxisLabel = "时间";
+                SeriesConsumePower.Points[4].AxisLabel = "时间";
+
+                //顶部显示的数字
+                SeriesConsumePower.Points[0].Label = "20";
+                SeriesConsumePower.Points[1].Label = "30";
+                SeriesConsumePower.Points[2].Label = "40";
+                SeriesConsumePower.Points[3].Label = "50";
+                SeriesConsumePower.Points[4].Label = "60";
+                //鼠标放上去的提示内容
+                SeriesConsumePower.Points[0].ToolTip = "20";
+                SeriesConsumePower.Points[1].ToolTip = "30";
+                SeriesConsumePower.Points[2].ToolTip = "40";
+                SeriesConsumePower.Points[3].ToolTip = "50";
+                SeriesConsumePower.Points[4].ToolTip = "60";
+
+                Series seriesRevivePower = new Series("RevivePower");
+                seriesRevivePower.ChartType = SeriesChartType.Column;
+                seriesRevivePower.BorderWidth = 3;
+                seriesRevivePower.ShadowOffset = 2;
+
+                seriesRevivePower.Points.AddY(144);
+                seriesRevivePower.Points.AddY(143);
+                seriesRevivePower.Points.AddY(124);
+                seriesRevivePower.Points.AddY(120);
+                seriesRevivePower.Points.AddY(123);
+
+                seriesRevivePower.Points[0].Label = "144";
+                seriesRevivePower.Points[1].Label = "143";
+                seriesRevivePower.Points[2].Label = "124";
+                seriesRevivePower.Points[3].Label = "120";
+                seriesRevivePower.Points[4].Label = "123";
+                seriesRevivePower.Points[0].ToolTip = "144";
+                seriesRevivePower.Points[1].ToolTip = "143";
+                seriesRevivePower.Points[2].ToolTip = "124";
+                seriesRevivePower.Points[3].ToolTip = "120";
+                seriesRevivePower.Points[4].ToolTip = "123";
+
+                Series seriesTotalPower = new Series("TotalPower");
+                seriesTotalPower.ChartType = SeriesChartType.Column;
+                seriesTotalPower.BorderWidth = 3;
+                seriesTotalPower.ShadowOffset = 2;
+
+                seriesTotalPower.Points.AddY(144);
+                seriesTotalPower.Points.AddY(143);
+                seriesTotalPower.Points.AddY(124);
+                seriesTotalPower.Points.AddY(120);
+                seriesTotalPower.Points.AddY(123);
+
+                seriesTotalPower.Points[0].Label = "144";
+                seriesTotalPower.Points[1].Label = "143";
+                seriesTotalPower.Points[2].Label = "124";
+                seriesTotalPower.Points[3].Label = "120";
+                seriesTotalPower.Points[4].Label = "123";
+                seriesTotalPower.Points[0].ToolTip = "144";
+                seriesTotalPower.Points[1].ToolTip = "143";
+                seriesTotalPower.Points[2].ToolTip = "124";
+                seriesTotalPower.Points[3].ToolTip = "120";
+                seriesTotalPower.Points[4].ToolTip = "123";
+
+
+                chartPower.Series.Add(SeriesConsumePower);
+                chartPower.Series.Add(seriesRevivePower);
+                chartPower.Series.Add(seriesTotalPower);
+            }
+        }
     }
 }

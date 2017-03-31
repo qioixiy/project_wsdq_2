@@ -30,11 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.LegendCellColumn legendCellColumn7 = new System.Windows.Forms.DataVisualization.Charting.LegendCellColumn();
-            System.Windows.Forms.DataVisualization.Charting.LegendCellColumn legendCellColumn8 = new System.Windows.Forms.DataVisualization.Charting.LegendCellColumn();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.LegendCellColumn legendCellColumn1 = new System.Windows.Forms.DataVisualization.Charting.LegendCellColumn();
+            System.Windows.Forms.DataVisualization.Charting.LegendCellColumn legendCellColumn2 = new System.Windows.Forms.DataVisualization.Charting.LegendCellColumn();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.openFileDialogData = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -43,13 +43,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.labelTitle = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.chartPower = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.buttonSaveImage = new System.Windows.Forms.Button();
+            this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBoxUnit = new System.Windows.Forms.GroupBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBoxUnit = new System.Windows.Forms.ComboBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.buttonExit = new System.Windows.Forms.Button();
             this.buttonSelect = new System.Windows.Forms.Button();
@@ -61,15 +63,12 @@
             this.ColumnPositivePower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnNegativePower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnTotalPower = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.chartPower = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.buttonSaveImage = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartPower)).BeginInit();
             this.panel3.SuspendLayout();
             this.groupBoxUnit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEnergy)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chartPower)).BeginInit();
             this.SuspendLayout();
             // 
             // imageList1
@@ -138,12 +137,35 @@
             this.panel2.Size = new System.Drawing.Size(1264, 639);
             this.panel2.TabIndex = 8;
             // 
+            // chartPower
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chartPower.ChartAreas.Add(chartArea1);
+            legendCellColumn1.ColumnType = System.Windows.Forms.DataVisualization.Charting.LegendCellColumnType.SeriesSymbol;
+            legendCellColumn1.Name = "Column1";
+            legendCellColumn1.Text = "#VALX#LEGENDTEXT";
+            legendCellColumn2.Name = "Column2";
+            legend1.CellColumns.Add(legendCellColumn1);
+            legend1.CellColumns.Add(legendCellColumn2);
+            legend1.Enabled = false;
+            legend1.Name = "Legend1";
+            this.chartPower.Legends.Add(legend1);
+            this.chartPower.Location = new System.Drawing.Point(0, 370);
+            this.chartPower.Name = "chartPower";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartPower.Series.Add(series1);
+            this.chartPower.Size = new System.Drawing.Size(1063, 269);
+            this.chartPower.TabIndex = 13;
+            this.chartPower.Text = "能耗仪图表";
+            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.buttonSaveImage);
-            this.panel3.Controls.Add(this.dateTimePicker2);
+            this.panel3.Controls.Add(this.dateTimePickerTo);
             this.panel3.Controls.Add(this.label4);
-            this.panel3.Controls.Add(this.dateTimePicker1);
+            this.panel3.Controls.Add(this.dateTimePickerFrom);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.groupBoxUnit);
             this.panel3.Controls.Add(this.comboBox1);
@@ -158,14 +180,29 @@
             this.panel3.Size = new System.Drawing.Size(200, 639);
             this.panel3.TabIndex = 12;
             // 
-            // dateTimePicker2
+            // buttonSaveImage
             // 
-            this.dateTimePicker2.CustomFormat = "yyyy年MM月dd日 HH:mm";
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(16, 189);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(172, 23);
-            this.dateTimePicker2.TabIndex = 21;
+            this.buttonSaveImage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.buttonSaveImage.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.buttonSaveImage.ImageIndex = 3;
+            this.buttonSaveImage.ImageList = this.imageList1;
+            this.buttonSaveImage.Location = new System.Drawing.Point(40, 488);
+            this.buttonSaveImage.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.buttonSaveImage.Name = "buttonSaveImage";
+            this.buttonSaveImage.Size = new System.Drawing.Size(131, 33);
+            this.buttonSaveImage.TabIndex = 22;
+            this.buttonSaveImage.Text = "保存为图片";
+            this.buttonSaveImage.UseVisualStyleBackColor = true;
+            this.buttonSaveImage.Click += new System.EventHandler(this.buttonSaveImage_Click);
+            // 
+            // dateTimePickerTo
+            // 
+            this.dateTimePickerTo.CustomFormat = "yyyy年MM月dd日 HH:mm";
+            this.dateTimePickerTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePickerTo.Location = new System.Drawing.Point(16, 189);
+            this.dateTimePickerTo.Name = "dateTimePickerTo";
+            this.dateTimePickerTo.Size = new System.Drawing.Size(172, 23);
+            this.dateTimePickerTo.TabIndex = 21;
             // 
             // label4
             // 
@@ -176,14 +213,14 @@
             this.label4.TabIndex = 20;
             this.label4.Text = "终止时间";
             // 
-            // dateTimePicker1
+            // dateTimePickerFrom
             // 
-            this.dateTimePicker1.CustomFormat = "yyyy年MM月dd日 HH:mm";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(16, 139);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(172, 23);
-            this.dateTimePicker1.TabIndex = 21;
+            this.dateTimePickerFrom.CustomFormat = "yyyy年MM月dd日 HH:mm";
+            this.dateTimePickerFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePickerFrom.Location = new System.Drawing.Point(16, 139);
+            this.dateTimePickerFrom.Name = "dateTimePickerFrom";
+            this.dateTimePickerFrom.Size = new System.Drawing.Size(172, 23);
+            this.dateTimePickerFrom.TabIndex = 21;
             // 
             // label1
             // 
@@ -196,7 +233,7 @@
             // 
             // groupBoxUnit
             // 
-            this.groupBoxUnit.Controls.Add(this.comboBox2);
+            this.groupBoxUnit.Controls.Add(this.comboBoxUnit);
             this.groupBoxUnit.Location = new System.Drawing.Point(16, 43);
             this.groupBoxUnit.Name = "groupBoxUnit";
             this.groupBoxUnit.Size = new System.Drawing.Size(172, 62);
@@ -204,21 +241,21 @@
             this.groupBoxUnit.TabStop = false;
             this.groupBoxUnit.Text = "柱状图单位";
             // 
-            // comboBox2
+            // comboBoxUnit
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.comboBoxUnit.FormattingEnabled = true;
+            this.comboBoxUnit.Items.AddRange(new object[] {
             "年",
             "月",
             "日",
             "时",
             "分"});
-            this.comboBox2.Location = new System.Drawing.Point(6, 22);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(160, 25);
-            this.comboBox2.TabIndex = 0;
-            this.comboBox2.Text = "请选择";
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            this.comboBoxUnit.Location = new System.Drawing.Point(6, 22);
+            this.comboBoxUnit.Name = "comboBoxUnit";
+            this.comboBoxUnit.Size = new System.Drawing.Size(160, 25);
+            this.comboBoxUnit.TabIndex = 0;
+            this.comboBoxUnit.Text = "请选择";
+            this.comboBoxUnit.SelectedIndexChanged += new System.EventHandler(this.comboBoxUnit_SelectedIndexChanged);
             // 
             // comboBox1
             // 
@@ -341,44 +378,6 @@
             this.ColumnTotalPower.Name = "ColumnTotalPower";
             this.ColumnTotalPower.ReadOnly = true;
             // 
-            // chartPower
-            // 
-            chartArea4.Name = "ChartArea1";
-            this.chartPower.ChartAreas.Add(chartArea4);
-            legendCellColumn7.ColumnType = System.Windows.Forms.DataVisualization.Charting.LegendCellColumnType.SeriesSymbol;
-            legendCellColumn7.Name = "Column1";
-            legendCellColumn7.Text = "#VALX#LEGENDTEXT";
-            legendCellColumn8.Name = "Column2";
-            legend4.CellColumns.Add(legendCellColumn7);
-            legend4.CellColumns.Add(legendCellColumn8);
-            legend4.Enabled = false;
-            legend4.Name = "Legend1";
-            this.chartPower.Legends.Add(legend4);
-            this.chartPower.Location = new System.Drawing.Point(0, 370);
-            this.chartPower.Name = "chartPower";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chartPower.Series.Add(series4);
-            this.chartPower.Size = new System.Drawing.Size(1063, 269);
-            this.chartPower.TabIndex = 13;
-            this.chartPower.Text = "能耗仪图表";
-            // 
-            // buttonSaveImage
-            // 
-            this.buttonSaveImage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.buttonSaveImage.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.buttonSaveImage.ImageIndex = 3;
-            this.buttonSaveImage.ImageList = this.imageList1;
-            this.buttonSaveImage.Location = new System.Drawing.Point(40, 488);
-            this.buttonSaveImage.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.buttonSaveImage.Name = "buttonSaveImage";
-            this.buttonSaveImage.Size = new System.Drawing.Size(131, 33);
-            this.buttonSaveImage.TabIndex = 22;
-            this.buttonSaveImage.Text = "保存为图片";
-            this.buttonSaveImage.UseVisualStyleBackColor = true;
-            this.buttonSaveImage.Click += new System.EventHandler(this.buttonSaveImage_Click);
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -398,11 +397,11 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chartPower)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.groupBoxUnit.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEnergy)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chartPower)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -430,12 +429,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPositivePower;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNegativePower;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTotalPower;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.ComboBox comboBoxUnit;
+        private System.Windows.Forms.DateTimePicker dateTimePickerFrom;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dateTimePickerTo;
         private System.Windows.Forms.Label label4;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartPower;
         private System.Windows.Forms.Button buttonSaveImage;
     }

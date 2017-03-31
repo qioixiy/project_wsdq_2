@@ -53,7 +53,18 @@ namespace ExportExcel
                 string minute = this.getMinute().ToString();
                 string ret = year + "年" + mouth + "月" + day + "日" + hour + "时" + minute + "分";
                 return ret;
-            }  
+            }
+            public DateTime GetDateTimeFilter()     //用于处理过滤的时间
+            {
+                string year = this.getYear().ToString();
+                string mouth = this.getMouth().ToString();
+                string day = this.getDay().ToString();
+                string hour = this.getHour().ToString();
+                string minute = this.getMinute().ToString();
+                string DateTimeFilter = year + "-" + mouth + "-" + day + " " + hour + ":" + minute + ":00";
+                DateTime ret = Convert.ToDateTime(DateTimeFilter);
+                return ret;
+            }
             public int getConsumePower()
             {
                 int ret = BitConverter.ToInt32(Myutility.ToHostEndian(consumePower), 0);
@@ -87,18 +98,18 @@ namespace ExportExcel
 
             // 验证有效性： 大于31或者小于等于0；时：大于等于24；分大于等于60；秒大于等于60；就丢弃这16个字节。
             Int32 year = _EnergyDataRaw.getYear();
-            Int32 mount = _EnergyDataRaw.getMouth();
+            Int32 mounth = _EnergyDataRaw.getMouth();
             Int32 day = _EnergyDataRaw.getDay();
             Int32 hour = _EnergyDataRaw.getHour();
             Int32 minute = _EnergyDataRaw.getMinute();
 
             if (!(Myutility.InInt32Scope(year, 2000, 2900)
-                && Myutility.InInt32Scope(mount, 0, 23)
+                && Myutility.InInt32Scope(mounth, 1, 12)
                 && Myutility.InInt32Scope(day, 0, 31)
-                && Myutility.InInt32Scope(hour, 0, 24)
+                && Myutility.InInt32Scope(hour, 0, 23)
                 && Myutility.InInt32Scope(minute, 0, 59)))
             {
-                Console.WriteLine("无效数据： " + year + "年" + mount + "月" + day + "日" + hour + "时" + minute + "分");
+                Console.WriteLine("无效数据： " + year + "年" + mounth + "月" + day + "日" + hour + "时" + minute + "分");
                 ret = false;
             }
 
