@@ -78,7 +78,18 @@ namespace ExportExcel
             }
             public float getPowerFactor()
             {
-                return BitConverter.ToInt16(Myutility.ToHostEndian(powerFactor), 0) / 1000.0f;
+                float ret = BitConverter.ToInt16(Myutility.ToHostEndian(powerFactor), 0) / 1000.0f;
+                // work around
+                bool work_around = true;
+                if (work_around)
+                {
+                    ret = 0.0f;
+                    float ui = getI() * getV();
+                    if (ui > 0.00001) {
+                        ret = getPowerRealTime() / ui;
+                    }
+                }
+                return ret;
             }
             public float getPowerRealTime()
             {
