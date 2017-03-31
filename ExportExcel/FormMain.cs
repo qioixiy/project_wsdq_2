@@ -285,7 +285,15 @@ namespace ExportExcel
         private void comboBoxUnit_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBoxUnit.SelectedIndex == 1)
-            {             
+            {
+                chartPower.ChartAreas["ChartArea1"].CursorX.AutoScroll = true;
+                chartPower.ChartAreas["ChartArea1"].AxisX.ScrollBar.Enabled = true;
+                chartPower.ChartAreas["ChartArea1"].CursorX.IsUserEnabled = true;
+                chartPower.ChartAreas["ChartArea1"].CursorX.IsUserSelectionEnabled = true;
+                chartPower.ChartAreas["ChartArea1"].AxisX.Interval = 1;
+                chartPower.ChartAreas["ChartArea1"].AxisX.ScaleView.Zoomable = true;
+                chartPower.ChartAreas["ChartArea1"].AxisX.ScaleView.Position = 0;
+                chartPower.ChartAreas["ChartArea1"].AxisX.ScaleView.Size = 1 * 10;
                 chartPower.Series.Clear();
                 Series SeriesConsumePower = new Series("ConsumePower");
                 SeriesConsumePower.ChartType = SeriesChartType.Column;
@@ -293,6 +301,41 @@ namespace ExportExcel
                 SeriesConsumePower.ShadowOffset = 2;
                 SeriesConsumePower.Points.AddY(20);
                 SeriesConsumePower.Points.AddY(30);
+                SeriesConsumePower.Points.AddY(40);
+                SeriesConsumePower.Points.AddY(50);
+                SeriesConsumePower.Points.AddY(60);
+                SeriesConsumePower.Points.AddY(40);
+                SeriesConsumePower.Points.AddY(50);
+                SeriesConsumePower.Points.AddY(60);
+                SeriesConsumePower.Points.AddY(20);
+                SeriesConsumePower.Points.AddY(30);
+                SeriesConsumePower.Points.AddY(40);
+                SeriesConsumePower.Points.AddY(50);
+                SeriesConsumePower.Points.AddY(60);
+                SeriesConsumePower.Points.AddY(40);
+                SeriesConsumePower.Points.AddY(50);
+                SeriesConsumePower.Points.AddY(60);
+                SeriesConsumePower.Points.AddY(20);
+                SeriesConsumePower.Points.AddY(30);
+                SeriesConsumePower.Points.AddY(40);
+                SeriesConsumePower.Points.AddY(50);
+                SeriesConsumePower.Points.AddY(60);
+                SeriesConsumePower.Points.AddY(40);
+                SeriesConsumePower.Points.AddY(50);
+                SeriesConsumePower.Points.AddY(60);
+                SeriesConsumePower.Points.AddY(20);
+                SeriesConsumePower.Points.AddY(30);
+                SeriesConsumePower.Points.AddY(40);
+                SeriesConsumePower.Points.AddY(50);
+                SeriesConsumePower.Points.AddY(60);
+                SeriesConsumePower.Points.AddY(40);
+                SeriesConsumePower.Points.AddY(50);
+                SeriesConsumePower.Points.AddY(60);
+                SeriesConsumePower.Points.AddY(20);
+                SeriesConsumePower.Points.AddY(30);
+                SeriesConsumePower.Points.AddY(40);
+                SeriesConsumePower.Points.AddY(50);
+                SeriesConsumePower.Points.AddY(60);
                 SeriesConsumePower.Points.AddY(40);
                 SeriesConsumePower.Points.AddY(50);
                 SeriesConsumePower.Points.AddY(60);
