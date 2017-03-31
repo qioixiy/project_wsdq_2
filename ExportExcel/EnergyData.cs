@@ -87,6 +87,7 @@ namespace ExportExcel
                     float ui = getI() * getV();
                     if (ui > 0.00001) {
                         ret = getPowerRealTime() / ui;
+                        ret = ((int)(ret * 1000))/1000.0f;
                     }
                 }
                 return ret;
