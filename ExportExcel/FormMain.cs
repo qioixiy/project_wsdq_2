@@ -218,10 +218,10 @@ namespace ExportExcel
                     string totalPower = "0";
 
                     if (i != 0)
-                    {
-                        consumePower = (mEnergyData.mEnergyDataRawList[i].getConsumePower() - mEnergyData.mEnergyDataRawList[i - 1].getConsumePower()).ToString();
-                        revivePower = (mEnergyData.mEnergyDataRawList[i].getRevivePower() - mEnergyData.mEnergyDataRawList[i - 1].getRevivePower()).ToString();
-                        totalPower = (mEnergyData.mEnergyDataRawList[i].getTotalPower() - mEnergyData.mEnergyDataRawList[i - 1].getTotalPower()).ToString();
+                    {                      
+                        consumePower = (mEnergyData.mEnergyDataRawList[i].consumeEnergy - mEnergyData.mEnergyDataRawList[i - 1].consumeEnergy).ToString();
+                        revivePower = (mEnergyData.mEnergyDataRawList[i].reviveEgergy - mEnergyData.mEnergyDataRawList[i - 1].reviveEgergy).ToString();
+                        totalPower = (mEnergyData.mEnergyDataRawList[i].totalEnergy - mEnergyData.mEnergyDataRawList[i - 1].totalEnergy).ToString();
                     }
 
                     dataGridViewEnergy.Rows[j].Cells[0].Value = mEnergyData.mEnergyDataRawList[i].GetDateTime();
@@ -232,8 +232,8 @@ namespace ExportExcel
                  }
 
                 //初始默认显示全部数据
-                dateTimePickerFrom.Value = mEnergyData.mEnergyDataRawList[0].GetDateTimeFilter();
-                dateTimePickerTo.Value = mEnergyData.mEnergyDataRawList[mEnergyData.mEnergyDataRawList.Count - 1].GetDateTimeFilter();
+                dateTimePickerFrom.Value = mEnergyData.mEnergyDataRawList[0].EnergyDate;
+                dateTimePickerTo.Value = mEnergyData.mEnergyDataRawList[mEnergyData.mEnergyDataRawList.Count - 1].EnergyDate;
 
             }
         }
@@ -284,132 +284,135 @@ namespace ExportExcel
 
         private void comboBoxUnit_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBoxUnit.SelectedIndex == 1)
-            {
-                chartPower.ChartAreas["ChartArea1"].CursorX.AutoScroll = true;
-                chartPower.ChartAreas["ChartArea1"].AxisX.ScrollBar.Enabled = true;
-                chartPower.ChartAreas["ChartArea1"].CursorX.IsUserEnabled = true;
-                chartPower.ChartAreas["ChartArea1"].CursorX.IsUserSelectionEnabled = true;
-                chartPower.ChartAreas["ChartArea1"].AxisX.Interval = 1;
-                chartPower.ChartAreas["ChartArea1"].AxisX.ScaleView.Zoomable = true;
-                chartPower.ChartAreas["ChartArea1"].AxisX.ScaleView.Position = 0;
-                chartPower.ChartAreas["ChartArea1"].AxisX.ScaleView.Size = 1 * 10;
-                chartPower.Series.Clear();
-                Series SeriesConsumePower = new Series("ConsumePower");
-                SeriesConsumePower.ChartType = SeriesChartType.Column;
-                SeriesConsumePower.BorderWidth = 7;
-                SeriesConsumePower.ShadowOffset = 2;
-                SeriesConsumePower.Points.AddY(20);
-                SeriesConsumePower.Points.AddY(30);
-                SeriesConsumePower.Points.AddY(40);
-                SeriesConsumePower.Points.AddY(50);
-                SeriesConsumePower.Points.AddY(60);
-                SeriesConsumePower.Points.AddY(40);
-                SeriesConsumePower.Points.AddY(50);
-                SeriesConsumePower.Points.AddY(60);
-                SeriesConsumePower.Points.AddY(20);
-                SeriesConsumePower.Points.AddY(30);
-                SeriesConsumePower.Points.AddY(40);
-                SeriesConsumePower.Points.AddY(50);
-                SeriesConsumePower.Points.AddY(60);
-                SeriesConsumePower.Points.AddY(40);
-                SeriesConsumePower.Points.AddY(50);
-                SeriesConsumePower.Points.AddY(60);
-                SeriesConsumePower.Points.AddY(20);
-                SeriesConsumePower.Points.AddY(30);
-                SeriesConsumePower.Points.AddY(40);
-                SeriesConsumePower.Points.AddY(50);
-                SeriesConsumePower.Points.AddY(60);
-                SeriesConsumePower.Points.AddY(40);
-                SeriesConsumePower.Points.AddY(50);
-                SeriesConsumePower.Points.AddY(60);
-                SeriesConsumePower.Points.AddY(20);
-                SeriesConsumePower.Points.AddY(30);
-                SeriesConsumePower.Points.AddY(40);
-                SeriesConsumePower.Points.AddY(50);
-                SeriesConsumePower.Points.AddY(60);
-                SeriesConsumePower.Points.AddY(40);
-                SeriesConsumePower.Points.AddY(50);
-                SeriesConsumePower.Points.AddY(60);
-                SeriesConsumePower.Points.AddY(20);
-                SeriesConsumePower.Points.AddY(30);
-                SeriesConsumePower.Points.AddY(40);
-                SeriesConsumePower.Points.AddY(50);
-                SeriesConsumePower.Points.AddY(60);
-                SeriesConsumePower.Points.AddY(40);
-                SeriesConsumePower.Points.AddY(50);
-                SeriesConsumePower.Points.AddY(60);
+            chartPower.ChartAreas["ChartArea1"].CursorX.AutoScroll = true;
+            chartPower.ChartAreas["ChartArea1"].AxisX.ScrollBar.Enabled = true;
+            chartPower.ChartAreas["ChartArea1"].CursorX.IsUserEnabled = true;
+            chartPower.ChartAreas["ChartArea1"].CursorX.IsUserSelectionEnabled = true;
+            chartPower.ChartAreas["ChartArea1"].AxisX.Interval = 1;
+            chartPower.ChartAreas["ChartArea1"].AxisX.ScaleView.Zoomable = true;
+            chartPower.ChartAreas["ChartArea1"].AxisX.ScaleView.Position = 0;
+            chartPower.ChartAreas["ChartArea1"].AxisX.ScaleView.Size = 1 * 10;
 
+            chartPower.Series.Clear();
+            Series SeriesConsumePower = new Series("ConsumePower");
+            SeriesConsumePower.ChartType = SeriesChartType.Column;
+            SeriesConsumePower.BorderWidth = 3;
+            SeriesConsumePower.ShadowOffset = 2;
+
+            Series seriesRevivePower = new Series("RevivePower");
+            seriesRevivePower.ChartType = SeriesChartType.Column;
+            seriesRevivePower.BorderWidth = 3;
+            seriesRevivePower.ShadowOffset = 2;
+
+            Series seriesTotalPower = new Series("TotalPower");
+            seriesTotalPower.ChartType = SeriesChartType.Column;
+            seriesTotalPower.BorderWidth = 3;
+            seriesTotalPower.ShadowOffset = 2;
+            if (comboBoxUnit.SelectedIndex == 0)
+            {
+                var EnergyByYear = mEnergyData.mEnergyDataRawList.GroupBy(energy => energy.EnergyDate.Year).ToList();
+
+                int i = 0;
+                foreach (var energy in EnergyByYear)
+                {                    
+                    SeriesConsumePower.Points.AddY(energy.ToList().Sum(tempEnergy => tempEnergy.consumeEnergy));
+
+                    //X轴显示的名称
+                    SeriesConsumePower.Points[i].AxisLabel = energy.Key.ToString() + "年";
+
+                    //顶部显示的数字
+                    SeriesConsumePower.Points[i].Label = energy.ToList().Sum(tempEnergy => tempEnergy.consumeEnergy).ToString();
+                    //鼠标放上去的提示内容
+                    SeriesConsumePower.Points[i].ToolTip = energy.ToList().Sum(tempEnergy => tempEnergy.consumeEnergy).ToString();
+
+
+
+                    seriesRevivePower.Points.AddY(energy.ToList().Sum(tempEnergy => tempEnergy.reviveEgergy));
+
+                    seriesRevivePower.Points[i].Label = energy.ToList().Sum(tempEnergy => tempEnergy.reviveEgergy).ToString();
+
+                    seriesRevivePower.Points[i].ToolTip = energy.ToList().Sum(tempEnergy => tempEnergy.reviveEgergy).ToString();
+
+                    seriesTotalPower.Points.AddY(energy.ToList().Sum(tempEnergy => tempEnergy.totalEnergy));
+
+                    seriesTotalPower.Points[i].Label = energy.ToList().Sum(tempEnergy => tempEnergy.totalEnergy).ToString();
+
+                    seriesTotalPower.Points[i].ToolTip = energy.ToList().Sum(tempEnergy => tempEnergy.totalEnergy).ToString();
+
+                    i++;
+                }
+            }
+            else if (comboBoxUnit.SelectedIndex == 1)
+            {
+                var EnergyByMonth = mEnergyData.mEnergyDataRawList.GroupBy(energy => { return new { energy.EnergyDate.Year, energy.EnergyDate.Month }; }).ToList();
+
+                int i = 0;
+            foreach (var energy in EnergyByMonth)
+            {
+                SeriesConsumePower.Points.AddY(energy.ToList().Sum(tempEnergy => tempEnergy.consumeEnergy));
 
                 //X轴显示的名称
-                SeriesConsumePower.Points[0].AxisLabel = "时间";
-                SeriesConsumePower.Points[1].AxisLabel = "时间";
-                SeriesConsumePower.Points[2].AxisLabel = "时间";
-                SeriesConsumePower.Points[3].AxisLabel = "时间";
-                SeriesConsumePower.Points[4].AxisLabel = "时间";
+                SeriesConsumePower.Points[i].AxisLabel = energy.Key.ToString();
 
                 //顶部显示的数字
-                SeriesConsumePower.Points[0].Label = "20";
-                SeriesConsumePower.Points[1].Label = "30";
-                SeriesConsumePower.Points[2].Label = "40";
-                SeriesConsumePower.Points[3].Label = "50";
-                SeriesConsumePower.Points[4].Label = "60";
+                SeriesConsumePower.Points[i].Label = energy.ToList().Sum(tempEnergy => tempEnergy.consumeEnergy).ToString();
                 //鼠标放上去的提示内容
-                SeriesConsumePower.Points[0].ToolTip = "20";
-                SeriesConsumePower.Points[1].ToolTip = "30";
-                SeriesConsumePower.Points[2].ToolTip = "40";
-                SeriesConsumePower.Points[3].ToolTip = "50";
-                SeriesConsumePower.Points[4].ToolTip = "60";
-
-                Series seriesRevivePower = new Series("RevivePower");
-                seriesRevivePower.ChartType = SeriesChartType.Column;
-                seriesRevivePower.BorderWidth = 3;
-                seriesRevivePower.ShadowOffset = 2;
-
-                seriesRevivePower.Points.AddY(144);
-                seriesRevivePower.Points.AddY(143);
-                seriesRevivePower.Points.AddY(124);
-                seriesRevivePower.Points.AddY(120);
-                seriesRevivePower.Points.AddY(123);
-
-                seriesRevivePower.Points[0].Label = "144";
-                seriesRevivePower.Points[1].Label = "143";
-                seriesRevivePower.Points[2].Label = "124";
-                seriesRevivePower.Points[3].Label = "120";
-                seriesRevivePower.Points[4].Label = "123";
-                seriesRevivePower.Points[0].ToolTip = "144";
-                seriesRevivePower.Points[1].ToolTip = "143";
-                seriesRevivePower.Points[2].ToolTip = "124";
-                seriesRevivePower.Points[3].ToolTip = "120";
-                seriesRevivePower.Points[4].ToolTip = "123";
-
-                Series seriesTotalPower = new Series("TotalPower");
-                seriesTotalPower.ChartType = SeriesChartType.Column;
-                seriesTotalPower.BorderWidth = 3;
-                seriesTotalPower.ShadowOffset = 2;
-
-                seriesTotalPower.Points.AddY(144);
-                seriesTotalPower.Points.AddY(143);
-                seriesTotalPower.Points.AddY(124);
-                seriesTotalPower.Points.AddY(120);
-                seriesTotalPower.Points.AddY(123);
-
-                seriesTotalPower.Points[0].Label = "144";
-                seriesTotalPower.Points[1].Label = "143";
-                seriesTotalPower.Points[2].Label = "124";
-                seriesTotalPower.Points[3].Label = "120";
-                seriesTotalPower.Points[4].Label = "123";
-                seriesTotalPower.Points[0].ToolTip = "144";
-                seriesTotalPower.Points[1].ToolTip = "143";
-                seriesTotalPower.Points[2].ToolTip = "124";
-                seriesTotalPower.Points[3].ToolTip = "120";
-                seriesTotalPower.Points[4].ToolTip = "123";
+                SeriesConsumePower.Points[i].ToolTip = energy.ToList().Sum(tempEnergy => tempEnergy.consumeEnergy).ToString();
 
 
-                chartPower.Series.Add(SeriesConsumePower);
-                chartPower.Series.Add(seriesRevivePower);
-                chartPower.Series.Add(seriesTotalPower);
+
+                seriesRevivePower.Points.AddY(energy.ToList().Sum(tempEnergy => tempEnergy.reviveEgergy));
+
+                seriesRevivePower.Points[i].Label = energy.ToList().Sum(tempEnergy => tempEnergy.reviveEgergy).ToString();
+
+                seriesRevivePower.Points[i].ToolTip = energy.ToList().Sum(tempEnergy => tempEnergy.reviveEgergy).ToString();
+
+                seriesTotalPower.Points.AddY(energy.ToList().Sum(tempEnergy => tempEnergy.totalEnergy));
+
+                seriesTotalPower.Points[i].Label = energy.ToList().Sum(tempEnergy => tempEnergy.totalEnergy).ToString();
+
+                seriesTotalPower.Points[i].ToolTip = energy.ToList().Sum(tempEnergy => tempEnergy.totalEnergy).ToString();
+
+                i++;
+            } 
             }
+            else if (comboBoxUnit.SelectedIndex == 2)
+            {
+                var EnergyByDay = mEnergyData.mEnergyDataRawList.GroupBy(energy => { return new { energy.EnergyDate.Year, energy.EnergyDate.Month, energy.EnergyDate.Day }; }).ToList();
+
+                int i = 0;
+                foreach (var energy in EnergyByDay)
+                {
+                    SeriesConsumePower.Points.AddY(energy.ToList().Sum(tempEnergy => tempEnergy.consumeEnergy));
+
+                    //X轴显示的名称
+                    SeriesConsumePower.Points[i].AxisLabel = energy.Key.ToString();
+
+                    //顶部显示的数字
+                    SeriesConsumePower.Points[i].Label = energy.ToList().Sum(tempEnergy => tempEnergy.consumeEnergy).ToString();
+                    //鼠标放上去的提示内容
+                    SeriesConsumePower.Points[i].ToolTip = energy.ToList().Sum(tempEnergy => tempEnergy.consumeEnergy).ToString();
+
+
+
+                    seriesRevivePower.Points.AddY(energy.ToList().Sum(tempEnergy => tempEnergy.reviveEgergy));
+
+                    seriesRevivePower.Points[i].Label = energy.ToList().Sum(tempEnergy => tempEnergy.reviveEgergy).ToString();
+
+                    seriesRevivePower.Points[i].ToolTip = energy.ToList().Sum(tempEnergy => tempEnergy.reviveEgergy).ToString();
+
+                    seriesTotalPower.Points.AddY(energy.ToList().Sum(tempEnergy => tempEnergy.totalEnergy));
+
+                    seriesTotalPower.Points[i].Label = energy.ToList().Sum(tempEnergy => tempEnergy.totalEnergy).ToString();
+
+                    seriesTotalPower.Points[i].ToolTip = energy.ToList().Sum(tempEnergy => tempEnergy.totalEnergy).ToString();
+
+                    i++;
+                }
+            }
+            chartPower.Series.Add(SeriesConsumePower);
+            chartPower.Series.Add(seriesRevivePower);
+            chartPower.Series.Add(seriesTotalPower);
         }
     }
 }

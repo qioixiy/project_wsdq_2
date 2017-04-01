@@ -184,26 +184,18 @@ namespace ExportExcel
             {
                 row = i + 2;
 
-                string year = mEnergyData.mEnergyDataRawList[i].getYear().ToString();
-                string mouth = mEnergyData.mEnergyDataRawList[i].getMouth().ToString();
-                string day = mEnergyData.mEnergyDataRawList[i].getDay().ToString();
-                string hour = mEnergyData.mEnergyDataRawList[i].getHour().ToString();
-                string minute = mEnergyData.mEnergyDataRawList[i].getMinute().ToString();
                 string consumePower = "0";
                 string revivePower = "0";
                 string totalPower = "0";
 
                 if (i != 0)
                 {
-                    consumePower = (mEnergyData.mEnergyDataRawList[i].getConsumePower() - mEnergyData.mEnergyDataRawList[i-1].getConsumePower()).ToString();
-                    revivePower = (mEnergyData.mEnergyDataRawList[i].getRevivePower() - mEnergyData.mEnergyDataRawList[i - 1].getRevivePower()).ToString();
-                    totalPower = (mEnergyData.mEnergyDataRawList[i].getTotalPower() - mEnergyData.mEnergyDataRawList[i - 1].getTotalPower()).ToString();
+                    consumePower = (mEnergyData.mEnergyDataRawList[i].consumeEnergy - mEnergyData.mEnergyDataRawList[i - 1].consumeEnergy).ToString();
+                    revivePower = (mEnergyData.mEnergyDataRawList[i].reviveEgergy - mEnergyData.mEnergyDataRawList[i - 1].reviveEgergy).ToString();
+                    totalPower = (mEnergyData.mEnergyDataRawList[i].totalEnergy - mEnergyData.mEnergyDataRawList[i - 1].totalEnergy).ToString();
                 }
 
-                string datetime = year + "年" + mouth + "月" + day + "日" + hour + "时" + minute  + "分";
-
-
-                excel.SetData(row, 1, datetime);
+                excel.SetData(row, 1, mEnergyData.mEnergyDataRawList[i].GetDateTime());
                 excel.SetData(row, 2, consumePower);
                 excel.SetData(row, 3, revivePower);
                 excel.SetData(row, 4, totalPower);

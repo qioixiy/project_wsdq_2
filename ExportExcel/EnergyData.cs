@@ -17,7 +17,38 @@ namespace ExportExcel
             public byte[] hour;//时 1byte
             public byte[] minute;//分 1byte
             public byte[] consumePower;//消耗电能 4byte
-            public byte[] revivePower;//再生电能 4byte            
+            public byte[] revivePower;//再生电能 4byte          
+            public DateTime EnergyDate 
+            { 
+                get
+                {
+                    return this.GetDateTimeFilter();
+                }  
+            }
+            public int consumeEnergy
+            {
+                get
+                {
+                    return this.getConsumePower();
+                }
+            }
+
+            public int reviveEgergy
+            {
+                get
+                {
+                    return this.getRevivePower();
+                }
+            }
+
+            // 总消耗能量=消耗电能-再生电能
+            public int totalEnergy
+            {
+                get
+                {
+                    return consumeEnergy - reviveEgergy;
+                }
+            }
 
             public int getYear()
             {
@@ -76,11 +107,7 @@ namespace ExportExcel
                 int ret = BitConverter.ToInt32(Myutility.ToHostEndian(revivePower), 0);
                 return ret;
             }
-            // 总消耗能量=消耗电能-再生电能
-            public int getTotalPower()
-            {
-                return getConsumePower() - getRevivePower();
-            }
+     
         }
         public byte[] reserve = new byte[1];
         public byte[] carType = new byte[1];
