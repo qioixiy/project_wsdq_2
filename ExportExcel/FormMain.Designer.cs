@@ -52,7 +52,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBoxUnit = new System.Windows.Forms.GroupBox();
             this.comboBoxUnit = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxDays = new System.Windows.Forms.ComboBox();
             this.buttonExit = new System.Windows.Forms.Button();
             this.buttonSelect = new System.Windows.Forms.Button();
             this.textBoxNumber = new System.Windows.Forms.TextBox();
@@ -118,7 +118,7 @@
             // labelTitle
             // 
             this.labelTitle.AutoSize = true;
-            this.labelTitle.Font = new System.Drawing.Font("LiSu", 23F, System.Drawing.FontStyle.Bold);
+            this.labelTitle.Font = new System.Drawing.Font("隶书", 23F, System.Drawing.FontStyle.Bold);
             this.labelTitle.Location = new System.Drawing.Point(392, 6);
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(377, 31);
@@ -168,7 +168,7 @@
             this.panel3.Controls.Add(this.dateTimePickerFrom);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.groupBoxUnit);
-            this.panel3.Controls.Add(this.comboBox1);
+            this.panel3.Controls.Add(this.comboBoxDays);
             this.panel3.Controls.Add(this.buttonExit);
             this.panel3.Controls.Add(this.buttonSelect);
             this.panel3.Controls.Add(this.textBoxNumber);
@@ -257,17 +257,17 @@
             this.comboBoxUnit.Text = "请选择";
             this.comboBoxUnit.SelectedIndexChanged += new System.EventHandler(this.comboBoxUnit_SelectedIndexChanged);
             // 
-            // comboBox1
+            // comboBoxDays
             // 
-            this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft YaHei", 7F);
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(40, 400);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(131, 22);
-            this.comboBox1.TabIndex = 19;
-            this.comboBox1.Text = "请选择需要导出的日期";
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBoxDays.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.comboBoxDays.Font = new System.Drawing.Font("微软雅黑", 7F);
+            this.comboBoxDays.FormattingEnabled = true;
+            this.comboBoxDays.Location = new System.Drawing.Point(40, 400);
+            this.comboBoxDays.Name = "comboBoxDays";
+            this.comboBoxDays.Size = new System.Drawing.Size(131, 22);
+            this.comboBoxDays.TabIndex = 19;
+            this.comboBoxDays.Text = "请选择需要导出的日期";
+            this.comboBoxDays.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // buttonExit
             // 
@@ -387,7 +387,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "FormMain";
@@ -423,7 +423,7 @@
         private System.Windows.Forms.DataGridView dataGridViewEnergy;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxDays;
         private System.Windows.Forms.GroupBox groupBoxUnit;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPositivePower;

@@ -172,7 +172,7 @@ namespace ExportExcel
             excel.SetData(1, 3, "再生电能(kW.h)");
             excel.SetData(1, 4, "总消耗能量(kW.h)");
 
-            if (mEnergyData == null || mEnergyData.mEnergyDataRawList.Count == 0)
+            if (mEnergyData == null || mEnergyData.mEnergyDataRawListExportExcel.Count == 0)
             {
                 form.setExportExcelStatus("unknown-data");
                 return -1;
@@ -180,7 +180,7 @@ namespace ExportExcel
 
             List<RowColumData> tRowColumDataList = new List<RowColumData>();
             int row = 2;
-            for (int i = 0; i < mEnergyData.mEnergyDataRawList.Count; i++)
+            for (int i = 0; i < mEnergyData.mEnergyDataRawListExportExcel.Count; i++)
             {
                 row = i + 2;
 
@@ -190,17 +190,17 @@ namespace ExportExcel
 
                 if (i != 0)
                 {
-                    consumePower = (mEnergyData.mEnergyDataRawList[i].consumeEnergy - mEnergyData.mEnergyDataRawList[i - 1].consumeEnergy).ToString();
-                    revivePower = (mEnergyData.mEnergyDataRawList[i].reviveEgergy - mEnergyData.mEnergyDataRawList[i - 1].reviveEgergy).ToString();
-                    totalPower = (mEnergyData.mEnergyDataRawList[i].totalEnergy - mEnergyData.mEnergyDataRawList[i - 1].totalEnergy).ToString();
+                    consumePower = (mEnergyData.mEnergyDataRawListExportExcel[i].consumeEnergy - mEnergyData.mEnergyDataRawListExportExcel[i - 1].consumeEnergy).ToString();
+                    revivePower = (mEnergyData.mEnergyDataRawListExportExcel[i].reviveEgergy - mEnergyData.mEnergyDataRawListExportExcel[i - 1].reviveEgergy).ToString();
+                    totalPower = (mEnergyData.mEnergyDataRawListExportExcel[i].totalEnergy - mEnergyData.mEnergyDataRawListExportExcel[i - 1].totalEnergy).ToString();
                 }
 
-                excel.SetData(row, 1, mEnergyData.mEnergyDataRawList[i].GetDateTime());
+                excel.SetData(row, 1, mEnergyData.mEnergyDataRawListExportExcel[i].GetDateTime());
                 excel.SetData(row, 2, consumePower);
                 excel.SetData(row, 3, revivePower);
                 excel.SetData(row, 4, totalPower);
 
-                form.setExportExcelStatus("processing", "S1:" + i + "/" + mEnergyData.mEnergyDataRawList.Count);
+                form.setExportExcelStatus("processing", "S1:" + i + "/" + mEnergyData.mEnergyDataRawListExportExcel.Count);
             }
 
             excel.CurXlsWorkSheet.Visible = Excel.XlSheetVisibility.xlSheetHidden;

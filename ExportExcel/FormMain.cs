@@ -131,27 +131,30 @@ namespace ExportExcel
 
             for (int i = 0; i < mEnergyData.mEnergyDataRawList.Count; i++)
             {
-                if (dateTime == (int)mEnergyData.mEnergyDataRawList[i].year[0])
+                if (dateTime == (int)mEnergyData.mEnergyDataRawList[i].getDay())
                 {
                     tEnergyDataRawList.Add(mEnergyData.mEnergyDataRawList[i]);
                 }
             }
 
-            mEnergyData.mEnergyDataRawList = tEnergyDataRawList;
+            mEnergyData.mEnergyDataRawListExportExcel = tEnergyDataRawList;
         }
         private void buttonExportExcel_Click(object sender, EventArgs e)
         {
-            if (comboBox1.Text == "请选择日期") {
-                MessageBox.Show("请先选择日期");
-                return;
-            } else {
-                filterEnergyDataWithDateTime(Int32.Parse(comboBox1.Text));
-            }
-
-            if (null == mEnergyData) {
+            if (null == mEnergyData)
+            {
                 MessageBox.Show("请先导入数据文件");
                 return;
             }
+
+            if (comboBoxDays.SelectedIndex < 0)
+            {
+                MessageBox.Show("请先选择需要导出日期");
+                return;
+            }
+
+            filterEnergyDataWithDateTime(Int32.Parse(comboBoxDays.Text));
+
             setExportExcelStatus("exporting");
 
             ExportExcelThread mExportExcelThread;
@@ -194,9 +197,50 @@ namespace ExportExcel
             ;
         }
 
+        private void updateDataGridView()
+        {
+            for (int j = 0, count = 0, i = this.dataGridViewEnergy.RowCount - 1; i >= 0; i--, count++)
+            {
+                string consumePower = "0";
+                string revivePower = "0";
+                string totalPower = "0";
+
+                if (i != 0)
+                {
+                    consumePower = (mEnergyData.mEnergyDataRawList[i].consumeEnergy - mEnergyData.mEnergyDataRawList[i - 1].consumeEnergy).ToString();
+                    revivePower = (mEnergyData.mEnergyDataRawList[i].reviveEgergy - mEnergyData.mEnergyDataRawList[i - 1].reviveEgergy).ToString();
+                    totalPower = (mEnergyData.mEnergyDataRawList[i].totalEnergy - mEnergyData.mEnergyDataRawList[i - 1].totalEnergy).ToString();
+                }
+
+                dataGridViewEnergy.Rows[j].Cells[0].Value = mEnergyData.mEnergyDataRawList[i].GetDateTime();
+                dataGridViewEnergy.Rows[j].Cells[1].Value = consumePower + " kW.h";
+                dataGridViewEnergy.Rows[j].Cells[2].Value = revivePower + " kW.h";
+                dataGridViewEnergy.Rows[j].Cells[3].Value = totalPower + " kW.h";
+                j++;
+            }
+        }
+
+        private void updateDaysComboBox()
+        {
+            // 获取有效的时间天数
+            bool[] days = new bool[31];
+            foreach (var item in mEnergyData.mEnergyDataRawList)
+            {
+                days[item.getDay()] = true;
+            }
+
+            for (int index = 0; index < 31; index++)
+            {
+                if (days[index] == true)
+                {
+                    comboBoxDays.Items.Add(index);
+                }
+            }
+        }
+
         private void buttonSelect_Click(object sender, EventArgs e)
         {
-            comboBox1.Items.Clear();
+            comboBoxDays.Items.Clear();
 
             this.openFileDialog1.Filter = "数据文件(*.txt)|*.txt|所有文件(*.*)|*.*";
             this.openFileDialog1.FileName = "*.TXT";
@@ -211,30 +255,13 @@ namespace ExportExcel
                     return;
                 }
 
-                for (int j = 0, count = 0, i = this.dataGridViewEnergy.RowCount - 1; i >= 0; i--, count++)
-                {
-                    string consumePower = "0";
-                    string revivePower = "0";
-                    string totalPower = "0";
-
-                    if (i != 0)
-                    {                      
-                        consumePower = (mEnergyData.mEnergyDataRawList[i].consumeEnergy - mEnergyData.mEnergyDataRawList[i - 1].consumeEnergy).ToString();
-                        revivePower = (mEnergyData.mEnergyDataRawList[i].reviveEgergy - mEnergyData.mEnergyDataRawList[i - 1].reviveEgergy).ToString();
-                        totalPower = (mEnergyData.mEnergyDataRawList[i].totalEnergy - mEnergyData.mEnergyDataRawList[i - 1].totalEnergy).ToString();
-                    }
-
-                    dataGridViewEnergy.Rows[j].Cells[0].Value = mEnergyData.mEnergyDataRawList[i].GetDateTime();
-                    dataGridViewEnergy.Rows[j].Cells[1].Value = consumePower + " kW.h";
-                    dataGridViewEnergy.Rows[j].Cells[2].Value = revivePower + " kW.h";
-                    dataGridViewEnergy.Rows[j].Cells[3].Value = totalPower + " kW.h";
-                    j++;
-                 }
+                // update DataGridView
+                updateDataGridView();
+                updateDaysComboBox();
 
                 //初始默认显示全部数据
                 dateTimePickerFrom.Value = mEnergyData.mEnergyDataRawList[0].EnergyDate;
                 dateTimePickerTo.Value = mEnergyData.mEnergyDataRawList[mEnergyData.mEnergyDataRawList.Count - 1].EnergyDate;
-
             }
         }
 
@@ -278,8 +305,10 @@ namespace ExportExcel
         {
             
             string ImagePath = Directory.GetCurrentDirectory();
-            string FileName = ImagePath + "\\" + "Test" + ".Jpeg";
+            string FileName = ImagePath + "\\" + "Test" + ".jpeg";
             chartPower.SaveImage(FileName, ChartImageFormat.Jpeg);
+
+            MessageBox.Show(FileName, "保存成功");
         }
 
         private void comboBoxUnit_SelectedIndexChanged(object sender, EventArgs e)
