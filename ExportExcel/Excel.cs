@@ -26,18 +26,6 @@ namespace ExportExcel
             ;
         }
 
-        private class RowColumData
-        {
-            public RowColumData(int row, int col, string data) {
-                this.row = row;
-                this.col = col;
-                this.data = data;
-            }
-            public int row;
-            public int col;
-            public string data;
-        }
-
         public void SetData(int i, int j, string data)
         {
             CurXlsWorkSheet.Cells[i, j] = data;
@@ -72,9 +60,6 @@ namespace ExportExcel
             // add function sheet
             xlsApp.Worksheets.Add(misValue);
             GetWorksheet(1).Name = "电能列表";
-            GetWorksheet(2).Name = "阶段电能柱状图";
-            GetWorksheet(3).Name = "总电能曲线图";
-            GetWorksheet(4).Name = "...";
 
             xlsWorkBook.EnableAutoRecover = false;
         }
@@ -109,7 +94,7 @@ namespace ExportExcel
         {
             return (Excel.Worksheet)xlsWorkBook.Worksheets.get_Item(index);
         }
-        
+
         public void SelectWorksheet(int index)
         {
             CurXlsWorkSheet = (Excel.Worksheet)xlsWorkBook.Worksheets.get_Item(index);
@@ -139,7 +124,7 @@ namespace ExportExcel
             releaseObject(xlsApp);
             KillProcess();
         }
-                
+
         public static int GenExcel(FormMain form, EnergyData mEnergyData, string filename)
         {
             CBExcel excel = new CBExcel();
@@ -178,7 +163,6 @@ namespace ExportExcel
                 return -1;
             }
 
-            List<RowColumData> tRowColumDataList = new List<RowColumData>();
             int row = 2;
             for (int i = 0; i < mEnergyData.mEnergyDataRawListExportExcel.Count; i++)
             {
@@ -203,9 +187,9 @@ namespace ExportExcel
                 form.setExportExcelStatus("processing", "S1:" + i + "/" + mEnergyData.mEnergyDataRawListExportExcel.Count);
             }
 
-            excel.CurXlsWorkSheet.Visible = Excel.XlSheetVisibility.xlSheetHidden;
+            //excel.CurXlsWorkSheet.Visible = Excel.XlSheetVisibility.xlSheetHidden;
 
-           if (excel.SaveAs(filename))
+            if (excel.SaveAs(filename))
             {
                 form.setExportExcelStatus("export-success");
             }

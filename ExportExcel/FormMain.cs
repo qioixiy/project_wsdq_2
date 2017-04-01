@@ -153,21 +153,15 @@ namespace ExportExcel
                 return;
             }
 
+            // 过滤出指定日期的数据
             filterEnergyDataWithDateTime(Int32.Parse(comboBoxDays.Text));
 
             setExportExcelStatus("exporting");
 
             ExportExcelThread mExportExcelThread;
-            //mExportExcelThread = new ExportExcelThread(this, mEnergyData, GetExcelFileName(textBoxNumber.Text));
             // V1.2
-            string filename = null;
-            if ((Myutility.GetMajorVersionNumber() == "V1.1")
-                || (Myutility.GetMajorVersionNumber() == "V1.3"))
-            {
-                filename = GetExcelFileName(textBoxNumber.Text);
-            } else {
-                filename = GetExcelFileNameV1_2();
-            }
+            string filename = GetExcelFileName(textBoxNumber.Text);
+            
             if (null == filename)
             {
                 MessageBox.Show("无效文件名");
@@ -187,7 +181,7 @@ namespace ExportExcel
             }
             String curDate = DateTime.Now.ToString("yyyyMMdd");
             String ret = System.Environment.CurrentDirectory
-                + "\\" + "-" + append + "_" + curDate;
+                + "\\" + "CRH-" + append + "_" + curDate;
 
             return ret;
         }
