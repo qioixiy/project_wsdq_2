@@ -88,6 +88,9 @@ namespace ExportExcel
                     if (ui > 0.00001) {
                         ret = getPowerRealTime() / ui;
                         ret = ((int)(ret * 1000))/1000.0f;
+                        if (ret > 1.000000001) {
+                            ret = 1.0f;
+                        }
                     }
                 }
                 return ret;
