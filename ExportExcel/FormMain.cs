@@ -375,7 +375,7 @@ namespace ExportExcel
                 SeriesConsumePower.Points.AddY(energy.ToList().Sum(tempEnergy => tempEnergy.consumeEnergy));
 
                 //X轴显示的名称
-                SeriesConsumePower.Points[i].AxisLabel = energy.Key.ToString();
+                SeriesConsumePower.Points[i].AxisLabel = energy.Key.Year.ToString() + "/" + energy.Key.Month.ToString();
 
                 //顶部显示的数字
                 SeriesConsumePower.Points[i].Label = energy.ToList().Sum(tempEnergy => tempEnergy.consumeEnergy).ToString();
@@ -409,7 +409,75 @@ namespace ExportExcel
                     SeriesConsumePower.Points.AddY(energy.ToList().Sum(tempEnergy => tempEnergy.consumeEnergy));
 
                     //X轴显示的名称
-                    SeriesConsumePower.Points[i].AxisLabel = energy.Key.ToString();
+                    SeriesConsumePower.Points[i].AxisLabel = energy.Key.Year.ToString() + "/" + energy.Key.Month.ToString() + "/" + energy.Key.Day.ToString();
+
+                    //顶部显示的数字
+                    SeriesConsumePower.Points[i].Label = energy.ToList().Sum(tempEnergy => tempEnergy.consumeEnergy).ToString();
+                    //鼠标放上去的提示内容
+                    SeriesConsumePower.Points[i].ToolTip = energy.ToList().Sum(tempEnergy => tempEnergy.consumeEnergy).ToString();
+
+
+
+                    seriesRevivePower.Points.AddY(energy.ToList().Sum(tempEnergy => tempEnergy.reviveEgergy));
+
+                    seriesRevivePower.Points[i].Label = energy.ToList().Sum(tempEnergy => tempEnergy.reviveEgergy).ToString();
+
+                    seriesRevivePower.Points[i].ToolTip = energy.ToList().Sum(tempEnergy => tempEnergy.reviveEgergy).ToString();
+
+                    seriesTotalPower.Points.AddY(energy.ToList().Sum(tempEnergy => tempEnergy.totalEnergy));
+
+                    seriesTotalPower.Points[i].Label = energy.ToList().Sum(tempEnergy => tempEnergy.totalEnergy).ToString();
+
+                    seriesTotalPower.Points[i].ToolTip = energy.ToList().Sum(tempEnergy => tempEnergy.totalEnergy).ToString();
+
+                    i++;
+                }
+            }
+            else if (comboBoxUnit.SelectedIndex == 3)
+            {
+                var EnergyByHour = mEnergyData.mEnergyDataRawList.GroupBy(energy => { return new { energy.EnergyDate.Year, energy.EnergyDate.Month, energy.EnergyDate.Day, energy.EnergyDate.Hour }; }).ToList();
+
+                int i = 0;
+                foreach (var energy in EnergyByHour)
+                {
+                    SeriesConsumePower.Points.AddY(energy.ToList().Sum(tempEnergy => tempEnergy.consumeEnergy));
+
+                    //X轴显示的名称
+                    SeriesConsumePower.Points[i].AxisLabel = energy.Key.Year.ToString() + "/" + energy.Key.Month.ToString() + "/" + energy.Key.Day.ToString() + " " + energy.Key.Hour.ToString();
+
+                    //顶部显示的数字
+                    SeriesConsumePower.Points[i].Label = energy.ToList().Sum(tempEnergy => tempEnergy.consumeEnergy).ToString();
+                    //鼠标放上去的提示内容
+                    SeriesConsumePower.Points[i].ToolTip = energy.ToList().Sum(tempEnergy => tempEnergy.consumeEnergy).ToString();
+
+
+
+                    seriesRevivePower.Points.AddY(energy.ToList().Sum(tempEnergy => tempEnergy.reviveEgergy));
+
+                    seriesRevivePower.Points[i].Label = energy.ToList().Sum(tempEnergy => tempEnergy.reviveEgergy).ToString();
+
+                    seriesRevivePower.Points[i].ToolTip = energy.ToList().Sum(tempEnergy => tempEnergy.reviveEgergy).ToString();
+
+                    seriesTotalPower.Points.AddY(energy.ToList().Sum(tempEnergy => tempEnergy.totalEnergy));
+
+                    seriesTotalPower.Points[i].Label = energy.ToList().Sum(tempEnergy => tempEnergy.totalEnergy).ToString();
+
+                    seriesTotalPower.Points[i].ToolTip = energy.ToList().Sum(tempEnergy => tempEnergy.totalEnergy).ToString();
+
+                    i++;
+                }
+            }
+            else if (comboBoxUnit.SelectedIndex == 4)
+            {
+                var EnergyByMinute = mEnergyData.mEnergyDataRawList.GroupBy(energy => { return new { energy.EnergyDate.Year, energy.EnergyDate.Month, energy.EnergyDate.Day, energy.EnergyDate.Hour, energy.EnergyDate.Minute }; }).ToList();
+
+                int i = 0;
+                foreach (var energy in EnergyByMinute)
+                {
+                    SeriesConsumePower.Points.AddY(energy.ToList().Sum(tempEnergy => tempEnergy.consumeEnergy));
+
+                    //X轴显示的名称
+                    SeriesConsumePower.Points[i].AxisLabel = energy.Key.Year.ToString() + "/" + energy.Key.Month.ToString() + "/" + energy.Key.Day.ToString() + " " + energy.Key.Hour.ToString() + ":" + energy.Key.Minute.ToString();
 
                     //顶部显示的数字
                     SeriesConsumePower.Points[i].Label = energy.ToList().Sum(tempEnergy => tempEnergy.consumeEnergy).ToString();

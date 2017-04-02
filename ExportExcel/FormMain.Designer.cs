@@ -118,7 +118,7 @@
             // labelTitle
             // 
             this.labelTitle.AutoSize = true;
-            this.labelTitle.Font = new System.Drawing.Font("隶书", 23F, System.Drawing.FontStyle.Bold);
+            this.labelTitle.Font = new System.Drawing.Font("LiSu", 23F, System.Drawing.FontStyle.Bold);
             this.labelTitle.Location = new System.Drawing.Point(392, 6);
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(377, 31);
@@ -139,6 +139,8 @@
             // 
             // chartPower
             // 
+            this.chartPower.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             chartArea1.Name = "ChartArea1";
             this.chartPower.ChartAreas.Add(chartArea1);
             legendCellColumn1.ColumnType = System.Windows.Forms.DataVisualization.Charting.LegendCellColumnType.SeriesSymbol;
@@ -260,7 +262,7 @@
             // comboBoxDays
             // 
             this.comboBoxDays.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.comboBoxDays.Font = new System.Drawing.Font("微软雅黑", 7F);
+            this.comboBoxDays.Font = new System.Drawing.Font("Microsoft YaHei", 7F);
             this.comboBoxDays.FormattingEnabled = true;
             this.comboBoxDays.Location = new System.Drawing.Point(40, 400);
             this.comboBoxDays.Name = "comboBoxDays";
@@ -387,7 +389,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "FormMain";
