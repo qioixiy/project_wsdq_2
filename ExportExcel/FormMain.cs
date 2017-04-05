@@ -307,6 +307,11 @@ namespace ExportExcel
 
         private void comboBoxUnit_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if ((mEnergyData == null) || (mEnergyData.mEnergyDataRawList.Count == 0))
+            {
+                MessageBox.Show("请先导入数据！");
+                return;
+            }
             chartPower.ChartAreas["ChartArea1"].CursorX.AutoScroll = true;
             chartPower.ChartAreas["ChartArea1"].AxisX.ScrollBar.Enabled = true;
             chartPower.ChartAreas["ChartArea1"].CursorX.IsUserEnabled = true;
