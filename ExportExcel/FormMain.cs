@@ -20,9 +20,7 @@ namespace ExportExcel
         public FormMain()
         {
             InitializeComponent();
-            this.label3.Text = ExportExcel.Properties.Resources.Version;
-            //this.dateTimePicker1.MaxDate = new DateTime(;
-            
+            this.label3.Text = ExportExcel.Properties.Resources.Version;            
 
             CheckForIllegalCrossThreadCalls = false;
 
@@ -509,6 +507,59 @@ namespace ExportExcel
             chartPower.Series.Add(SeriesConsumePower);
             chartPower.Series.Add(seriesRevivePower);
             chartPower.Series.Add(seriesTotalPower);
+        }
+
+        private bool inDateTime(DateTime dateFrom, DateTime dateTo, DateTime cur)
+        {
+            bool ret = false;
+            if (dateFrom <= cur && cur <= dateTo)
+            {
+                ret = true;
+            }
+            else
+            {
+                ret = false;
+            }
+            return ret;
+        }
+        private string getTextBoxReport()
+        {
+
+            int consumePower = 0;
+            int revivePower = 0;
+
+            for (int j = 0, count = 0, i = this.dataGridViewEnergy.RowCount - 1; i >= 0; i--, j++, count++)
+            {
+                if (i != 0)
+                {
+                    EnergyData.EnergyDataRaw tEnergyDataRaw = mEnergyData.mEnergyDataRawList[i];
+                    DateTime curDateTime = new DateTime(
+                        tEnergyDataRaw.getYear(),
+                        tEnergyDataRaw.getMouth(),
+                        tEnergyDataRaw.getDay(),
+                        tEnergyDataRaw.getHour(),
+                        tEnergyDataRaw.getMinute(),
+                        0
+                    );
+
+                    DateTime dateFrom = DateTime.Parse(dateTimePickerFrom.Text);
+                    DateTime dateTo = DateTime.Parse(dateTimePickerTo.Text);
+
+                    if (!inDateTime(dateFrom, dateTo, curDateTime))
+                    {
+                        continue;
+                    }
+                    consumePower += (mEnergyData.mEnergyDataRawList[i].consumeEnergy - mEnergyData.mEnergyDataRawList[i - 1].consumeEnergy);
+                    revivePower += (mEnergyData.mEnergyDataRawList[i].reviveEgergy - mEnergyData.mEnergyDataRawList[i - 1].reviveEgergy);
+                }
+            }
+
+            return "消耗电能:" + consumePower + "kwh,再生电能:" + revivePower + "kwh";
+        }
+
+        private void dateTimePickerFrom_ValueChanged(object sender, EventArgs e)
+        {
+            textBoxReport.Text = getTextBoxReport();
         }
     }
 }
