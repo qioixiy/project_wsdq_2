@@ -189,6 +189,46 @@ namespace ExportExcel
             th.Start();
         }
 
+        private String GetExportTimePoint()
+        {
+            String ret = "";
+            Int32 chooseDay = Int32.Parse(comboBoxSelectDateTime.Text);
+
+            String year = DateTime.Now.ToString("yyyy");
+            String mouth = DateTime.Now.ToString("MM");
+            String day = DateTime.Now.ToString("dd");
+
+            String exportYear = year;
+            String exportMouth = mouth;
+            String exportDay = chooseDay.ToString().PadLeft(2, '0'); ;
+
+            Int32 curDay = Int32.Parse(day);
+            
+            // 1.33修订版
+            // 根据选择的日期来生产EXCEL的后缀日期，以前是根据软件在电脑的系统时间生产的日期，现在需要做判断，
+            // 如果选择的日小于等于电脑系统的日，那么月份也就是电脑的系统的月份，
+            // 如果选择的日大于电脑的日，那么月份肯定是电脑现在月份基础上的上一个月份，
+            // 如果是1月份，上一个月份是12月
+            if (chooseDay <= curDay)
+            {
+                exportMouth = mouth;
+            }
+            else
+            {
+                Int32 mouthInt32 = Int32.Parse(mouth);
+                Int32 exportMouthInt32 = mouthInt32 - 1;
+                if (mouthInt32 <= 1) {
+                    exportMouthInt32 = 12;
+                    exportYear = (Int32.Parse(year) - 1).ToString();
+                }
+                exportMouth = exportMouthInt32.ToString().PadLeft(2, '0');
+            }
+
+            ret = exportYear + exportMouth + exportDay;
+
+            return ret;
+        }
+
         public String GetExcelFileName(String append)
         {
             if (append.Equals(""))
@@ -196,8 +236,11 @@ namespace ExportExcel
                 append = "xxxx";
             }
             String curDate = DateTime.Now.ToString("yyyyMMdd");
+            
+            String exportDate = GetExportTimePoint();
+
             String ret = System.Environment.CurrentDirectory
-                + "\\" + textBox_V_type.Text + "-" + append + "_" + curDate;
+                + "\\" + textBox_V_type.Text + "-" + append + "_" + exportDate;
 
             return ret;
         }

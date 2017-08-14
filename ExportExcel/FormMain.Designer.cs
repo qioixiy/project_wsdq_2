@@ -170,7 +170,7 @@
             this.textBox_V_type.Name = "textBox_V_type";
             this.textBox_V_type.Size = new System.Drawing.Size(85, 23);
             this.textBox_V_type.TabIndex = 18;
-            this.textBox_V_type.Text = "CRH";
+            this.textBox_V_type.Text = "CRH400";
             this.textBox_V_type.Visible = false;
             // 
             // label1
