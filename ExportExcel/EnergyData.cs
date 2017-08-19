@@ -135,6 +135,64 @@ namespace ExportExcel
             ReadFromFile(filename);
         }
 
+        int probeDataHeader(String filename)
+        {
+            int ret = 0;
+            
+            FileStream fs = new FileStream(filename, FileMode.Open);
+            BinaryReader br = new BinaryReader(fs);
+
+            while (true)
+            {
+                byte[] buffer = br.ReadBytes(16);
+
+                EnergyDataRaw tEnergyDataRaw = new EnergyDataRaw();
+                tEnergyDataRaw.day = SubByte(buffer, 0, 1);//日 1byte
+                tEnergyDataRaw.hour = SubByte(buffer, 1, 1);//时 1byte
+                tEnergyDataRaw.minuts = SubByte(buffer, 2, 1);//分 1byte
+                tEnergyDataRaw.second = SubByte(buffer, 3, 1);//秒 1byte
+                tEnergyDataRaw.power1 = SubByte(buffer, 4, 4);//正向电能 4byte
+                tEnergyDataRaw.power2 = SubByte(buffer, 8, 4);//负向电能 4byte
+                tEnergyDataRaw.powerAll = SubByte(buffer, 12, 4);//总电能 4byte
+
+                //4.原先是我们存储解析是按照下图1这样的48个字节是一套存储信息，但是现实中由于FLASH存储存在按扇区擦除问题，
+                //所以现实中有可能下载的数据00000000h被擦除了
+                //这样V1.33就错开了，全解析错了，没能读到一条有用的信息，所以处理好开头很重要，
+                //如何处理？一排16个字节，一条解析字段48个字节。所以打开一个文档先读16个字节，
+                //第一个字节是日：日做判断条件，日大于等于1，小于等于31；
+                //第二个字节是时：时做判断条件，时大于等于0，小于等于23；
+                //第三个字节是分：分做判断条件，分大于等于0，小于等于59；
+                //第四个字节是秒：秒做判断条件，秒大于等于0，小于等于59；
+                //第五到八个字节是正向电能：
+                //第九到十二个字节是反向电能：
+                //第十三到十六个字节是总电能：
+                //判断条件是:总电能=正向电能-反向电能 或者 总电能=反向电能-正向电能
+                //如果这个几个条件满足，可以判断这个这16个字节是整个文档的开端，每48个字节为一条否则，丢弃读取下一16个字节判断开端。
+                int day = tEnergyDataRaw.getDay();
+                int hour = tEnergyDataRaw.getHour();
+                int minuts = tEnergyDataRaw.getMinuts();
+                int second = tEnergyDataRaw.getSecond();
+                int powerall = tEnergyDataRaw.getPowerAll();
+                int power1 = tEnergyDataRaw.getPower1();
+                int power2 = tEnergyDataRaw.getPower2();
+                if (day >= 1 && day <= 31
+                    && hour >= 0 && hour <= 23
+                    && minuts >= 0 && minuts <= 59
+                    && second >= 0 && second <= 59
+                    && powerall == (power1 - power2))
+                {
+                    break;
+                }
+
+                ret += 16;
+            }
+
+            br.Close();
+            fs.Close();
+
+            return ret;
+        }
+
         bool ReadFromFile(String filename)
         {
             if (!File.Exists(filename))
@@ -146,10 +204,17 @@ namespace ExportExcel
             {
                 try
                 {
+                    int offset = probeDataHeader(filename);
+
                     FileStream fs = new FileStream(filename, FileMode.Open);
                     BinaryReader br = new BinaryReader(fs);
                     try
                     {
+                        if (offset != 0)
+                        {
+                            byte[] discard = br.ReadBytes(offset);
+                        }
+
                         while (true)
                         {
                             EnergyDataRaw _EnergyDataRaw = new EnergyDataRaw();

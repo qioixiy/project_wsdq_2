@@ -37,7 +37,14 @@ namespace ExportExcel
 
         public void SetEnergyDataFromFile(String filename)
         {
-            mEnergyData = new EnergyData(filename);
+            try
+            {
+                mEnergyData = new EnergyData(filename);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("数据文件存在异常：" + ex.ToString());
+            }
         }
 
         private void releaseObject(object obj)
