@@ -129,13 +129,24 @@ namespace ExportExcel
 
         private void filterEnergyDataWithDateTime(int dateTime)
         {
+            if (mEnergyData.mBackupEnergyDataRawList.Count == 0)
+            {
+                mEnergyData.mBackupEnergyDataRawList = mEnergyData.mEnergyDataRawList;
+            }
+            
             List<ExportExcel.EnergyData.EnergyDataRaw> tEnergyDataRawList = new List<ExportExcel.EnergyData.EnergyDataRaw>();
 
-            for (int i = 0; i < mEnergyData.mEnergyDataRawList.Count; i++)
+            List<EnergyData.EnergyDataRaw> mWorkingEnergyDataRawList = mEnergyData.mEnergyDataRawList;
+            if (mEnergyData.mBackupEnergyDataRawList.Count != 0)
             {
-                if (dateTime == (int)mEnergyData.mEnergyDataRawList[i].getDay())
+                mWorkingEnergyDataRawList = mEnergyData.mBackupEnergyDataRawList;
+            }
+
+            for (int i = 0; i < mWorkingEnergyDataRawList.Count; i++)
+            {
+                if (dateTime == (int)mWorkingEnergyDataRawList[i].getDay())
                 {
-                    tEnergyDataRawList.Add(mEnergyData.mEnergyDataRawList[i]);
+                    tEnergyDataRawList.Add(mWorkingEnergyDataRawList[i]);
                 }
             }
 

@@ -127,9 +127,11 @@ namespace ExportExcel
         public byte[] carType = new byte[1];
         public byte[] carNum = new byte[2];
         public List<EnergyDataRaw> mEnergyDataRawList = new List<EnergyDataRaw>();
+        public List<EnergyDataRaw> mBackupEnergyDataRawList = new List<EnergyDataRaw>();
 
         public EnergyData(String filename)
         {
+            mBackupEnergyDataRawList = new List<EnergyDataRaw>();
             ReadFromFile(filename);
         }
 
